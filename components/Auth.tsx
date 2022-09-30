@@ -3,6 +3,7 @@ import { Alert, Pressable, StyleSheet, View, Text, Image } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input } from 'react-native-elements'
 import { useFonts } from 'expo-font'
+import {globalStyles} from '../lib/styles'
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -53,9 +54,9 @@ export default function Auth() {
   const bit_logo = require("../assets/bit_logo.png")
 
   return (
-    <View style={[styles.container]}>
-      <Image source={bit_logo} style={styles.logo}></Image>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+    <View style={[globalStyles.container]}>
+      <Image source={bit_logo} style={globalStyles.logo}></Image>
+      <View style={[globalStyles.verticallySpaced, globalStyles.mt20]}>
         <Input
           label="Email cím"
           leftIcon={{ type: 'font-awesome', name: 'envelope', size: 22 }}
@@ -63,12 +64,12 @@ export default function Auth() {
           value={email}
           placeholder="keresztnev.vezeteknev@bce.bitclub.com"
           autoCapitalize={'none'} autoCompleteType={undefined}
-          labelStyle={styles.labelText}
-          inputStyle={styles.inputText}
+          labelStyle={globalStyles.labelText}
+          inputStyle={globalStyles.inputText}
           disabled={loading}
           autoCorrect={false}/>
       </View>
-      <View style={styles.verticallySpaced}>
+      <View style={globalStyles.verticallySpaced}>
         <Input
           label="Jelszó"
           leftIcon={{ type: 'font-awesome', name: 'lock', size: 32 }}
@@ -77,71 +78,22 @@ export default function Auth() {
           secureTextEntry={true}
           placeholder="#Bitizenvagyok420"
           autoCapitalize={'none'} autoCompleteType={undefined}
-          labelStyle={styles.labelText}
-          inputStyle={styles.inputText}
+          labelStyle={globalStyles.labelText}
+          inputStyle={globalStyles.inputText}
           disabled={loading}
           autoCorrect={false}/>
       </View>
-      <View style={[styles.mt20, styles.button]}>
+      <View style={[globalStyles.mt20, globalStyles.button]}>
         <Pressable disabled={loading} onPress={() => signInWithEmail()}>
-          <Text style={[styles.buttonText]}>Bejelentkezés</Text>
+          <Text style={[globalStyles.buttonText]}>Bejelentkezés</Text>
         </Pressable>
       </View>
-      <View style={styles.mt20}>
+      <View style={globalStyles.mt20}>
         <Pressable disabled={loading} onPress={() => signUpWithEmail()}>
-          <Text style={styles.registrationText}>Még nincs fiókod? Regisztrálj itt!</Text>
+          <Text style={globalStyles.registrationText}>Még nincs fiókod? Regisztrálj itt!</Text>
         </Pressable>
       </View>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-    alignItems: 'center'
-  },
-  verticallySpaced: {
-    paddingTop: '4%',
-    paddingBottom: '4%',
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
-  button: {
-    backgroundColor: "#12b0b0",
-    width: '85%',
-    padding: '3%',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  registrationText: {
-    textAlign: 'center',
-    textDecorationLine: 'underline',
-    textDecorationColor: '#12b0b0',
-    textDecorationStyle: 'solid',
-    color: '#12b0b0',
-    fontFamily: 'EncodeSans'
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 20,
-    fontFamily: 'EncodeSans-Bold'
-  },
-  logo: {
-    height: '30%',
-    width: '75%',
-    marginTop: '10%'
-  },
-  labelText: {
-    fontFamily: 'EncodeSans-Bold'
-  },
-  inputText: {
-    fontFamily: 'EncodeSans-Light',
-    fontSize: 16,
-    marginLeft: '2.5%'
-  }
-})

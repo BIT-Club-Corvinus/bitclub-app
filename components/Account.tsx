@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { StyleSheet, View, Alert, Text, TextInput} from 'react-native'
+import { StyleSheet, View, Alert, Text, TextInput } from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 import Select, { SelectItem } from '@redmin_delishaj/react-native-select'
 import React from 'react'
+import { globalStyles } from '../lib/styles'
+import { Icon } from 'react-native-elements'
 
 export default function Account({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
@@ -13,8 +15,8 @@ export default function Account({ session }: { session: Session }) {
   const [avatarUrl, setAvatarUrl] = useState('')
   const [userType, setUserType] = useState<any>('')
 
-  const data: SelectItem[]= [{text: 'Member', value: "Member"}, {text: 'Coordinator', value: "Coordinator"}, {text: 'Vice President', value: "Vice President"}]
-  
+  const data: SelectItem[] = [{ text: 'Member', value: "Member" }, { text: 'Coordinator', value: "Coordinator" }, { text: 'Vice President', value: "Vice President" }]
+
 
   useEffect(() => {
     if (session) getProfile()
@@ -88,44 +90,54 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input label="Email" value={session?.user?.email} disabled autoCompleteType={undefined} />
+    <View style={globalStyles.container}>
+      <View style={globalStyles.uploadPhoto}>
+        <Icon name={'camera'} tvParallaxProperties={undefined} type='font-awesome'></Icon>
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input label="Username" value={username || ''} onChangeText={(text) => setUsername(text)} autoCompleteType={undefined} />
+      <View style={[globalStyles.verticallySpaced, globalStyles.mt20]}>
+        <Input
+          label="Email cím"
+          value={session?.user?.email}
+          disabled
+          autoCompleteType={undefined}
+          labelStyle={globalStyles.labelText}
+          inputStyle={globalStyles.inputText}
+          leftIcon={{ 'type': 'font-awesome', 'name': 'envelope', 'size': 22 }} />
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input label="Website" value={website || ''} onChangeText={(text) => setWebsite(text)} autoCompleteType={undefined} />
+      <View style={globalStyles.verticallySpaced}>
+        <Input
+          label="Felhasználónév"
+          value={username || ''}
+          onChangeText={(text) => setUsername(text)}
+          autoCompleteType={undefined}
+          labelStyle={globalStyles.labelText}
+          inputStyle={globalStyles.inputText}
+          leftIcon={{ 'type': 'font-awesome', 'name': 'user', 'size': 30 }}
+          autoCorrect={false}
+          autoCapitalize={'none'}/>
       </View>
-      <View style={styles.verticallySpaced}>
-        <Select data={data} onSelect={value => setUserType(value)} value={userType}></Select>
+      <View style={globalStyles.verticallySpaced}>
+        <Input
+          label="LinkedIn profil linkje"
+          value={website || ''}
+          onChangeText={(text) => setWebsite(text)}
+          autoCompleteType={undefined}
+          labelStyle={globalStyles.labelText}
+          inputStyle={globalStyles.inputText}
+          leftIcon={{ 'type': 'font-awesome', 'name': 'linkedin', 'size': 30 }}
+          autoCorrect={false}
+          autoCapitalize='none'/>
       </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+      <View style={[globalStyles.verticallySpaced, globalStyles.mt20]}>
         <Button
           title={loading ? 'Loading ...' : 'Update'}
           onPress={() => updateProfile({ username, website, avatar_url: avatarUrl, user_type: userType })}
           disabled={loading}
         />
       </View>
-      <View style={styles.verticallySpaced}>
+      <View style={globalStyles.verticallySpaced}>
         <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
       </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: '40%',
-  },
-})
