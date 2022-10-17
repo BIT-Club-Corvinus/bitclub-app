@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { StyleSheet, View, Alert, Text, TextInput, Pressable } from 'react-native'
-import { Button, Input } from 'react-native-elements'
+import { Button, Input, Switch } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 import Select, { SelectItem } from '@redmin_delishaj/react-native-select'
 import React from 'react'
@@ -11,9 +11,8 @@ import { Icon } from 'react-native-elements'
 export default function Account({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
-  const [website, setWebsite] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState('')
-  const [userType, setUserType] = useState<any>('')
+  const [minutesInOffice, setMinutesInOffice] = useState(0)
+  const [isNameVisible, setNameVisibility] = useState(true)
 
   useEffect(() => {
     if (session) getProfile()
@@ -26,7 +25,7 @@ export default function Account({ session }: { session: Session }) {
 
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url, user_type`)
+        .select(`username, namevisibility, minutesinoffice`)
         .eq('id', session?.user.id)
         .single()
       if (error && status !== 406) {
@@ -35,9 +34,8 @@ export default function Account({ session }: { session: Session }) {
 
       if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
-        setAvatarUrl(data.avatar_url)
-        setUserType(data.user_type)
+        setMinutesInOffice(data.minutesinoffice)
+        setNameVisibility(data.namevisibility)
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -50,14 +48,12 @@ export default function Account({ session }: { session: Session }) {
 
   async function updateProfile({
     username,
-    website,
-    avatar_url,
-    user_type
+    namevisibility,
+    minutesinoffice
   }: {
     username: string
-    website: string
-    avatar_url: string
-    user_type: string
+    namevisibility: boolean
+    minutesinoffice: number
   }) {
     try {
       setLoading(true)
@@ -66,16 +62,17 @@ export default function Account({ session }: { session: Session }) {
       const updates = {
         id: session?.user.id,
         username,
-        website,
-        avatar_url,
-        user_type,
-        updated_at: new Date(),
+        namevisibility,
+        minutesinoffice,
       }
 
       let { error } = await supabase.from('profiles').upsert(updates)
 
       if (error) {
         throw error
+      }
+      else {
+        Alert.alert("Profil sikeresen frissítve")
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -110,21 +107,17 @@ export default function Account({ session }: { session: Session }) {
           autoCorrect={false}
           autoCapitalize={'none'} />
       </View>
-      <View style={globalStyles.verticallySpaced}>
-        <Input
-          label="LinkedIn profil linkje"
-          value={website || ''}
-          onChangeText={(text) => setWebsite(text)}
-          autoCompleteType={undefined}
-          labelStyle={globalStyles.labelText}
-          inputStyle={globalStyles.inputText}
-          leftIcon={{ 'type': 'font-awesome', 'name': 'linkedin', 'size': 30 }}
-          autoCorrect={false}
-          autoCapitalize='none' />
+      <View style={globalStyles.row}>
+        <Text style={globalStyles.labelText}>Látszódjon a nevem</Text>
+        <Switch
+          trackColor={{false: 'grey', true: '#12b0b0'}}
+          onValueChange={()=>setNameVisibility(previousState => !previousState)}
+          value={isNameVisible}
+        />
       </View>
       <View style={[globalStyles.verticallySpaced, globalStyles.mt20, globalStyles.container]}>
         <Pressable
-          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl, user_type: userType })}
+          onPress={() => updateProfile({ username, namevisibility: isNameVisible, minutesinoffice: minutesInOffice})}
           disabled={loading} style={globalStyles.button}>
             <Text style={globalStyles.buttonText}>Update</Text>
         </Pressable>
