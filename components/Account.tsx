@@ -15,9 +15,6 @@ export default function Account({ session }: { session: Session }) {
   const [avatarUrl, setAvatarUrl] = useState('')
   const [userType, setUserType] = useState<any>('')
 
-  const data: SelectItem[] = [{ text: 'Member', value: "Member" }, { text: 'Coordinator', value: "Coordinator" }, { text: 'Vice President', value: "Vice President" }]
-
-
   useEffect(() => {
     if (session) getProfile()
   }, [session])
