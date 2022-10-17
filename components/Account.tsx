@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { StyleSheet, View, Alert, Text, TextInput } from 'react-native'
+import { StyleSheet, View, Alert, Text, TextInput, Pressable } from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 import Select, { SelectItem } from '@redmin_delishaj/react-native-select'
@@ -90,10 +90,7 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <View style={globalStyles.container}>
-      <View style={globalStyles.uploadPhoto}>
-        <Icon name={'camera'} tvParallaxProperties={undefined} type='font-awesome'></Icon>
-      </View>
+    <View style={[globalStyles.container, globalStyles.mt20percent]}>
       <View style={[globalStyles.verticallySpaced, globalStyles.mt20]}>
         <Input
           label="Email cím"
@@ -114,7 +111,7 @@ export default function Account({ session }: { session: Session }) {
           inputStyle={globalStyles.inputText}
           leftIcon={{ 'type': 'font-awesome', 'name': 'user', 'size': 30 }}
           autoCorrect={false}
-          autoCapitalize={'none'}/>
+          autoCapitalize={'none'} />
       </View>
       <View style={globalStyles.verticallySpaced}>
         <Input
@@ -126,17 +123,17 @@ export default function Account({ session }: { session: Session }) {
           inputStyle={globalStyles.inputText}
           leftIcon={{ 'type': 'font-awesome', 'name': 'linkedin', 'size': 30 }}
           autoCorrect={false}
-          autoCapitalize='none'/>
+          autoCapitalize='none' />
       </View>
-      <View style={[globalStyles.verticallySpaced, globalStyles.mt20]}>
-        <Button
-          title={loading ? 'Loading ...' : 'Update'}
+      <View style={[globalStyles.verticallySpaced, globalStyles.mt20, globalStyles.container]}>
+        <Pressable
           onPress={() => updateProfile({ username, website, avatar_url: avatarUrl, user_type: userType })}
-          disabled={loading}
-        />
-      </View>
-      <View style={globalStyles.verticallySpaced}>
-        <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
+          disabled={loading} style={globalStyles.button}>
+            <Text style={globalStyles.buttonText}>Update</Text>
+        </Pressable>
+        <Pressable onPress={() => supabase.auth.signOut()} style={[globalStyles.button, globalStyles.mt20]}>
+          <Text style={globalStyles.buttonText}>Sign out</Text>
+        </Pressable>
       </View>
     </View>
   )
