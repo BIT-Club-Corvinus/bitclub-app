@@ -5,6 +5,7 @@ import { Button, Icon, Input } from 'react-native-elements'
 import { useFonts } from 'expo-font'
 import { globalStyles } from '../lib/styles'
 import { LinearGradient } from 'expo-linear-gradient'
+import Register from './Register'
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -14,7 +15,8 @@ export default function Auth() {
     'EncodeSans': require('../assets/fonts/EncodeSans/EncodeSans-Medium.ttf'),
     'EncodeSans-Bold': require('../assets/fonts/EncodeSans/EncodeSans-Bold.ttf'),
     'EncodeSans-Light': require('../assets/fonts/EncodeSans/EncodeSans-Light.ttf')
-  })
+  });
+  const [screenState, setScreenState] = useState('login');
 
   if (!loaded) {
     return null;
@@ -55,6 +57,9 @@ export default function Auth() {
   const bit_logo = require("../assets/BIT-new-logo-FULL-white.png")
   const user_icon = require("../assets/user_icon.png")
 
+  if(screenState=='register'){
+    return <Register/>
+  }
   return (
     <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.linearGradient} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
       <View style={globalStyles.container}>
@@ -101,7 +106,7 @@ export default function Auth() {
         </View>
       </View>
       <View style={globalStyles.mt20}>
-        <Pressable disabled={loading} onPress={() => signUpWithEmail()} style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <Pressable disabled={loading} onPress={() => setScreenState('register')} style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text style={globalStyles.registrationText}>
             Még nincs fiókod?
           </Text>
