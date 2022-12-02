@@ -7,6 +7,7 @@ import { Session } from '@supabase/supabase-js'
 import 'react-native-url-polyfill/auto'
 import React from 'react'
 import Home from './components/Home'
+import Main from './components/Main'
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -23,7 +24,7 @@ export default function App() {
 
   return (
     <View>
-      {session && session.user ? <Home key={session.user.id} session={session} /> : <Auth />}
+      {session && session.user ? <Home key={session.user.id} session={session} /> : <Main />}
     </View>
   )
 }

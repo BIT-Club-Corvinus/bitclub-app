@@ -6,6 +6,7 @@ import { Session } from '@supabase/supabase-js'
 import React from 'react'
 import { globalStyles } from '../lib/styles'
 import { Icon } from 'react-native-elements'
+import LinearGradient from 'react-native-linear-gradient'
 
 export default function Account({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
