@@ -86,6 +86,9 @@ export default function Home({ session }: { session: Session }) {
             <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={() => { updateOnlineStatus({ online: online }) }}>
                 <Text style={globalStyles.buttonText}>Bent vagyok az irodában!</Text>
             </Pressable>
+            <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={async ()=> await supabase.auth.signOut()}>
+                <Text style={globalStyles.buttonText}>Kijelentkezés</Text>
+            </Pressable>
         </View>
     )
 }
