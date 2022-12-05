@@ -5,11 +5,11 @@ import { Button, Icon, Input } from 'react-native-elements'
 import { useFonts } from 'expo-font'
 import { globalStyles } from '../lib/styles'
 import { LinearGradient } from 'expo-linear-gradient'
-import Auth from './Login'
+import Login from './Login'
 import Register from './Register'
 import Login from './Login'
 
-export default function Main() {
+export default function Main({navigation}: {navigation: any}) {
     const [loaded] = useFonts({
         'EncodeSans': require('../assets/fonts/EncodeSans/EncodeSans-Medium.ttf'),
         'EncodeSans-Bold': require('../assets/fonts/EncodeSans/EncodeSans-Bold.ttf'),
@@ -40,12 +40,12 @@ export default function Main() {
                 <View>
                     <View style={globalStyles.container}>
                         <View style={[globalStyles.whiteButton]}>
-                            <Pressable onPress={() => setScreenState('login')}>
+                            <Pressable onPress={navigation.navigate('Details')}>
                                 <Text style={[globalStyles.buttonText2]}>Bejelentkezés</Text>
                             </Pressable>
                         </View>
                         <View style={[globalStyles.mt20, globalStyles.button]}>
-                            <Pressable onPress={() => setScreenState('register')}>
+                            <Pressable onPress={()=>{}}>
                                 <Text style={[globalStyles.buttonText]}>Regisztráció</Text>
                             </Pressable>
                         </View>
