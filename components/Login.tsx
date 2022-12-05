@@ -7,7 +7,7 @@ import { globalStyles } from '../lib/styles'
 import { LinearGradient } from 'expo-linear-gradient'
 import Register from './Register'
 
-export default function Auth() {
+export default function Login({ navigation }: { navigation: any }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -57,13 +57,10 @@ export default function Auth() {
   const bit_logo = require("../assets/BIT-new-logo-FULL-white.png")
   const user_icon = require("../assets/user_icon.png")
 
-  if(screenState=='register'){
-    return <Register/>
-  }
   return (
     <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.linearGradient} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
       <View style={globalStyles.container}>
-        <Image source={bit_logo} style={globalStyles.logo}></Image>
+        <Image source={bit_logo} style={globalStyles.logo2}></Image>
         <Text style={globalStyles.title}>
           Bejelentkezés
         </Text>
@@ -106,11 +103,11 @@ export default function Auth() {
         </View>
       </View>
       <View style={globalStyles.mt20}>
-        <Pressable disabled={loading} onPress={() => setScreenState('register')} style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <Pressable disabled={loading} onPress={() => navigation.navigate('Regisztráció')} style={{ flexDirection: 'row', justifyContent: 'center' }}>
           <Text style={globalStyles.registrationText}>
             Még nincs fiókod?
           </Text>
-          <Text style={{ color: '#12b0b0', fontFamily: 'EncodeSans-Bold', marginLeft: '1.9%'}}>
+          <Text style={{ color: '#12b0b0', fontFamily: 'EncodeSans-Bold', marginLeft: '1.9%' }}>
             Regisztráció
           </Text>
         </Pressable>

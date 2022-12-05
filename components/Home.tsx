@@ -5,6 +5,8 @@ import { useFonts } from 'expo-font'
 import { Alert, View, Text, Pressable } from "react-native";
 import { globalStyles } from "../lib/styles";
 import { supabase } from "../lib/supabase";
+import { LinearGradient } from "expo-linear-gradient";
+import { withTheme } from "react-native-elements";
 
 export default function Home({ session }: { session: Session }) {
     const [online, setOnline] = useState(true)
@@ -120,22 +122,22 @@ export default function Home({ session }: { session: Session }) {
     if(!loaded) return null;
 
     return (
-        <View style={globalStyles.container}>
+        <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.gradient2} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
             {   peopleInOffice != 0 ?
-                    <View style={globalStyles.container}>
-                        <Text style={[globalStyles.mt20percent, {fontSize: 40, fontFamily: 'EncodeSans-Bold'}]}>Most</Text>
-                        <Text style={{fontSize: 250, fontFamily: 'Bugfast'}}>{peopleInOffice}</Text>
-                        <Text style={{fontSize: 40, fontFamily: 'EncodeSans-Bold'}}>tag van az irodában</Text>
+                    <View style={[globalStyles.container, {padding: '5%'}]}>
+                        <Text style={[globalStyles.mt20percent, {fontSize: 36, fontFamily: 'EncodeSans-Bold', color: 'white'}]}>Most</Text>
+                        <Text style={{fontSize: 200, fontFamily: 'Bugfast'}}>{peopleInOffice}</Text>
+                        <Text style={{fontSize: 36, fontFamily: 'EncodeSans-Bold', color: 'white'}}>tag van az irodában</Text>
                     </View>
                 :   <Text style={[globalStyles.mt20percent, {fontFamily: 'EncodeSans-Bold', fontSize: 40, textAlign: "center"}]}>Most nincs senki az irodában</Text>
             }
             <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={() => { updateOnlineStatus({ online: !online }) }}>
                 {!online ? <Text style={globalStyles.buttonText}>Bemegyek az irodába!</Text> : <Text style={globalStyles.buttonText}>Kilépek az irodából!</Text>}
             </Pressable>
-            <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={async () => await supabase.auth.signOut()}>
+            <Pressable style={[globalStyles.mt20, globalStyles.logoutButton]} onPress={async () => await supabase.auth.signOut()}>
                 <Text style={globalStyles.buttonText}>Kijelentkezés</Text>
             </Pressable>
-        </View>
+        </LinearGradient>
     )
 }
 
