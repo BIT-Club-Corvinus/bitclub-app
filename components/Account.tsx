@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { StyleSheet, View, Alert, Text, TextInput} from 'react-native'
-import { Button, Input } from 'react-native-elements'
+import { StyleSheet, View, Alert, Text, TextInput, Pressable } from 'react-native'
+import { Button, Input, Switch } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
-import Select, { SelectItem } from '@redmin_delishaj/react-native-select'
 import React from 'react'
+import { globalStyles } from '../lib/styles'
+import { Icon } from 'react-native-elements'
+import LinearGradient from 'react-native-linear-gradient'
 
 export default function Account({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
-  const [website, setWebsite] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState('')
-  const [userType, setUserType] = useState<any>('')
-
-  const data: SelectItem[]= [{text: 'Member', value: "Member"}, {text: 'Coordinator', value: "Coordinator"}, {text: 'Vice President', value: "Vice President"}]
-  
+  const [minutesInOffice, setMinutesInOffice] = useState(0)
+  const [isNameVisible, setNameVisibility] = useState(true)
 
   useEffect(() => {
     if (session) getProfile()
@@ -27,7 +25,7 @@ export default function Account({ session }: { session: Session }) {
 
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url, user_type`)
+        .select(`username, namevisibility, minutesinoffice`)
         .eq('id', session?.user.id)
         .single()
       if (error && status !== 406) {
@@ -36,9 +34,8 @@ export default function Account({ session }: { session: Session }) {
 
       if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
-        setAvatarUrl(data.avatar_url)
-        setUserType(data.user_type)
+        setMinutesInOffice(data.minutesinoffice)
+        setNameVisibility(data.namevisibility)
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -51,14 +48,12 @@ export default function Account({ session }: { session: Session }) {
 
   async function updateProfile({
     username,
-    website,
-    avatar_url,
-    user_type
+    namevisibility,
+    minutesinoffice
   }: {
     username: string
-    website: string
-    avatar_url: string
-    user_type: string
+    namevisibility: boolean
+    minutesinoffice: number
   }) {
     try {
       setLoading(true)
@@ -67,16 +62,17 @@ export default function Account({ session }: { session: Session }) {
       const updates = {
         id: session?.user.id,
         username,
-        website,
-        avatar_url,
-        user_type,
-        updated_at: new Date(),
+        namevisibility,
+        minutesinoffice,
       }
 
       let { error } = await supabase.from('profiles').upsert(updates)
 
       if (error) {
         throw error
+      }
+      else {
+        Alert.alert("Profil sikeresen frissítve")
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -88,44 +84,47 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input label="Email" value={session?.user?.email} disabled autoCompleteType={undefined} />
+    <View style={[globalStyles.container, globalStyles.mt20percent]}>
+      <View style={[globalStyles.verticallySpaced, globalStyles.mt20]}>
+        <Input
+          label="Email cím"
+          value={session?.user?.email}
+          disabled
+          autoCompleteType={undefined}
+          labelStyle={globalStyles.labelText}
+          inputStyle={globalStyles.inputText}
+          leftIcon={{ 'type': 'font-awesome', 'name': 'envelope', 'size': 22 }} />
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input label="Username" value={username || ''} onChangeText={(text) => setUsername(text)} autoCompleteType={undefined} />
+      <View style={globalStyles.verticallySpaced}>
+        <Input
+          label="Felhasználónév"
+          value={username || ''}
+          onChangeText={(text) => setUsername(text)}
+          autoCompleteType={undefined}
+          labelStyle={globalStyles.labelText}
+          inputStyle={globalStyles.inputText}
+          leftIcon={{ 'type': 'font-awesome', 'name': 'user', 'size': 30 }}
+          autoCorrect={false}
+          autoCapitalize={'none'} />
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input label="Website" value={website || ''} onChangeText={(text) => setWebsite(text)} autoCompleteType={undefined} />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Select data={data} onSelect={value => setUserType(value)} value={userType}></Select>
-      </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button
-          title={loading ? 'Loading ...' : 'Update'}
-          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl, user_type: userType })}
-          disabled={loading}
+      <View style={globalStyles.row}>
+        <Text style={globalStyles.labelText}>Látszódjon a nevem</Text>
+        <Switch
+          trackColor={{false: 'grey', true: '#12b0b0'}}
+          onValueChange={()=>setNameVisibility(previousState => !previousState)}
+          value={isNameVisible}
         />
       </View>
-      <View style={styles.verticallySpaced}>
-        <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
+      <View style={[globalStyles.verticallySpaced, globalStyles.mt20, globalStyles.container]}>
+        <Pressable
+          onPress={() => updateProfile({ username, namevisibility: isNameVisible, minutesinoffice: minutesInOffice})}
+          disabled={loading} style={globalStyles.button}>
+            <Text style={globalStyles.buttonText}>Update</Text>
+        </Pressable>
+        <Pressable onPress={() => supabase.auth.signOut()} style={[globalStyles.button, globalStyles.mt20]}>
+          <Text style={globalStyles.buttonText}>Sign out</Text>
+        </Pressable>
       </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: '40%',
-  },
-})
