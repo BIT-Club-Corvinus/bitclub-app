@@ -8,7 +8,11 @@ import 'react-native-url-polyfill/auto'
 import React from 'react'
 import Home from './components/Home'
 import Main from './components/Main'
-
+import { useFonts } from 'expo-font'
+import Login from './components/Login'
+import Register from './components/Register'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native'
 export default function App() {
 
   const [session, setSession] = useState<Session | null>(null)
@@ -17,6 +21,8 @@ export default function App() {
     'EncodeSans-Bold': require('../bitclub-app/assets/fonts/EncodeSans/EncodeSans-Bold.ttf'),
     'EncodeSans-Light': require('../bitclub-app/assets/fonts/EncodeSans/EncodeSans-Light.ttf')
   });
+
+  const Stack = createNativeStackNavigator();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -37,8 +43,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator >
-        <Stack.Screen name="Főoldal" component={HomeScreen}
-          options={{ headerShown: false }} />
         <Stack.Screen name="Bejelentkezés" component={Login}
           options={{
             headerStyle: {
