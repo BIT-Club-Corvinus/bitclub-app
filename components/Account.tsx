@@ -90,7 +90,7 @@ export default function Account({ session }: { session: Session }) {
           label="Email cím"
           value={session?.user?.email}
           disabled
-          autoCompleteType={undefined}
+          autoComplete={undefined}
           labelStyle={globalStyles.labelText}
           inputStyle={globalStyles.inputText}
           leftIcon={{ 'type': 'font-awesome', 'name': 'envelope', 'size': 22 }} />
@@ -100,7 +100,7 @@ export default function Account({ session }: { session: Session }) {
           label="Felhasználónév"
           value={username || ''}
           onChangeText={(text) => setUsername(text)}
-          autoCompleteType={undefined}
+          autoComplete={undefined}
           labelStyle={globalStyles.labelText}
           inputStyle={globalStyles.inputText}
           leftIcon={{ 'type': 'font-awesome', 'name': 'user', 'size': 30 }}
