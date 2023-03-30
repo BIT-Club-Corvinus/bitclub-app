@@ -28,6 +28,20 @@ export const globalStyles = StyleSheet.create({
       height: 5
     }
   },
+  logoutButton: {
+    backgroundColor: "#f69133",
+    width: '85%',
+    padding: '3%',
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      width: 4,
+      height: 5
+    }
+  },
   registrationText: {
     textAlign: 'center',
     textDecorationColor: 'white',
@@ -41,9 +55,14 @@ export const globalStyles = StyleSheet.create({
     fontFamily: 'EncodeSans-Bold'
   },
   logo: {
+    height: '40%',
+    width: '80%',
+    marginTop: '5%'
+  },
+  logo2: {
     height: '55%',
     width: '75%',
-    marginTop: '20%'
+    marginTop: '5%'
   },
   labelText: {
     fontFamily: 'EncodeSans',
@@ -71,7 +90,7 @@ export const globalStyles = StyleSheet.create({
     width: '100%',
     paddingTop: '20%',
     paddingHorizontal: '5%',
-    paddingBottom: '50%'
+    paddingBottom: '40%'
   },
   title: {
     color: 'white',
@@ -122,14 +141,15 @@ export const globalStyles = StyleSheet.create({
   webImage: {
     position: 'absolute',
     width: 400,
-    height: 580,
+    height: 650,
     left: 0,
-    top: -90
+    top: 0
   },
   gradient2: {
     justifyContent: 'center',
     height: '100%',
     width: '100%',
+    alignItems: 'center'
   },
   buttonText2:{
     color: '#12b0b0',
