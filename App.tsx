@@ -1,40 +1,13 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
-import { useFonts } from 'expo-font'
-import { Text, Image, Pressable } from 'react-native'
+import Auth from './components/Login'
+import Account from './components/Account'
+import { View } from 'react-native'
 import { Session } from '@supabase/supabase-js'
 import 'react-native-url-polyfill/auto'
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react'
 import Home from './components/Home'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './components/Login'
-import { LinearGradient } from 'expo-linear-gradient'
-import { globalStyles } from './lib/styles'
-import Register from './components/Register'
-
-
-function HomeScreen({ navigation }: { navigation: any }) {
-  return (
-    <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.gradient2} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
-      <Image source={require("../bitclub-app/assets/halo_bit.png")} style={globalStyles.webImage}></Image>
-      <Image source={require("../bitclub-app/assets/BIT-new-logo-FULL-white.png")} style={globalStyles.logo}></Image>
-
-      <Pressable
-        onPress={() => navigation.navigate('Bejelentkezés')}
-        style={[globalStyles.whiteButton, globalStyles.mt20percent]}
-      >
-        <Text style={globalStyles.buttonText2}>Bejelentkezés</Text>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate('Regisztráció')} style={[globalStyles.button, globalStyles.mt20]}>
-        <Text style={[globalStyles.buttonText]}>Regisztráció</Text>
-      </Pressable>
-    </LinearGradient>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
+import Main from './components/Main'
 
 export default function App() {
 
