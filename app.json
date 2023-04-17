@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "expo-user-management",
-    "slug": "expo-user-management",
+    "name": "BIT Club Corvinus",
+    "slug": "BIT-Club-Corvinus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/bit_logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -18,7 +18,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "hu.bitclub.office",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "59dc8865-e907-4f01-956c-ff65b21879e2"
+      }
     }
   }
 }
