@@ -1,5 +1,6 @@
 {
   "expo": {
+    "jsEngine": "jsc",
     "name": "BIT Club Corvinus",
     "slug": "BIT-Club-Corvinus",
     "version": "1.0.0",
