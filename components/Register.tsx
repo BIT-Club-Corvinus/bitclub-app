@@ -2,10 +2,22 @@ import React, { useState } from 'react'
 import { Alert, Pressable, StyleSheet, View, Text, Image, TextInput } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Icon, Input } from 'react-native-elements'
-import { useFonts } from 'expo-font'
 import { globalStyles } from '../lib/styles'
 import { LinearGradient } from 'expo-linear-gradient'
 import Login from './Login'
+import {
+    useFonts,
+    EncodeSans_100Thin,
+    EncodeSans_200ExtraLight,
+    EncodeSans_300Light,
+    EncodeSans_400Regular,
+    EncodeSans_500Medium,
+    EncodeSans_600SemiBold,
+    EncodeSans_700Bold,
+    EncodeSans_800ExtraBold,
+    EncodeSans_900Black,
+} from '@expo-google-fonts/encode-sans';
+
 
 export default function Auth({navigation}: {navigation: any}) {
     const [email, setEmail] = useState('')
@@ -13,9 +25,15 @@ export default function Auth({navigation}: {navigation: any}) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false)
     const [loaded] = useFonts({
-        'EncodeSans': require('../assets/fonts/EncodeSans/EncodeSans-Medium.ttf'),
-        'EncodeSans-Bold': require('../assets/fonts/EncodeSans/EncodeSans-Bold.ttf'),
-        'EncodeSans-Light': require('../assets/fonts/EncodeSans/EncodeSans-Light.ttf')
+        EncodeSans_100Thin,
+        EncodeSans_200ExtraLight,
+        EncodeSans_300Light,
+        EncodeSans_400Regular,
+        EncodeSans_500Medium,
+        EncodeSans_600SemiBold,
+        EncodeSans_700Bold,
+        EncodeSans_800ExtraBold,
+        EncodeSans_900Black,
     });
     const [screenState, setScreenState] = useState('register');
 
@@ -78,7 +96,7 @@ export default function Auth({navigation}: {navigation: any}) {
                 E-mail cím
             </Text>
             <View style={[globalStyles.inputContainer]}>
-                <Icon type='font-awesome' name='user' style={globalStyles.inputIcon} color={'#12b0b0'} tvParallaxProperties={undefined}></Icon>
+                <Icon type='font-awesome' name='user' style={globalStyles.inputIcon} color={'#12b0b0'} ></Icon>
                 <TextInput
                     onChangeText={(text: React.SetStateAction<string>) => setEmail(text)}
                     value={email}
@@ -90,7 +108,7 @@ export default function Auth({navigation}: {navigation: any}) {
                 Jelszó
             </Text>
             <View style={[globalStyles.inputContainer]}>
-                <Icon tvParallaxProperties={undefined} name={'lock'} type={'font-awesome'} style={globalStyles.inputIcon} color={'#12b0b0'}></Icon>
+                <Icon name={'lock'} type={'font-awesome'} style={globalStyles.inputIcon} color={'#12b0b0'}></Icon>
                 <TextInput
                     onChangeText={(text) => setPassword(text)}
                     value={password}
@@ -103,7 +121,7 @@ export default function Auth({navigation}: {navigation: any}) {
                 Jelszó megerősítése
             </Text>
             <View style={[globalStyles.inputContainer]}>
-                <Icon tvParallaxProperties={undefined} name={'lock'} type={'font-awesome'} style={globalStyles.inputIcon} color={'#12b0b0'}></Icon>
+                <Icon name={'lock'} type={'font-awesome'} style={globalStyles.inputIcon} color={'#12b0b0'}></Icon>
                 <TextInput
                     onChangeText={(text) => setConfirmPassword(text)}
                     value={confirmPassword}
@@ -124,7 +142,7 @@ export default function Auth({navigation}: {navigation: any}) {
                     <Text style={globalStyles.registrationText}>
                         Már van fiókod?
                     </Text>
-                    <Text style={{ color: '#12b0b0', fontFamily: 'EncodeSans-Bold', marginLeft: '1.9%' }}>
+                    <Text style={{ color: '#12b0b0', fontFamily: 'EncodeSans_700Bold', marginLeft: '1.9%' }}>
                         Belépés
                     </Text>
                 </Pressable>

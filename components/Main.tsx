@@ -2,18 +2,35 @@ import React, { useState } from 'react'
 import { Alert, Pressable, StyleSheet, View, Text, Image, TextInput } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Icon, Input } from 'react-native-elements'
-import { useFonts } from 'expo-font'
 import { globalStyles } from '../lib/styles'
 import { LinearGradient } from 'expo-linear-gradient'
-import Login from './Login'
 import Register from './Register'
 import Login from './Login'
+import {
+    useFonts,
+    EncodeSans_100Thin,
+    EncodeSans_200ExtraLight,
+    EncodeSans_300Light,
+    EncodeSans_400Regular,
+    EncodeSans_500Medium,
+    EncodeSans_600SemiBold,
+    EncodeSans_700Bold,
+    EncodeSans_800ExtraBold,
+    EncodeSans_900Black,
+} from '@expo-google-fonts/encode-sans';
+
 
 export default function Main({navigation}: {navigation: any}) {
     const [loaded] = useFonts({
-        'EncodeSans': require('../assets/fonts/EncodeSans/EncodeSans-Medium.ttf'),
-        'EncodeSans-Bold': require('../assets/fonts/EncodeSans/EncodeSans-Bold.ttf'),
-        'EncodeSans-Light': require('../assets/fonts/EncodeSans/EncodeSans-Light.ttf')
+        EncodeSans_100Thin,
+        EncodeSans_200ExtraLight,
+        EncodeSans_300Light,
+        EncodeSans_400Regular,
+        EncodeSans_500Medium,
+        EncodeSans_600SemiBold,
+        EncodeSans_700Bold,
+        EncodeSans_800ExtraBold,
+        EncodeSans_900Black,
     });
     const [screenState, setScreenState] = useState('main')
 
@@ -25,10 +42,10 @@ export default function Main({navigation}: {navigation: any}) {
     const bit_web = require("../assets/halo_bit.png")
 
     if(screenState=='register') {
-        return <Register/>
+        return <Register navigation={undefined}/>
     }
     else if(screenState =='login') {
-        return <Login/>
+        return <Login navigation={undefined}/>
     }
     return (
         <View>

@@ -8,19 +8,38 @@ import 'react-native-url-polyfill/auto'
 import React from 'react'
 import Home from './components/Home'
 import Main from './components/Main'
-import { useFonts } from 'expo-font'
 import Login from './components/Login'
 import Register from './components/Register'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native'
+import {
+  useFonts,
+  EncodeSans_100Thin,
+  EncodeSans_200ExtraLight,
+  EncodeSans_300Light,
+  EncodeSans_400Regular,
+  EncodeSans_500Medium,
+  EncodeSans_600SemiBold,
+  EncodeSans_700Bold,
+  EncodeSans_800ExtraBold,
+  EncodeSans_900Black,
+} from '@expo-google-fonts/encode-sans';
+
+
 export default function App() {
 
   const [session, setSession] = useState<Session | null>(null)
   const [loaded] = useFonts({
-    'EncodeSans': require('../bitclub-app/assets/fonts/EncodeSans/EncodeSans-Medium.ttf'),
-    'EncodeSans-Bold': require('../bitclub-app/assets/fonts/EncodeSans/EncodeSans-Bold.ttf'),
-    'EncodeSans-Light': require('../bitclub-app/assets/fonts/EncodeSans/EncodeSans-Light.ttf')
-  });
+    EncodeSans_100Thin,
+    EncodeSans_200ExtraLight,
+    EncodeSans_300Light,
+    EncodeSans_400Regular,
+    EncodeSans_500Medium,
+    EncodeSans_600SemiBold,
+    EncodeSans_700Bold,
+    EncodeSans_800ExtraBold,
+    EncodeSans_900Black,
+});
 
   const Stack = createNativeStackNavigator();
 
@@ -50,7 +69,7 @@ export default function App() {
             },
             headerTitleStyle: {
               color: 'white',
-              fontFamily: 'EncodeSans-Bold'
+              fontFamily: 'EncodeSans_700Bold'
             },
             headerTintColor: 'white',
             headerBackTitleVisible: false,
@@ -64,10 +83,10 @@ export default function App() {
             },
             headerTitleStyle: {
               color: 'white',
-              fontFamily: 'EncodeSans-Bold'
+              fontFamily: 'EncodeSans_700Bold'
             },
             headerBackTitleStyle: {
-              fontFamily: 'EncodeSans-Light'
+              fontFamily: 'EncodeSans_300Light'
             },
             headerTintColor: 'white',
             headerBackTitleVisible: false,

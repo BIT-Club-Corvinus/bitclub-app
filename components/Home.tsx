@@ -1,7 +1,18 @@
 import { Session } from "@supabase/supabase-js";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useFonts } from 'expo-font'
+import {
+    useFonts,
+    EncodeSans_100Thin,
+    EncodeSans_200ExtraLight,
+    EncodeSans_300Light,
+    EncodeSans_400Regular,
+    EncodeSans_500Medium,
+    EncodeSans_600SemiBold,
+    EncodeSans_700Bold,
+    EncodeSans_800ExtraBold,
+    EncodeSans_900Black,
+} from '@expo-google-fonts/encode-sans';
 import { Alert, View, Text, Pressable } from "react-native";
 import { globalStyles } from "../lib/styles";
 import { supabase } from "../lib/supabase";
@@ -14,10 +25,15 @@ export default function Home({ session }: { session: Session }) {
     const [officeMinutes, setMinutesInOffice] = useState(0)
     const [peopleInOffice, setPeopleCount] = useState(0)
     const [loaded] = useFonts({
-        'EncodeSans': require('../assets/fonts/EncodeSans/EncodeSans-Medium.ttf'),
-        'EncodeSans-Bold': require('../assets/fonts/EncodeSans/EncodeSans-Bold.ttf'),
-        'EncodeSans-Light': require('../assets/fonts/EncodeSans/EncodeSans-Light.ttf'),
-        'Bugfast': require('../assets/fonts/Bugfast400.ttf')
+        EncodeSans_100Thin,
+        EncodeSans_200ExtraLight,
+        EncodeSans_300Light,
+        EncodeSans_400Regular,
+        EncodeSans_500Medium,
+        EncodeSans_600SemiBold,
+        EncodeSans_700Bold,
+        EncodeSans_800ExtraBold,
+        EncodeSans_900Black,
     });
 
     useEffect(() => {
@@ -118,18 +134,18 @@ export default function Home({ session }: { session: Session }) {
             setLoading(false)
         }
     }
-    
-    if(!loaded) return null;
+
+    if (!loaded) return null;
 
     return (
         <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.gradient2} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
-            {   peopleInOffice != 0 ?
-                    <View style={[globalStyles.container, {padding: '5%'}]}>
-                        <Text style={[globalStyles.mt20percent, {fontSize: 36, fontFamily: 'EncodeSans-Bold', color: 'white'}]}>Most</Text>
-                        <Text style={{fontSize: 200, fontFamily: 'Bugfast'}}>{peopleInOffice}</Text>
-                        <Text style={{fontSize: 36, fontFamily: 'EncodeSans-Bold', color: 'white'}}>tag van az irodában</Text>
-                    </View>
-                :   <Text style={[globalStyles.mt20percent, {fontFamily: 'EncodeSans-Bold', fontSize: 40, textAlign: "center"}]}>Most nincs senki az irodában</Text>
+            {peopleInOffice != 0 ?
+                <View style={[globalStyles.container, { padding: '5%' }]}>
+                    <Text style={[globalStyles.mt20percent, { fontSize: 36, fontFamily: 'EncodeSans_700Bold', color: 'white' }]}>Most</Text>
+                    <Text style={{ fontSize: 150, fontFamily: 'EncodeSans_700Bold' }}>{peopleInOffice}</Text>
+                    <Text style={{ fontSize: 36, fontFamily: 'EncodeSans_700Bold', color: 'white' }}>tag van az irodában</Text>
+                </View>
+                : <Text style={[globalStyles.mt20percent, { fontFamily: 'EncodeSans_700Bold', fontSize: 40, textAlign: "center" }]}>Most nincs senki az irodában</Text>
             }
             <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={() => { updateOnlineStatus({ online: !online }) }}>
                 {!online ? <Text style={globalStyles.buttonText}>Bemegyek az irodába!</Text> : <Text style={globalStyles.buttonText}>Kilépek az irodából!</Text>}

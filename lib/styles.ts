@@ -47,12 +47,12 @@ export const globalStyles = StyleSheet.create({
     textDecorationColor: 'white',
     textDecorationStyle: 'solid',
     color: 'white',
-    fontFamily: 'EncodeSans-Bold'
+    fontFamily: 'EncodeSans_700Bold'
   },
   buttonText: {
     color: 'white',
     fontSize: 20,
-    fontFamily: 'EncodeSans-Bold'
+    fontFamily: 'EncodeSans_700Bold',
   },
   logo: {
     height: '40%',
@@ -65,12 +65,12 @@ export const globalStyles = StyleSheet.create({
     marginTop: '5%'
   },
   labelText: {
-    fontFamily: 'EncodeSans',
+    fontFamily: 'EncodeSans_500Medium',
     color: 'white', fontSize: 20,
     marginBottom: '2.5%'
   },
   inputText: {
-    fontFamily: 'EncodeSans-Light',
+    fontFamily: 'EncodeSans_700Bold',
     fontSize: 16,
     marginLeft: '2.5%'
   },
@@ -94,7 +94,7 @@ export const globalStyles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    fontFamily: 'EncodeSans-Bold',
+    fontFamily: 'EncodeSans_700Bold',
     fontSize: 36
   },
   inputContainer: {
@@ -120,7 +120,7 @@ export const globalStyles = StyleSheet.create({
   },
   forgottenPassword: {
     color: 'white',
-    fontFamily: 'EncodeSans-Light',
+    fontFamily: 'EncodeSans_700Bold',
     textAlign: 'right',
     fontSize: 12
   },
@@ -154,6 +154,6 @@ export const globalStyles = StyleSheet.create({
   buttonText2:{
     color: '#12b0b0',
     fontSize: 20,
-    fontFamily: 'EncodeSans-Bold'
+    fontFamily: 'EncodeSans_700Bold'
   }
 })
