@@ -38,6 +38,7 @@ export default function Home({ session }: { session: Session }) {
 
     useEffect(() => {
         if (session) {
+            supabase.auth.refreshSession();
             getOnlineUsers();
             getProfile();
         }

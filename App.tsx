@@ -64,16 +64,7 @@ export default function App() {
       <Stack.Navigator >
         <Stack.Screen name="Bejelentkezés" component={Login}
           options={{
-            headerStyle: {
-              backgroundColor: '#12b0b0'
-            },
-            headerTitleStyle: {
-              color: 'white',
-              fontFamily: 'EncodeSans_700Bold'
-            },
-            headerTintColor: 'white',
-            headerBackTitleVisible: false,
-            headerShadowVisible: false,
+            headerShown: false
           }}
         />
         <Stack.Screen name='Regisztráció' component={Register}
@@ -81,10 +72,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: '#12b0b0'
             },
-            headerTitleStyle: {
-              color: 'white',
-              fontFamily: 'EncodeSans_700Bold'
-            },
+            headerTitle: '',
             headerBackTitleStyle: {
               fontFamily: 'EncodeSans_300Light'
             },
