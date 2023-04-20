@@ -19,7 +19,6 @@ import {
     EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
 
-
 export default function Main({navigation}: {navigation: any}) {
     const [loaded] = useFonts({
         EncodeSans_100Thin,
