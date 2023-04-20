@@ -7,7 +7,6 @@ import { globalStyles } from '../lib/styles'
 import { LinearGradient } from 'expo-linear-gradient'
 import Login from './Login'
 import Register from './Register'
-import Login from './Login'
 
 export default function Main({navigation}: {navigation: any}) {
     const [loaded] = useFonts({
