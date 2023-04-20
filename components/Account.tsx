@@ -7,12 +7,36 @@ import React from 'react'
 import { globalStyles } from '../lib/styles'
 import { Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
+import {
+  useFonts,
+  EncodeSans_100Thin,
+  EncodeSans_200ExtraLight,
+  EncodeSans_300Light,
+  EncodeSans_400Regular,
+  EncodeSans_500Medium,
+  EncodeSans_600SemiBold,
+  EncodeSans_700Bold,
+  EncodeSans_800ExtraBold,
+  EncodeSans_900Black,
+} from '@expo-google-fonts/encode-sans';
+
 
 export default function Account({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
   const [minutesInOffice, setMinutesInOffice] = useState(0)
   const [isNameVisible, setNameVisibility] = useState(true)
+  const [loaded] = useFonts({
+    EncodeSans_100Thin,
+    EncodeSans_200ExtraLight,
+    EncodeSans_300Light,
+    EncodeSans_400Regular,
+    EncodeSans_500Medium,
+    EncodeSans_600SemiBold,
+    EncodeSans_700Bold,
+    EncodeSans_800ExtraBold,
+    EncodeSans_900Black,
+});
 
   useEffect(() => {
     if (session) getProfile()
@@ -90,7 +114,7 @@ export default function Account({ session }: { session: Session }) {
           label="Email cím"
           value={session?.user?.email}
           disabled
-          autoCompleteType={undefined}
+          autoComplete={undefined}
           labelStyle={globalStyles.labelText}
           inputStyle={globalStyles.inputText}
           leftIcon={{ 'type': 'font-awesome', 'name': 'envelope', 'size': 22 }} />
@@ -100,7 +124,7 @@ export default function Account({ session }: { session: Session }) {
           label="Felhasználónév"
           value={username || ''}
           onChangeText={(text) => setUsername(text)}
-          autoCompleteType={undefined}
+          autoComplete={undefined}
           labelStyle={globalStyles.labelText}
           inputStyle={globalStyles.inputText}
           leftIcon={{ 'type': 'font-awesome', 'name': 'user', 'size': 30 }}

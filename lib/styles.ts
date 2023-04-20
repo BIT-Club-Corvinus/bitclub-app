@@ -2,8 +2,10 @@ import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
   container: {
+    flexDirection: 'column',
     marginTop: 0,
     padding: 0,
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   verticallySpaced: {
@@ -47,30 +49,29 @@ export const globalStyles = StyleSheet.create({
     textDecorationColor: 'white',
     textDecorationStyle: 'solid',
     color: 'white',
-    fontFamily: 'EncodeSans-Bold'
+    fontFamily: 'EncodeSans_700Bold'
   },
   buttonText: {
     color: 'white',
     fontSize: 20,
-    fontFamily: 'EncodeSans-Bold'
+    fontFamily: 'EncodeSans_700Bold',
   },
   logo: {
-    height: '40%',
-    width: '80%',
+    height: '55%',
+    width: '45%',
     marginTop: '5%'
   },
   logo2: {
     height: '55%',
-    width: '75%',
-    marginTop: '5%'
+    width: '45%',
   },
   labelText: {
-    fontFamily: 'EncodeSans',
-    color: 'white', fontSize: 20,
+    fontFamily: 'EncodeSans_500Medium',
+    color: 'white',fontSize: 20,
     marginBottom: '2.5%'
   },
   inputText: {
-    fontFamily: 'EncodeSans-Light',
+    fontFamily: 'EncodeSans_700Bold',
     fontSize: 16,
     marginLeft: '2.5%'
   },
@@ -85,16 +86,16 @@ export const globalStyles = StyleSheet.create({
     paddingHorizontal: '3%'
   },
   linearGradient: {
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
     height: '100%',
     width: '100%',
-    paddingTop: '20%',
+    paddingTop: '15%',
     paddingHorizontal: '5%',
-    paddingBottom: '40%'
   },
   title: {
     color: 'white',
-    fontFamily: 'EncodeSans-Bold',
+    fontFamily: 'EncodeSans_700Bold',
     fontSize: 36
   },
   inputContainer: {
@@ -120,7 +121,7 @@ export const globalStyles = StyleSheet.create({
   },
   forgottenPassword: {
     color: 'white',
-    fontFamily: 'EncodeSans-Light',
+    fontFamily: 'EncodeSans_700Bold',
     textAlign: 'right',
     fontSize: 12
   },
@@ -146,14 +147,15 @@ export const globalStyles = StyleSheet.create({
     top: 0
   },
   gradient2: {
+    flexDirection: 'column',
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    alignItems: 'center'
+    paddingHorizontal: '5%',
   },
   buttonText2:{
     color: '#12b0b0',
     fontSize: 20,
-    fontFamily: 'EncodeSans-Bold'
+    fontFamily: 'EncodeSans_700Bold'
   }
 })
