@@ -62,7 +62,7 @@ export default function BitNews() {
             if (!session?.user) throw new Error('No user on the session!')
 
             const { data, error, status } = await supabase
-                .from<News>('news')
+                .from('news')
                 .select('*')
 
             if (error && status !== 406) {
