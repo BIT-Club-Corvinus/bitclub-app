@@ -157,5 +157,46 @@ export const globalStyles = StyleSheet.create({
     color: '#12b0b0',
     fontSize: 20,
     fontFamily: 'EncodeSans_700Bold'
+  },
+  bitNewsList:{
+    flex: 1,
+    marginTop: '30%',
+    flexDirection: 'column',
+    width: '100%'
+  },
+  bitNewsContainer:{
+    backgroundColor: 'white',
+    width: '100%',
+    borderRadius: 20,
+    paddingVertical: '5%',
+    paddingHorizontal: '5%',
+    flex: 1/8,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  bitNewsTitle:{
+    fontFamily: 'EncodeSans_600SemiBold',
+    fontSize: 26
+  },
+  bitNewsSubTitle:{
+    fontFamily: 'EncodeSans_700Bold',
+    textTransform: 'uppercase',
+    color: '#12b0b0',
+    marginVertical: '10%',
+    fontSize: 26,
+    textAlign: 'center',
+    paddingHorizontal: '5%'
+  },
+  bitNewsContent:{
+    fontFamily: 'EncodeSans_400Regular',
+    textAlign: 'justify',
+    paddingHorizontal: '5%'
+  },
+  bitizenName:{
+    fontFamily: 'EncodeSans_700Bold',
+    fontSize: 20,
+    color: 'black',
+    textAlign: 'center',
+    marginVertical: '5%'
   }
 })
