@@ -1,8 +1,11 @@
-import { View, Text, Image, ScrollView} from 'react-native'
-import React from 'react'
+import { View, Text, Image, ScrollView } from 'react-native'
+import React, { useEffect } from 'react'
 import { globalStyles } from '../lib/styles'
 
 export default function BITNewsDetails({ route }: { route: any }) {
+    useEffect(() => {
+
+    })
     return (
         <ScrollView>
             <Text style={globalStyles.bitNewsSubTitle}>Elnöki ügy</Text>
@@ -16,13 +19,14 @@ export default function BITNewsDetails({ route }: { route: any }) {
             <Text style={globalStyles.bitNewsSubTitle}>Marketing Mozzanatok</Text>
             <Text style={globalStyles.bitNewsContent}>{route.params.paramKey.sect_Marketing}</Text>
             <Text style={globalStyles.bitNewsSubTitle}>A Hét Bitizenei</Text>
-            <View style={{marginBottom: '10%'}}>
-                <Image source={route.params.paramKey.BITizen1_img}/>
+            <View style={{ paddingBottom: '0%', alignItems: 'center'}}>
+                <Image source={{ uri: route.params.paramKey.BITizen1_img }} style={globalStyles.bitizenImage} />
                 <Text style={globalStyles.bitizenName}>{route.params.paramKey.weekly_BITizen1}</Text>
-                <Text style={globalStyles.bitNewsContent}>{route.params.paramKey.BITizen_desc}</Text>
-                <Image source={route.params.paramKey.BITizen2_img}/>
+                <Text style={globalStyles.bitNewsContent}>{route.params.paramKey.BITizen_desc1}</Text>
+                <Image source={{ uri: route.params.paramKey.BITizen2_img }} style={globalStyles.bitizenImage} />
                 <Text style={globalStyles.bitizenName}>{route.params.paramKey.weekly_BITizen2}</Text>
-                <Text style={globalStyles.bitNewsContent}>{route.params.paramKey.BITizen_desc}</Text>
+                <Text style={globalStyles.bitNewsContent}>{route.params.paramKey.BITizen_desc2}</Text>
+                <Text style={globalStyles.bitNewsSubTitle}>Gratulálunk! :)</Text>
             </View>
         </ScrollView>
     )

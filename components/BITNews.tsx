@@ -56,6 +56,16 @@ export default function BitNews({navigation}: {navigation: any}) {
         if (session) {
             getNews();
         }
+        const channel = supabase.channel('public:news')
+        const profiles = channel
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'news' },
+                (payload) => {
+                    getNews()
+                }
+            )
+            .subscribe()
     }, [session])
 
     const Stack = createNativeStackNavigator();

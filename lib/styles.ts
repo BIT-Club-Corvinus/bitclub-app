@@ -172,7 +172,8 @@ export const globalStyles = StyleSheet.create({
     paddingHorizontal: '5%',
     flex: 1/8,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: '5%'
   },
   bitNewsTitle:{
     fontFamily: 'EncodeSans_600SemiBold',
@@ -198,5 +199,11 @@ export const globalStyles = StyleSheet.create({
     color: 'black',
     textAlign: 'center',
     marginVertical: '5%'
+  },
+  bitizenImage:{
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    marginVertical: '10%'
   }
 })
