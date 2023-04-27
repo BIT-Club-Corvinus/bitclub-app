@@ -5,7 +5,7 @@
     "slug": "BIT-Club-Corvinus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/bitlogo_square (1).png",
+    "icon": "./assets/bitlogo_square.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -21,12 +21,12 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "hu.bitclub.office",
-      "buildNumber": "1.0.1"
+      "buildNumber": "1.0.2"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#000000"
       }
     },
     "web": {

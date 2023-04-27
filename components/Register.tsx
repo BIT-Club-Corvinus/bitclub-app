@@ -86,7 +86,7 @@ export default function Auth({ navigation }: { navigation: any }) {
 
     return (
         <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.linearGradient} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
           <View style={{ height: '100%', justifyContent: 'center'}}>
             <Text style={globalStyles.title}>
               Regisztráció

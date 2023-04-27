@@ -60,7 +60,7 @@ export default function Home() {
                     shadowRadius: 20,
                     shadowColor: '#12b0b0',
                     borderColor: 'rgba(191, 240, 207, 1)',
-                    paddingBottom: 0
+                    paddingBottom: 0,
                 },
             }: {
                 headerShown: false,
@@ -83,6 +83,7 @@ export default function Home() {
                     shadowRadius: 20,
                     shadowColor: '#12b0b0',
                     borderColor: 'rgba(191, 240, 207, 1)',
+                    height: '10%'
                 },
             }}>
                 <Tab.Screen name="Iroda" component={Office} options={{

@@ -27,8 +27,9 @@ export const globalStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowOffset: {
       width: 4,
-      height: 5
-    }
+      height: 5,
+    },
+    elevation: 20
   },
   logoutButton: {
     backgroundColor: "#f69133",
@@ -42,7 +43,8 @@ export const globalStyles = StyleSheet.create({
     shadowOffset: {
       width: 4,
       height: 5
-    }
+    },
+    elevation: 20
   },
   registrationText: {
     textAlign: 'center',
@@ -65,7 +67,7 @@ export const globalStyles = StyleSheet.create({
     height: 200,
     width: 200,
     marginHorizontal: '20%',
-    marginTop: '10%'
+    marginTop: '0%'
   },
   labelText: {
     fontFamily: 'EncodeSans_500Medium',
