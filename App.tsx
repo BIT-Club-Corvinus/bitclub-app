@@ -22,6 +22,7 @@ import {
 } from '@expo-google-fonts/encode-sans';
 import AuthContext from './lib/AuthContext'
 import Home from './components/Home'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 
 export default function App() {
@@ -55,29 +56,31 @@ export default function App() {
     return null
   }
   return (
-    <AuthContext.Provider value={{session, setSession}}>
+    <AuthContext.Provider value={{ session, setSession }}>
       <NavigationContainer>
-        {session && session?.user ? <Home/> :         <Stack.Navigator >
-          <Stack.Screen name="Bejelentkezés" component={Login}
-            options={{
-              headerShown: false
-            }}
-          />
-          <Stack.Screen name='Regisztráció' component={Register}
-            options={{
-              headerStyle: {
-                backgroundColor: '#12b0b0'
-              },
-              headerTitle: '',
-              headerBackTitleStyle: {
-                fontFamily: 'EncodeSans_300Light'
-              },
-              headerTintColor: 'white',
-              headerBackTitleVisible: false,
-              headerShadowVisible: false
-            }} />
-        </Stack.Navigator>
-}
+        {session && session?.user ?
+          <Home /> :
+          <Stack.Navigator >
+            <Stack.Screen name="Bejelentkezés" component={Login}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen name='Regisztráció' component={Register}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#12b0b0'
+                },
+                headerTitle: '',
+                headerBackTitleStyle: {
+                  fontFamily: 'EncodeSans_300Light'
+                },
+                headerTintColor: 'white',
+                headerBackTitleVisible: false,
+                headerShadowVisible: false
+              }} />
+          </Stack.Navigator>
+        }
       </NavigationContainer>
 
     </AuthContext.Provider>

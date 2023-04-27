@@ -77,8 +77,8 @@ export default function Login({ navigation }: { navigation: any }) {
 
   return (
     <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.linearGradient} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
-        <View style={{ height: '100%' }}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'padding'}>
+        <View style={{ height: '100%', justifyContent: 'center' }}>
           <Image source={bit_logo} style={globalStyles.logo2}></Image>
           <Text style={globalStyles.title}>
             Bejelentkezés

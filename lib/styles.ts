@@ -107,7 +107,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 100,
     backgroundColor: 'white',
-    height: '8.5%',
+    height: 60,
     marginBottom: '5%',
     width: '100%',
     padding: '2%',

@@ -139,13 +139,13 @@ export default function Office() {
     if (!loaded) return null;
 
     if (loading) return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <ActivityIndicator size="large" color="#12b0b0"/>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#12b0b0" />
         </View>
     )
 
     return (
-        <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={[globalStyles.gradient2, {alignItems: 'center', paddingBottom: '20%'}]} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
+        <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={[globalStyles.gradient2, { alignItems: 'center', paddingBottom: '20%', justifyContent: 'center' }]} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
             {peopleInOffice != 0 ?
                 <View style={[globalStyles.container, { padding: '5%' }]}>
                     <Text style={[globalStyles.mt20percent, { fontSize: 36, fontFamily: 'EncodeSans_700Bold', color: 'white' }]}>Most</Text>
