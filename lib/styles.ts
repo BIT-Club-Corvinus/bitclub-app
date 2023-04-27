@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 0,
     padding: 0,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   verticallySpaced: {
@@ -62,8 +62,10 @@ export const globalStyles = StyleSheet.create({
     marginTop: '5%'
   },
   logo2: {
-    height: '55%',
-    width: '45%',
+    height: 200,
+    width: 200,
+    marginHorizontal: '20%',
+    marginTop: '10%'
   },
   labelText: {
     fontFamily: 'EncodeSans_500Medium',
@@ -90,13 +92,15 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'flex-end',
     height: '100%',
     width: '100%',
-    paddingTop: '15%',
+    paddingTop: '0%',
     paddingHorizontal: '5%',
   },
   title: {
     color: 'white',
     fontFamily: 'EncodeSans_700Bold',
-    fontSize: 36
+    fontSize: 30,
+    paddingBottom: '10%',
+    textAlign: 'center'
   },
   inputContainer: {
     alignItems: 'center',
@@ -148,7 +152,6 @@ export const globalStyles = StyleSheet.create({
   },
   gradient2: {
     flexDirection: 'column',
-    justifyContent: 'center',
     height: '100%',
     width: '100%',
     paddingHorizontal: '5%',

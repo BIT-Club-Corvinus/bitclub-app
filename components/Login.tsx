@@ -77,14 +77,12 @@ export default function Login({ navigation }: { navigation: any }) {
 
   return (
     <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.linearGradient} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'padding'}>
-        <ScrollView style={{height: '100%'}}>
-          <View style={globalStyles.container}>
-            <Image source={bit_logo} style={globalStyles.logo}></Image>
-            <Text style={globalStyles.title}>
-              Bejelentkezés
-            </Text>
-          </View>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
+        <View style={{ height: '100%' }}>
+          <Image source={bit_logo} style={globalStyles.logo2}></Image>
+          <Text style={globalStyles.title}>
+            Bejelentkezés
+          </Text>
           <Text style={globalStyles.labelText}>
             E-mail cím
           </Text>
@@ -132,7 +130,7 @@ export default function Login({ navigation }: { navigation: any }) {
               </Text>
             </Pressable>
           </View>
-        </ScrollView>
+        </View>
       </KeyboardAvoidingView>
     </LinearGradient>
   )
