@@ -77,7 +77,6 @@ export default function Auth({ navigation }: { navigation: any }) {
             }
             setLoading(false)
         }
-        Alert.alert('Tölts ki minden mezőt')
         return;
     }
 
@@ -122,8 +121,8 @@ export default function Auth({ navigation }: { navigation: any }) {
             <View style={[globalStyles.inputContainer]}>
               <Icon name={'lock'} type={'font-awesome'} style={globalStyles.inputIcon} color={'#12b0b0'}></Icon>
               <TextInput
-                onChangeText={(text) => setPassword(text)}
-                value={password}
+                onChangeText={(text) => setConfirmPassword(text)}
+                value={confirmPassword}
                 secureTextEntry={true}
                 placeholder="#Bitizenvagyok420"
                 autoCapitalize={'none'} autoComplete={undefined}
