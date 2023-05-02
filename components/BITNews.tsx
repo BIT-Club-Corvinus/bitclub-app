@@ -12,7 +12,7 @@ import {
     EncodeSans_800ExtraBold,
     EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
-import { Alert, View, Text, Pressable, ActivityIndicator, Image, ImageBackground} from "react-native";
+import { Alert, View, Text, Pressable, ActivityIndicator, Image, ImageBackground, ScrollView} from "react-native";
 import { globalStyles } from "../lib/styles";
 import { supabase } from "../lib/supabase";
 import { LinearGradient } from "expo-linear-gradient";
@@ -104,7 +104,8 @@ export default function BitNews({navigation}: {navigation: any}) {
         return (
             <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={[globalStyles.gradient2, { alignItems: 'center' }]} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
                 {/*Ide készítsétek el a BIT news oldal UI-ját (milyen elemek fognak megjelenni, hogyan kerülsz át arra az oldalra ahol részletesen el tudod olvasni az adott BIT news-t., stb.), az oldal alaphátterét megadtam már :) A függvényeket segítségül megírom helyettetek, hogy először tudjatok a UI-ra koncentrálni */}
-                <View style={globalStyles.bitNewsList}>
+                <ScrollView style={globalStyles.bitNewsList}
+                contentContainerStyle={{height: '100%'}}>
                     {news.map((item: any) => (
                         <ImageBackground key={item.id} style={globalStyles.bitNewsContainer} source={{uri: item.thumbnail_img}} borderRadius={20} imageStyle={{opacity: 0.5}}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'column', flex: 1, paddingHorizontal: '5%'}}>
@@ -118,7 +119,7 @@ export default function BitNews({navigation}: {navigation: any}) {
                             </View>
                         </ImageBackground>
                     ))}
-                </View>
+                </ScrollView>
             </LinearGradient>
         )    
     }

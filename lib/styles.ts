@@ -167,7 +167,7 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     marginTop: '30%',
     flexDirection: 'column',
-    width: '100%'
+    width: '100%',
   },
   bitNewsContainer:{
     width: '100%',
@@ -188,9 +188,8 @@ export const globalStyles = StyleSheet.create({
     fontFamily: 'EncodeSans_700Bold',
     textTransform: 'uppercase',
     color: '#12b0b0',
-    marginVertical: '10%',
-    fontSize: 26,
-    textAlign: 'center',
+    marginVertical: '5%',
+    fontSize: 22,
     paddingHorizontal: '5%'
   },
   bitNewsContent:{
@@ -210,5 +209,15 @@ export const globalStyles = StyleSheet.create({
     height: 200,
     borderRadius: 100,
     marginVertical: '10%'
+  },
+  bitNewsContentContainer: {
+    flex: 1,
+    width: '90%',
+    backgroundColor: '#D9D9D9',
+    paddingVertical: '5%',
+    marginHorizontal: '5%',
+    marginTop: '2.5%',
+    borderRadius: 20,
+    marginBottom: '2.5%'
   }
 })
