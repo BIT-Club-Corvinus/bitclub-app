@@ -61,6 +61,7 @@ export default function Home() {
                     shadowColor: '#12b0b0',
                     borderColor: 'rgba(191, 240, 207, 1)',
                     paddingBottom: 0,
+                    height: '10%'
                 },
             }: {
                 headerShown: false,

@@ -12,7 +12,7 @@ import {
     EncodeSans_800ExtraBold,
     EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
-import { Alert, View, Text, Pressable, ActivityIndicator } from "react-native";
+import { Alert, View, Text, Pressable, ActivityIndicator, Image, ImageBackground} from "react-native";
 import { globalStyles } from "../lib/styles";
 import { supabase } from "../lib/supabase";
 import { LinearGradient } from "expo-linear-gradient";
@@ -106,17 +106,17 @@ export default function BitNews({navigation}: {navigation: any}) {
                 {/*Ide készítsétek el a BIT news oldal UI-ját (milyen elemek fognak megjelenni, hogyan kerülsz át arra az oldalra ahol részletesen el tudod olvasni az adott BIT news-t., stb.), az oldal alaphátterét megadtam már :) A függvényeket segítségül megírom helyettetek, hogy először tudjatok a UI-ra koncentrálni */}
                 <View style={globalStyles.bitNewsList}>
                     {news.map((item: any) => (
-                        <View key={item.id} style={globalStyles.bitNewsContainer}>
-                            <View style={{ justifyContent: 'space-between', flexDirection: 'column', flex: 1 }}>
+                        <ImageBackground key={item.id} style={globalStyles.bitNewsContainer} source={{uri: item.thumbnail_img}} borderRadius={20} imageStyle={{opacity: 0.5}}>
+                            <View style={{ justifyContent: 'space-between', flexDirection: 'column', flex: 1, paddingHorizontal: '5%'}}>
                                 <Text style={globalStyles.bitNewsTitle}>{item.title}</Text>
-                                <Text style={{ fontFamily: 'EncodeSans_500Medium', fontSize: 16 }}>{item.date}</Text>
+                                <Text style={{ fontFamily: 'EncodeSans_500Medium', fontSize: 16, color: 'white'}}>{item.date}</Text>
                             </View>
                             <View style={{ flexDirection: 'column', justifyContent: 'center', marginRight: '5%' }}>
                                 <Pressable onPress={()=>{navigation.navigate('BitNewsElem', {paramKey: item})}}>
-                                    <Ionicons name="ios-arrow-forward" size={30} />
+                                    <Ionicons name="ios-arrow-forward" size={30} color={'white'}/>
                                 </Pressable>
                             </View>
-                        </View>
+                        </ImageBackground>
                     ))}
                 </View>
             </LinearGradient>

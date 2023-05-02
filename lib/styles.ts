@@ -170,19 +170,19 @@ export const globalStyles = StyleSheet.create({
     width: '100%'
   },
   bitNewsContainer:{
-    backgroundColor: 'white',
     width: '100%',
-    borderRadius: 20,
     paddingVertical: '5%',
-    paddingHorizontal: '5%',
-    flex: 1/8,
+    borderRadius: 20,
+    flex: 1/7,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: '5%'
+    marginBottom: '5%',
+    backgroundColor: 'black'
   },
   bitNewsTitle:{
     fontFamily: 'EncodeSans_600SemiBold',
-    fontSize: 26
+    fontSize: 26,
+    color: 'white'
   },
   bitNewsSubTitle:{
     fontFamily: 'EncodeSans_700Bold',
