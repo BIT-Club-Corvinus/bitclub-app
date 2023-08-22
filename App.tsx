@@ -64,7 +64,13 @@ export default function App() {
           <Home /> :
           <Stack.Navigator >
             <Stack.Screen name='Kezdőlap' component={Welcome} options={{headerShown: false}}/>
-            <Stack.Screen name='Leendő Bitizeneknek' component={ForFreshman} options={{headerShown: true}}/>
+            <Stack.Screen name='Leendő Bitizeneknek' component={ForFreshman}
+              options={{
+                headerShown: true,
+                headerStyle: {backgroundColor: '#12b0b0'}, headerShadowVisible: false,
+                headerTitle: '',
+                headerTintColor: 'white'
+              }} />
             <Stack.Screen name="Bejelentkezés" component={Login}
               options={{
                 headerShown: true

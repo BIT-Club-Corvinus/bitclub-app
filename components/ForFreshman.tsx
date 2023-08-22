@@ -21,7 +21,9 @@ import { View, Text, ImageBackground, Image, Pressable} from 'react-native'
 const ForFreshman = ({navigation}: {navigation: any}) => {
   return (
     <ImageBackground source={require('../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
+      <View style={{backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%'}}>
 
+      </View>
     </ImageBackground>
   )
 }
