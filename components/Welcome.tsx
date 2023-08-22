@@ -19,16 +19,33 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { View, Text, ImageBackground, Image, Pressable} from 'react-native'
 
 
-const Welcome = () => {
+const Welcome = ({navigation}: {navigation: any}) => {
+  const [loaded] = useFonts({
+    EncodeSans_100Thin,
+    EncodeSans_200ExtraLight,
+    EncodeSans_300Light,
+    EncodeSans_400Regular,
+    EncodeSans_500Medium,
+    EncodeSans_600SemiBold,
+    EncodeSans_700Bold,
+    EncodeSans_800ExtraBold,
+    EncodeSans_900Black,
+  });
+  if (!loaded) {
+    return null
+  }
   return (
     <ImageBackground source={require('../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
-        <View style={{backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', paddingHorizontal: 32, paddingBottom: 72}}>
             <Image source={require('../assets/BIT-new-logo-FULL-white.png')} style={globalStyles.welcomeLogo}/>
             <Text style={globalStyles.welcomeText}>
             “BITizennek lenni egy életérzés, a konstans Nyo-mode pedig még a véred is #12b0b0-ra színezi”
             </Text>
-            <Pressable style={{width: '100%', backgroundColor: '#1ee7e7', padding: 16, justifyContent: 'center'}}>
-                <Text>Még nem vagyok BITizen!</Text>
+            <Pressable style={globalStyles.welcomeButton1} onPress={() => navigation.navigate('Leendő Bitizeneknek')}>
+                <Text style={{fontFamily: 'EncodeSans_600SemiBold'}}>Még nem vagyok BITizen!</Text>
+            </Pressable>
+            <Pressable style={globalStyles.welcomeButton2} onPress={() => navigation.navigate('Bejelentkezés')}>
+                <Text style={{fontFamily: 'EncodeSans_600SemiBold', color: '#1ee7e7', textDecorationStyle: 'solid', textDecorationLine: 'underline', textDecorationColor: '#1ee7e7'}}>BITizen vagyok, belépek!</Text>
             </Pressable>
         </View>
     </ImageBackground>

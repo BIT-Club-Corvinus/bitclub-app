@@ -24,6 +24,7 @@ import AuthContext from './lib/AuthContext'
 import Home from './components/Home'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Welcome from './components/Welcome'
+import ForFreshman from './components/ForFreshman'
 
 
 export default function App() {
@@ -63,9 +64,10 @@ export default function App() {
           <Home /> :
           <Stack.Navigator >
             <Stack.Screen name='Kezdőlap' component={Welcome} options={{headerShown: false}}/>
+            <Stack.Screen name='Leendő Bitizeneknek' component={ForFreshman}/>
             <Stack.Screen name="Bejelentkezés" component={Login}
               options={{
-                headerShown: false
+                headerShown: true
               }}
             />
             <Stack.Screen name='Regisztráció' component={Register}

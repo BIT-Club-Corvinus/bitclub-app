@@ -1,4 +1,3 @@
-import { EncodeSans_600SemiBold } from "@expo-google-fonts/encode-sans";
 import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
@@ -226,15 +225,35 @@ export const globalStyles = StyleSheet.create({
     resizeMode: 'cover',
   },
   welcomeLogo: {
-    height: '35%',
-    width: '65%',
-    marginTop: '5%'
+    height: 228,
+    width: 342,
+    marginTop: '5%',
+    marginBottom: 72
   },
   welcomeText: {
     fontFamily: 'EncodeSans_600SemiBold',
-    fontSize: 16,
+    fontSize: 20,
     color: 'white',
     marginHorizontal: 40,
     textAlign: 'center',
-  }
+    marginBottom: 48
+  },
+  welcomeButton1: {
+    width: '100%',
+    backgroundColor: '#1ee7e7',
+    padding: 16,
+    justifyContent: 'center',
+    borderRadius: 15.33,
+    alignItems: 'center',
+    marginTop: 32
+  },
+  welcomeButton2: {
+    width: '100%',
+    backgroundColor: 'transparent',
+    padding: 16,
+    justifyContent: 'center',
+    borderRadius: 15.33,
+    alignItems: 'center',
+    marginTop: 16
+  },
 })
