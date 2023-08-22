@@ -23,6 +23,7 @@ import {
 import AuthContext from './lib/AuthContext'
 import Home from './components/Home'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Welcome from './components/Welcome'
 
 
 export default function App() {
@@ -61,6 +62,7 @@ export default function App() {
         {session && session?.user ?
           <Home /> :
           <Stack.Navigator >
+            <Stack.Screen name='Kezdőlap' component={Welcome} options={{headerShown: false}}/>
             <Stack.Screen name="Bejelentkezés" component={Login}
               options={{
                 headerShown: false
