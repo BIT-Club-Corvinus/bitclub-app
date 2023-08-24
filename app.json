@@ -1,7 +1,7 @@
 {
   "expo": {
     "jsEngine": "jsc",
-    "name": "BIT Club Corvinus",
+    "name": "Business IT Club - Corvinus",
     "slug": "BIT-Club-Corvinus",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,15 +20,15 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "hu.bitclub.office",
-      "buildNumber": "1.0.4"
+      "bundleIdentifier": "hu.businessitclub.app",
+      "buildNumber": "1.0.5"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
       },
-      "package": "hu.bitclub.office"
+      "package": "hu.businessitclub.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
