@@ -76,7 +76,7 @@ const ForFreshman = ({ navigation }: { navigation: any }) => {
       <View style={{ backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', paddingHorizontal: 16, paddingTop: 96 }}>
         <Text style={[globalStyles.title, { marginVertical: 32 }]}>Hogyan válhatsz BITizenné?</Text>
         <Pressable style={globalStyles.bigBlurContainerWrapper} onPress={() => navigation.navigate('Toborzás')} disabled={false}>
-          <BlurView intensity={40} style={globalStyles.blurContainer}>
+          <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
             <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 32, marginTop: 32, fontSize: 20 }}>I. Ismerj meg minket!</Text>
             <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 32, fontSize: 16, width: '67%', marginVertical: 24 }}>
               Nézd meg, mikor és hol találkozhatsz velünk!
@@ -85,17 +85,17 @@ const ForFreshman = ({ navigation }: { navigation: any }) => {
           </BlurView>
         </Pressable>
         <Pressable style={globalStyles.smallBlurContainerWrapper} disabled={recruitingStatus=='Jelentkezés'? false : true} onPress={()=> Linking.openURL('https://docs.google.com/forms/d/e/1FAIpQLSe5UsFm_JobOMHyk9M6Umr2s8mZbpTSo7rF3UwTM0aqQMrB4g/viewform?usp=sf_link')}>
-          <BlurView intensity={40} style={globalStyles.blurContainer}>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 32, marginTop: 16, fontSize: 16 }}>II. Jelentkezz!</Text>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 32, fontSize: 14, width: '67%', marginVertical: 24 }}>
+          <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
+            <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 28, marginTop:0, fontSize: 16 }}>II. Jelentkezz!</Text>
+            <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 28, fontSize: 12, width: '67%', marginTop: 24 }}>
               Jelentkezz hozzánk, hogy téged is átjárjon a Nyo-mode!
             </Text>
           </BlurView>
         </Pressable>
         <Pressable style={globalStyles.smallBlurContainerWrapper}>
-          <BlurView intensity={40} style={globalStyles.blurContainer}>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 32, marginTop: 24, fontSize: 16, width: '50%' }}>III. Kezdődjön a BITizen élet!</Text>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 32, fontSize: 14, width: '80%', marginVertical: 24 }}>
+          <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
+            <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 28, marginTop: '8%', fontSize: 16, width: '50%' }}>III. Kezdődjön a BITizen élet!</Text>
+            <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 28, fontSize: 12, width: '80%', marginVertical: 24 }}>
               BITizen lettél? Tudd meg, hogyan kezdődik életed legjobb időszaka!
             </Text>
           </BlurView>

@@ -261,7 +261,7 @@ export const globalStyles = StyleSheet.create({
     height: 148,
     flexDirection: 'column',
     flexWrap: 'wrap',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   bigBlurContainerWrapper: {
     borderRadius: 20,
@@ -269,7 +269,7 @@ export const globalStyles = StyleSheet.create({
     borderColor: '#1ee7e7',
     borderWidth: 2,
     marginBottom: 32,
-    width: '100%'
+    width: '100%',
   },
   smallBlurContainerWrapper: {
     borderRadius: 20,
