@@ -25,6 +25,7 @@ import Home from './components/Home'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Welcome from './components/Welcome'
 import ForFreshman from './components/ForFreshman'
+import FreshmanHome from './components/FreshmanHome'
 
 
 export default function App() {
@@ -63,17 +64,43 @@ export default function App() {
         {session && session?.user ?
           <Home /> :
           <Stack.Navigator >
-            <Stack.Screen name='Kezdőlap' component={Welcome} options={{headerShown: false}}/>
-            <Stack.Screen name='Leendő Bitizeneknek' component={ForFreshman}
+            <Stack.Screen
+              name='Kezdőlap'
+              component={Welcome}
+              options={{ headerShown: false }} />
+            <Stack.Screen
+              name='Leendő Bitizeneknek'
+              component={ForFreshman}
               options={{
                 headerShown: true,
-                headerStyle: {backgroundColor: '#12b0b0'}, headerShadowVisible: false,
+                headerShadowVisible: false,
                 headerTitle: '',
-                headerTintColor: 'white'
+                headerTintColor: 'white',
+                headerTransparent: true,
+                headerBackTitle: 'Vissza',
+                headerBackTitleStyle: {
+                  fontFamily: 'EncodeSans_300Light'
+                }
               }} />
+            <Stack.Screen
+              name='Toborzás'
+              component={FreshmanHome}
+              options={{
+                headerTransparent: true,
+                headerTintColor: 'white',
+                headerTitle: '',
+                headerBackTitle: 'Vissza',
+                headerBackTitleStyle: {
+                  fontFamily: 'EncodeSans_300Light'
+                }
+              }}
+              />
             <Stack.Screen name="Bejelentkezés" component={Login}
               options={{
-                headerShown: true
+                headerShown: true,
+                headerTintColor: 'white',
+                headerTransparent: true,
+                headerTitle: ''
               }}
             />
             <Stack.Screen name='Regisztráció' component={Register}
@@ -83,7 +110,7 @@ export default function App() {
                 },
                 headerTitle: '',
                 headerBackTitleStyle: {
-                  fontFamily: 'EncodeSans_300Light'
+                  fontFamily: 'EncodeSans_500Medium'
                 },
                 headerTintColor: 'white',
                 headerBackTitleVisible: false,

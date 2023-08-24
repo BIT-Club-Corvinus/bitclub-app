@@ -71,7 +71,7 @@ export const globalStyles = StyleSheet.create({
   },
   labelText: {
     fontFamily: 'EncodeSans_500Medium',
-    color: 'white',fontSize: 20,
+    color: 'white', fontSize: 20,
     marginBottom: '2.5%'
   },
   inputText: {
@@ -158,33 +158,33 @@ export const globalStyles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: '5%',
   },
-  buttonText2:{
+  buttonText2: {
     color: '#12b0b0',
     fontSize: 20,
     fontFamily: 'EncodeSans_700Bold'
   },
-  bitNewsList:{
+  bitNewsList: {
     flex: 1,
     marginTop: '30%',
     flexDirection: 'column',
     width: '100%',
   },
-  bitNewsContainer:{
+  bitNewsContainer: {
     width: '100%',
     paddingVertical: '5%',
     borderRadius: 20,
-    flex: 1/7,
+    flex: 1 / 7,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: '5%',
     backgroundColor: 'black'
   },
-  bitNewsTitle:{
+  bitNewsTitle: {
     fontFamily: 'EncodeSans_600SemiBold',
     fontSize: 26,
     color: 'white'
   },
-  bitNewsSubTitle:{
+  bitNewsSubTitle: {
     fontFamily: 'EncodeSans_700Bold',
     textTransform: 'uppercase',
     color: '#12b0b0',
@@ -192,19 +192,19 @@ export const globalStyles = StyleSheet.create({
     fontSize: 22,
     paddingHorizontal: '5%'
   },
-  bitNewsContent:{
+  bitNewsContent: {
     fontFamily: 'EncodeSans_400Regular',
     textAlign: 'justify',
     paddingHorizontal: '5%'
   },
-  bitizenName:{
+  bitizenName: {
     fontFamily: 'EncodeSans_700Bold',
     fontSize: 20,
     color: 'black',
     textAlign: 'center',
     marginVertical: '5%'
   },
-  bitizenImage:{
+  bitizenImage: {
     width: 200,
     height: 200,
     borderRadius: 100,
@@ -256,4 +256,26 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 16
   },
+  blurContainer: {
+    width: '100%',
+    height: 148,
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
+  },
+  bigBlurContainerWrapper: {
+    borderRadius: 20,
+    overflow: 'hidden',
+    borderColor: '#1ee7e7',
+    borderWidth: 2,
+    marginBottom: 32,
+    width: '100%'
+  },
+  smallBlurContainerWrapper: {
+    borderRadius: 20,
+    overflow: 'hidden',
+    marginBottom: 32,
+    width: '80%',
+    marginHorizontal: 32
+  }
 })

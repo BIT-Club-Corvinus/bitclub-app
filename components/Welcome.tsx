@@ -39,7 +39,7 @@ const Welcome = ({navigation}: {navigation: any}) => {
         <View style={{backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', paddingHorizontal: 32, paddingBottom: 72}}>
             <Image source={require('../assets/BIT-new-logo-FULL-white.png')} style={globalStyles.welcomeLogo}/>
             <Text style={globalStyles.welcomeText}>
-            “BITizennek lenni egy életérzés, a konstans Nyo-mode pedig még a véred is #12b0b0-ra színezi”
+            “BITizennek lenni egy életérzés, a konstans Nyo-mode pedig még a véredet is #12b0b0-ra színezi”
             </Text>
             <Pressable style={globalStyles.welcomeButton1} onPress={() => navigation.navigate('Leendő Bitizeneknek')}>
                 <Text style={{fontFamily: 'EncodeSans_600SemiBold'}}>Még nem vagyok BITizen!</Text>
