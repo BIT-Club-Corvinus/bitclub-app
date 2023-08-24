@@ -22,7 +22,7 @@
     "@react-navigation/stack": "^6.3.7",
     "@redmin_delishaj/react-native-select": "^1.0.6",
     "@supabase/supabase-js": "^2.33.1",
-    "eas-cli": "^3.10.2",
+    "eas-cli": "4.1.2",
     "elements": "^0.2.4",
     "expo": "^49.0.8",
     "expo-app-loading": "~2.1.0",
