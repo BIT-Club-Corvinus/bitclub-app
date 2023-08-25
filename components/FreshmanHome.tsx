@@ -55,7 +55,7 @@ const FreshmanHome = ({ navigation }: { navigation: any }) => {
                     ></Image>
                     <View style={{width: 140, height: 120, marginBottom: 24, paddingTop: 8, marginTop: 8}}>
                         <Text style={{fontFamily: 'EncodeSans_900Black', color: 'white', fontSize: 20}}>Infóest</Text>
-                        <Text style={{fontFamily: 'EncodeSans_500Medium', fontSize: 12, color: 'white', paddingVertical: 16, paddingRight: 16}}>Ha még kérdéseid vannak, gyere el infóestünkre szeptember 14-én, és tudj meg mindent!</Text>
+                        <Text style={{fontFamily: 'EncodeSans_500Medium', fontSize: 12, color: 'white', paddingVertical: 16, paddingRight: 16}}>Ha még kérdéseid vannak, gyere el infóestünkre szeptember 12-én, és tudj meg mindent!</Text>
                     </View>
                     <Image
                         source={require('../assets/bit_infoest.png')}
