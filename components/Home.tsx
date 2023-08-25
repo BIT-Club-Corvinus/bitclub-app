@@ -19,7 +19,7 @@ import BitNews from "./BITNews";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 
 export default function Home() {
     const [loaded] = useFonts({
@@ -48,7 +48,8 @@ export default function Home() {
                 tabBarLabelStyle: {
                     fontFamily: 'EncodeSans_600SemiBold',
                     fontSize: 14,
-                    paddingBottom: '10%'
+                    paddingBottom: '10%',
+                    textAlign: 'center'
                 },
                 tabBarStyle: {
                     elevation: 240,
@@ -61,7 +62,8 @@ export default function Home() {
                     shadowColor: '#12b0b0',
                     borderColor: 'rgba(191, 240, 207, 1)',
                     paddingBottom: 0,
-                    height: '10%'
+                    height: '10%',
+                    alignItems: 'center',
                 },
             }: {
                 headerShown: false,
@@ -72,7 +74,8 @@ export default function Home() {
                 tabBarLabelStyle: {
                     fontFamily: 'EncodeSans_600SemiBold',
                     fontSize: 14,
-                    paddingBottom: '10%'
+                    paddingBottom: '10%',
+                    textAlign: 'center'
                 },
                 tabBarStyle: {
                     elevation: 240,
@@ -84,14 +87,15 @@ export default function Home() {
                     shadowRadius: 20,
                     shadowColor: '#12b0b0',
                     borderColor: 'rgba(191, 240, 207, 1)',
-                    height: '10%'
+                    height: '10%',
+                    alignItems: 'center'
                 },
             }}>
                 <Tab.Screen name="Iroda" component={Office} options={{
                     tabBarIcon: ({ focused }) => (
-                        <>
+                        <View style={{alignItems: 'center'}}>
                             {focused ? <Ionicons name="md-home" size={26} color={'#f69133'} /> : <Ionicons name="md-home" size={26} color={'#12b0b0'} />}
-                        </>
+                        </View>
                     )
                 }} />
                 <Tab.Screen name="BIT News" component={BitNews} options={{

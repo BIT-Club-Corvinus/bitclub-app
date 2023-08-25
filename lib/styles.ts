@@ -227,8 +227,8 @@ export const globalStyles = StyleSheet.create({
   welcomeLogo: {
     height: 228,
     width: 342,
-    marginTop: '5%',
-    marginBottom: 72
+    marginTop: '30%',
+    marginBottom: 32
   },
   welcomeText: {
     fontFamily: 'EncodeSans_600SemiBold',
@@ -236,7 +236,8 @@ export const globalStyles = StyleSheet.create({
     color: 'white',
     marginHorizontal: 40,
     textAlign: 'center',
-    marginBottom: 48
+    marginBottom: 24,
+    marginTop: 20
   },
   welcomeButton1: {
     width: '100%',

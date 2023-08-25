@@ -78,8 +78,10 @@ export default function Login({ navigation }: { navigation: any }) {
   return (
     <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.linearGradient} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <View style={{height: '100%', justifyContent: 'center'}}>
-          <Image source={bit_logo} style={globalStyles.logo2}></Image>
+        <View style={{ height: '100%', justifyContent: 'center' }}>
+          <View style={{alignItems: 'center'}}>
+            <Image source={bit_logo} style={globalStyles.logo2}></Image>
+          </View>
           <Text style={globalStyles.title}>
             Bejelentkezés
           </Text>
@@ -94,7 +96,7 @@ export default function Login({ navigation }: { navigation: any }) {
               placeholder="keresztnev.vezeteknev@bce.bitclub.com"
               autoCapitalize={'none'} autoComplete={undefined}
               autoCorrect={false}
-              style={{width: '100%'}}/>
+              style={{ width: '100%' }} />
           </View>
           <Text style={globalStyles.labelText}>
             Jelszó
@@ -108,7 +110,7 @@ export default function Login({ navigation }: { navigation: any }) {
               placeholder="#Bitizenvagyok420"
               autoCapitalize={'none'} autoComplete={undefined}
               autoCorrect={false}
-              style={{width: '100%'}}/>
+              style={{ width: '100%' }} />
           </View>
           <View>
             <Text style={globalStyles.forgottenPassword}>

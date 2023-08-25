@@ -74,7 +74,7 @@ const ForFreshman = ({ navigation }: { navigation: any }) => {
   return (
     <ImageBackground source={require('../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
       <ScrollView style={{ backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', paddingHorizontal: 16, }} >
-        <View style={{paddingTop: 80}}>
+        <View style={{paddingTop: 80, alignItems: 'center'}}>
           <Text style={[globalStyles.title, { marginVertical: 32 }]}>Hogyan válhatsz BITizenné?</Text>
           <Pressable style={globalStyles.bigBlurContainerWrapper} onPress={() => navigation.navigate('Toborzás')} disabled={false}>
             <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
@@ -95,7 +95,7 @@ const ForFreshman = ({ navigation }: { navigation: any }) => {
           </Pressable>
           <Pressable style={[globalStyles.smallBlurContainerWrapper]}>
             <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
-              <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 28, marginTop: '8%', fontSize: 16, width: '50%' }}>III. Kezdődjön a BITizen élet!</Text>
+              <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 28, marginTop: '5%', fontSize: 16, width: '50%' }}>III. Kezdődjön a BITizen élet!</Text>
               <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 28, fontSize: 12, width: '80%', marginVertical: 24 }}>
                 BITizen lettél? Tudd meg, hogyan kezdődik életed legjobb időszaka!
               </Text>
