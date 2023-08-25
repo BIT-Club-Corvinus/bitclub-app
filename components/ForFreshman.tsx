@@ -16,7 +16,7 @@ import {
   EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { View, Text, ImageBackground, Image, Pressable, Linking } from 'react-native'
+import { View, Text, ImageBackground, Image, Pressable, Linking, ScrollView } from 'react-native'
 import { BlurView } from 'expo-blur'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -39,7 +39,7 @@ const ForFreshman = ({ navigation }: { navigation: any }) => {
       const endDate1 = new Date('2023-09-22');   // Replace with your end dates
       const startDate2 = new Date('2023-09-23');
       const endDate2 = new Date('2023-10-06');
-      
+
       if (currentDate >= startDate1 && currentDate <= endDate1) {
         setRecruitingStatus('Jelentkezés');
       } else if (currentDate >= startDate2 && currentDate <= endDate2) {
@@ -53,7 +53,7 @@ const ForFreshman = ({ navigation }: { navigation: any }) => {
     setStatusBasedOnDate();
 
   }, [])
-  
+
 
   const [loaded] = useFonts({
     EncodeSans_100Thin,
@@ -73,34 +73,37 @@ const ForFreshman = ({ navigation }: { navigation: any }) => {
 
   return (
     <ImageBackground source={require('../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
-      <View style={{ backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', paddingHorizontal: 16, paddingTop: 96 }}>
-        <Text style={[globalStyles.title, { marginVertical: 32 }]}>Hogyan válhatsz BITizenné?</Text>
-        <Pressable style={globalStyles.bigBlurContainerWrapper} onPress={() => navigation.navigate('Toborzás')} disabled={false}>
-          <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 32, marginTop: 32, fontSize: 20 }}>I. Ismerj meg minket!</Text>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 32, fontSize: 16, width: '67%', marginVertical: 24 }}>
-              Nézd meg, mikor és hol találkozhatsz velünk!
-            </Text>
-            <Ionicons name='md-play-outline' size={30} color={'#1ee7e7'} />
-          </BlurView>
-        </Pressable>
-        <Pressable style={globalStyles.smallBlurContainerWrapper} disabled={recruitingStatus=='Jelentkezés'? false : true} onPress={()=> Linking.openURL('https://docs.google.com/forms/d/e/1FAIpQLSe5UsFm_JobOMHyk9M6Umr2s8mZbpTSo7rF3UwTM0aqQMrB4g/viewform?usp=sf_link')}>
-          <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 28, marginTop:0, fontSize: 16 }}>II. Jelentkezz!</Text>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 28, fontSize: 12, width: '67%', marginTop: 24 }}>
-              Jelentkezz hozzánk, hogy téged is átjárjon a Nyo-mode!
-            </Text>
-          </BlurView>
-        </Pressable>
-        <Pressable style={globalStyles.smallBlurContainerWrapper}>
-          <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 28, marginTop: '8%', fontSize: 16, width: '50%' }}>III. Kezdődjön a BITizen élet!</Text>
-            <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 28, fontSize: 12, width: '80%', marginVertical: 24 }}>
-              BITizen lettél? Tudd meg, hogyan kezdődik életed legjobb időszaka!
-            </Text>
-          </BlurView>
-        </Pressable>
-      </View>
+      <ScrollView style={{ backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', paddingHorizontal: 16, }} >
+        <View style={{paddingTop: 80}}>
+          <Text style={[globalStyles.title, { marginVertical: 32 }]}>Hogyan válhatsz BITizenné?</Text>
+          <Pressable style={globalStyles.bigBlurContainerWrapper} onPress={() => navigation.navigate('Toborzás')} disabled={false}>
+            <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
+              <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 32, marginTop: 32, fontSize: 20 }}>I. Ismerj meg minket!</Text>
+              <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 32, fontSize: 16, width: '67%', marginVertical: 24 }}>
+                Nézd meg, mikor és hol találkozhatsz velünk!
+              </Text>
+              <Ionicons name='md-play-outline' size={30} color={'#1ee7e7'} />
+            </BlurView>
+          </Pressable>
+          <Pressable style={globalStyles.smallBlurContainerWrapper} disabled={recruitingStatus == 'Jelentkezés' ? false : true} onPress={() => Linking.openURL('https://docs.google.com/forms/d/e/1FAIpQLSe5UsFm_JobOMHyk9M6Umr2s8mZbpTSo7rF3UwTM0aqQMrB4g/viewform?usp=sf_link')}>
+            <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
+              <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 28, marginTop: 0, fontSize: 16 }}>II. Jelentkezz!</Text>
+              <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 28, fontSize: 12, width: '67%', marginTop: 24 }}>
+                Jelentkezz hozzánk, hogy téged is átjárjon a Nyo-mode!
+              </Text>
+            </BlurView>
+          </Pressable>
+          <Pressable style={[globalStyles.smallBlurContainerWrapper]}>
+            <BlurView intensity={40} tint='default' style={globalStyles.blurContainer} blurReductionFactor={1.5}>
+              <Text style={{ color: 'white', fontFamily: 'EncodeSans_900Black', marginHorizontal: 28, marginTop: '8%', fontSize: 16, width: '50%' }}>III. Kezdődjön a BITizen élet!</Text>
+              <Text style={{ color: 'white', fontFamily: 'EncodeSans_500Medium', marginHorizontal: 28, fontSize: 12, width: '80%', marginVertical: 24 }}>
+                BITizen lettél? Tudd meg, hogyan kezdődik életed legjobb időszaka!
+              </Text>
+            </BlurView>
+          </Pressable>
+
+        </View>
+      </ScrollView>
     </ImageBackground>
   )
 }

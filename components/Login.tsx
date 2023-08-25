@@ -93,7 +93,8 @@ export default function Login({ navigation }: { navigation: any }) {
               value={email}
               placeholder="keresztnev.vezeteknev@bce.bitclub.com"
               autoCapitalize={'none'} autoComplete={undefined}
-              autoCorrect={false} />
+              autoCorrect={false}
+              style={{width: '100%'}}/>
           </View>
           <Text style={globalStyles.labelText}>
             Jelszó
@@ -106,7 +107,8 @@ export default function Login({ navigation }: { navigation: any }) {
               secureTextEntry={true}
               placeholder="#Bitizenvagyok420"
               autoCapitalize={'none'} autoComplete={undefined}
-              autoCorrect={false} />
+              autoCorrect={false}
+              style={{width: '100%'}}/>
           </View>
           <View>
             <Text style={globalStyles.forgottenPassword}>

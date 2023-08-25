@@ -16,7 +16,7 @@ import {
   EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { View, Text, ImageBackground, Image, Pressable} from 'react-native'
+import { View, Text, ImageBackground, Image, Pressable, ScrollView} from 'react-native'
 
 
 const Welcome = ({navigation}: {navigation: any}) => {
@@ -36,7 +36,7 @@ const Welcome = ({navigation}: {navigation: any}) => {
   }
   return (
     <ImageBackground source={require('../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
-        <View style={{backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', paddingHorizontal: 32, paddingBottom: 72}}>
+        <ScrollView style={{backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', flexDirection: 'column', paddingHorizontal: 32, paddingBottom: 72}} contentContainerStyle={{justifyContent: 'flex-end', alignItems: 'center'}}>
             <Image source={require('../assets/BIT-new-logo-FULL-white.png')} style={globalStyles.welcomeLogo}/>
             <Text style={globalStyles.welcomeText}>
             “BITizennek lenni egy életérzés, a konstans Nyo-mode pedig még a véredet is #12b0b0-ra színezi”
@@ -47,7 +47,7 @@ const Welcome = ({navigation}: {navigation: any}) => {
             <Pressable style={globalStyles.welcomeButton2} onPress={() => navigation.navigate('Bejelentkezés')}>
                 <Text style={{fontFamily: 'EncodeSans_600SemiBold', color: '#1ee7e7', textDecorationStyle: 'solid', textDecorationLine: 'underline', textDecorationColor: '#1ee7e7'}}>BITizen vagyok, belépek!</Text>
             </Pressable>
-        </View>
+        </ScrollView>
     </ImageBackground>
   )
 }

@@ -100,7 +100,8 @@ export default function Auth({ navigation }: { navigation: any }) {
                 value={email}
                 placeholder="keresztnev.vezeteknev@bce.bitclub.com"
                 autoCapitalize={'none'} autoComplete={undefined}
-                autoCorrect={false} />
+                autoCorrect={false}
+                style={{width: '100%'}}/>
             </View>
             <Text style={globalStyles.labelText}>
               Jelszó
@@ -113,7 +114,8 @@ export default function Auth({ navigation }: { navigation: any }) {
                 secureTextEntry={true}
                 placeholder="#Bitizenvagyok420"
                 autoCapitalize={'none'} autoComplete={undefined}
-                autoCorrect={false} />
+                autoCorrect={false}
+                style={{width: '100%'}}/>
             </View>
             <Text style={globalStyles.labelText}>
               Jelszó megerősítése
@@ -126,7 +128,8 @@ export default function Auth({ navigation }: { navigation: any }) {
                 secureTextEntry={true}
                 placeholder="#Bitizenvagyok420"
                 autoCapitalize={'none'} autoComplete={undefined}
-                autoCorrect={false} />
+                autoCorrect={false}
+                style={{width: '100%'}}/>
             </View>
             <View style={globalStyles.container}>
               <View style={[globalStyles.mt20, globalStyles.button]}>
