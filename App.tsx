@@ -23,9 +23,9 @@ import {
 import AuthContext from './lib/AuthContext'
 import Home from './components/navigation/HomeNavigator'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Welcome from './components/Welcome'
-import ForFreshman from './components/ForFreshman'
-import FreshmanHome from './components/FreshmanHome'
+import Welcome from './components/onboarding/Welcome'
+import ForFreshman from './components/onboarding/ForFreshman'
+import FreshmanHome from './components/onboarding/FreshmanHome'
 
 
 export default function App() {
