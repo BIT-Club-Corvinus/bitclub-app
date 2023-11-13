@@ -35,10 +35,10 @@ const Welcome = ({ navigation }: { navigation: any }) => {
     return null
   }
   return (
-    <ImageBackground source={require('../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
+    <ImageBackground source={require('../../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
       <ScrollView style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.75)'}} contentContainerStyle={{justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
         <View style={{ width: '100%', height: '100%', flexDirection: 'column', paddingHorizontal: 32, justifyContent: 'center', alignItems: 'center', paddingTop: 0}}>
-          <Image source={require('../assets/BIT-new-logo-FULL-white.png')} style={globalStyles.welcomeLogo} />
+          <Image source={require('../../assets/BIT-new-logo-FULL-white.png')} style={globalStyles.welcomeLogo} />
           <Text style={globalStyles.welcomeText}>
             “BITizennek lenni egy életérzés, a konstans Nyo-mode pedig még a véredet is #12b0b0-ra színezi”
           </Text>

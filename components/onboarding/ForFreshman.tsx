@@ -72,7 +72,7 @@ const ForFreshman = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <ImageBackground source={require('../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
+    <ImageBackground source={require('../../assets/background_pattern.png')} style={globalStyles.backgroundPattern}>
       <ScrollView style={{ backgroundColor: 'rgba(0,0,0,0.75)', width: '100%', height: '100%', paddingHorizontal: 16, }} >
         <View style={{paddingTop: 80, alignItems: 'center'}}>
           <Text style={[globalStyles.title, { marginVertical: 32 }]}>Hogyan válhatsz BITizenné?</Text>

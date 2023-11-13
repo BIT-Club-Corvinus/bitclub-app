@@ -40,7 +40,7 @@ const FreshmanHome = ({ navigation }: { navigation: any }) => {
 
     return (
         <ImageBackground
-            source={require('../assets/background_pattern.png')}
+            source={require('../../assets/background_pattern.png')}
             style={globalStyles.backgroundPattern}
         >
             <ScrollView style={{ backgroundColor: 'rgba(0,0,0,0.75)', }}>
@@ -53,7 +53,7 @@ const FreshmanHome = ({ navigation }: { navigation: any }) => {
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <Image
-                                    source={require('../assets/bit_buli.png')}
+                                    source={require('../../assets/bit_buli.png')}
                                     style={{ width: 120, height: 120, marginBottom: 24, marginTop: 16, marginRight: 16 }}
                                 ></Image>
                             </View>
@@ -63,19 +63,19 @@ const FreshmanHome = ({ navigation }: { navigation: any }) => {
                             </View>
                             <View style={{ alignItems: 'center' }}>
                                 <Image
-                                    source={require('../assets/bit_infoest.png')}
+                                    source={require('../../assets/bit_infoest.png')}
                                     style={{ width: 120, height: 120, marginBottom: 16, marginTop: 16 }}
                                 ></Image>
                             </View>
 
                         </View>
                         <View style={{ height: '100%' }}>
-                            <Image source={require('../assets/roadmap_component.png')}></Image>
+                            <Image source={require('../../assets/roadmap_component.png')}></Image>
                         </View>
                         <View style={{ height: '100%', width: '33%' }}>
                             <View style={{alignItems: 'center'}}>
                                 <Image
-                                    source={require('../assets/bit_expo.png')}
+                                    source={require('../../assets/bit_expo.png')}
                                     style={{ width: 120, height: 120, marginBottom: 16, marginTop: 16, marginLeft: 16 }}
                                 ></Image>
                             </View>
@@ -86,7 +86,7 @@ const FreshmanHome = ({ navigation }: { navigation: any }) => {
                             </View>
                             <View style={{alignItems: 'center'}}>
                                 <Image
-                                    source={require('../assets/bit_meetup.png')}
+                                    source={require('../../assets/bit_meetup.png')}
                                     style={{ width: 120, height: 120, marginBottom:16, marginTop: 32, marginLeft: 8 }}
                                 ></Image>
                             </View>
