@@ -4,8 +4,8 @@ import { Session } from '@supabase/supabase-js'
 import 'react-native-url-polyfill/auto'
 import React from 'react'
 import Office from './components/Office'
-import Login from './components/Login'
-import Register from './components/Register'
+import Login from './components/auth/LoginScreen'
+import Register from './components/auth/RegisterScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native'
 import {
@@ -21,7 +21,7 @@ import {
   EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
 import AuthContext from './lib/AuthContext'
-import Home from './components/Home'
+import Home from './components/navigation/HomeNavigator'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Welcome from './components/Welcome'
 import ForFreshman from './components/ForFreshman'

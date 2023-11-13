@@ -1,4 +1,4 @@
-import { Session } from "@supabase/supabase-js";
+import { AuthImplicitGrantRedirectError, Session } from "@supabase/supabase-js";
 import React from "react";
 import { useEffect, useState } from "react";
 import {
@@ -14,12 +14,16 @@ import {
     EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Office from "./Office";
-import BitNews from "./BITNews";
+import Office from "../Office";
+import BitNews from "../news/BITNewsScreen";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { Platform, View } from "react-native";
+import CustomTabBar from "./CustomTabBar";
+import Agenda from "../calendar_events/AgendaScreen";
+import More from "../More";
+import Main from "../Main";
 
 export default function Home() {
     const [loaded] = useFonts({
@@ -38,7 +42,7 @@ export default function Home() {
 
     return (
         <SafeAreaView style={{ flex: 1}}>
-            <Tab.Navigator screenOptions={Platform.OS==='ios'?
+            <Tab.Navigator tabBar={props => <CustomTabBar {...props}/>} screenOptions={Platform.OS==='ios'?
                 {
                 headerShown: false,
                 tabBarActiveBackgroundColor: 'rgba(191, 240, 207, 1)',
@@ -91,20 +95,11 @@ export default function Home() {
                     alignItems: 'center'
                 },
             }}>
-                <Tab.Screen name="Iroda" component={Office} options={{
-                    tabBarIcon: ({ focused }) => (
-                        <View style={{alignItems: 'center'}}>
-                            {focused ? <Ionicons name="md-home" size={26} color={'#f69133'} /> : <Ionicons name="md-home" size={26} color={'#12b0b0'} />}
-                        </View>
-                    )
-                }} />
-                <Tab.Screen name="BIT News" component={BitNews} options={{
-                    tabBarIcon: ({ focused }) => (
-                        <>
-                            {focused ? <Ionicons name="md-book" size={26} color={'#f69133'} /> : <Ionicons name="md-book" size={26} color={'#12b0b0'} />}
-                        </>
-                    )
-                }} />
+                <Tab.Screen name="Iroda" component={Office}/>
+                <Tab.Screen name="BIT News" component={BitNews}/>
+                <Tab.Screen name="CTA" component={Main}/>
+                <Tab.Screen name="Események" component={Agenda}/>
+                <Tab.Screen name="Egyebek" component={More}/>
             </Tab.Navigator>
 
         </SafeAreaView>

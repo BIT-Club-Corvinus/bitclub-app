@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase } from '../../lib/supabase'
 import { StyleSheet, View, Alert, Text, TextInput, Pressable } from 'react-native'
 import { Button, Input, Switch } from 'react-native-elements'
 import { Session } from '@supabase/supabase-js'
 import React from 'react'
-import { globalStyles } from '../lib/styles'
+import { globalStyles } from '../../lib/styles'
 import { Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import {

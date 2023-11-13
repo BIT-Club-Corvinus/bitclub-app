@@ -13,13 +13,13 @@ import {
     EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
 import { Alert, View, Text, Pressable, ActivityIndicator, Image, ImageBackground, ScrollView} from "react-native";
-import { globalStyles } from "../lib/styles";
-import { supabase } from "../lib/supabase";
+import { globalStyles } from "../../lib/styles";
+import { supabase } from "../../lib/supabase";
 import { LinearGradient } from "expo-linear-gradient";
-import AuthContext from "../lib/AuthContext";
+import AuthContext from "../../lib/AuthContext";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import BITNewsDetails from "./BITNewsDetails";
+import BITNewsDetails from "./BITNewsDetailsScreen";
 
 type News = {
     id: number

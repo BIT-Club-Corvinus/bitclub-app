@@ -1,6 +1,6 @@
 import { View, Text, Image, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
-import { globalStyles } from '../lib/styles'
+import { globalStyles } from '../../lib/styles'
 
 export default function BITNewsDetails({ route }: { route: any }) {
     return (

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import 'react-native-url-polyfill/auto'
 import React from 'react'
 import { globalStyles } from '../lib/styles'
-import Login from './Login'
+import Login from './auth/LoginScreen'
 import {
     useFonts,
     EncodeSans_100Thin,

@@ -4,8 +4,8 @@ import { supabase } from '../lib/supabase'
 import { Button, Icon, Input } from 'react-native-elements'
 import { globalStyles } from '../lib/styles'
 import { LinearGradient } from 'expo-linear-gradient'
-import Register from './Register'
-import Login from './Login'
+import Register from './auth/RegisterScreen'
+import Login from './auth/LoginScreen'
 import {
     useFonts,
     EncodeSans_100Thin,
