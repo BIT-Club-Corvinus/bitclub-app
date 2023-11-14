@@ -31,6 +31,9 @@ import FreshmanHome from './components/onboarding/FreshmanHome'
 export default function App() {
 
   const [session, setSession] = useState<Session | null>(null)
+  const [online, setOnline] = useState(false)
+  const [loading, setLoading] = useState(true)
+
   const [loaded] = useFonts({
     EncodeSans_100Thin,
     EncodeSans_200ExtraLight,
@@ -59,7 +62,7 @@ export default function App() {
     return null
   }
   return (
-    <AuthContext.Provider value={{ session, setSession }}>
+    <AuthContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading }}>
       <NavigationContainer>
         {session && session?.user ?
           <Home /> :
@@ -94,7 +97,7 @@ export default function App() {
                   fontFamily: 'EncodeSans_300Light'
                 }
               }}
-              />
+            />
             <Stack.Screen name="Bejelentkezés" component={Login}
               options={{
                 headerShown: true,

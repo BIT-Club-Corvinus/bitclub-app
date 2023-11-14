@@ -19,10 +19,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import AuthContext from "../lib/AuthContext";
 
 export default function Office() {
-    const { session } = useContext(AuthContext)
-    const [online, setOnline] = useState(false)
-    const [loading, setLoading] = useState(true)
-    const [officeMinutes, setMinutesInOffice] = useState(0)
+    const { session, online, setOnline, loading, setLoading } = useContext(AuthContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
     const [loaded] = useFonts({
         EncodeSans_100Thin,
@@ -106,35 +103,7 @@ export default function Office() {
         }
     }
 
-    async function updateOnlineStatus({ online }: { online: boolean }) {
-        try {
-            setLoading(true)
-            if (!session?.user) throw new Error('No user on the session!')
-
-            setOnline(previousState => !previousState)
-
-            const updates = {
-                id: session?.user.id,
-                online
-            }
-
-            let { error } = await supabase.from('profiles').upsert(updates)
-
-            if (error) {
-                throw error
-            }
-            else {
-                if (online) Alert.alert("Beléptél az irodába!")
-                else Alert.alert("Kiléptél az irodából!")
-            }
-        } catch (error) {
-            if (error instanceof Error) {
-                Alert.alert(error.message)
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
+    
 
     if (!loaded) return null;
 
@@ -154,7 +123,7 @@ export default function Office() {
                 </View>
                 : <Text style={[globalStyles.mt20percent, { fontFamily: 'EncodeSans_700Bold', fontSize: 40, textAlign: "center" }]}>Most nincs senki az irodában</Text>
             }
-            <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={() => { updateOnlineStatus({ online: !online }) }}>
+            <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={() => {  }}>
                 {!online ? <Text style={globalStyles.buttonText}>Bemegyek az irodába!</Text> : <Text style={globalStyles.buttonText}>Kilépek az irodából!</Text>}
             </Pressable>
             <Pressable style={[globalStyles.mt20, globalStyles.logoutButton]} onPress={async () => await supabase.auth.signOut()}>

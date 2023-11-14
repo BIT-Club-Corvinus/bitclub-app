@@ -1,11 +1,47 @@
 // CustomTabBar.tsx
-import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCalendar, faCalendarDay, faDoorOpen, faHome, faList, faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faCalendarDay, faDoorClosed, faDoorOpen, faHome, faList, faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import AuthContext from '../../lib/AuthContext';
+import Office from '../Office';
+import { supabase } from '../../lib/supabase';
 
 const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
+  const { online, setOnline, setLoading, session} = useContext(AuthContext)
+  
+  
+  async function updateOnlineStatus({ online }: { online: boolean }) {
+    try {
+        setLoading(true)
+        if (!session?.user) throw new Error('No user on the session!')
+
+        setOnline(online)
+
+        const updates = {
+            id: session?.user.id,
+            online
+        }
+
+        let { error } = await supabase.from('profiles').upsert(updates)
+
+        if (error) {
+            throw error
+        }
+        else {
+            if (online) Alert.alert("Beléptél az irodába!")
+            else Alert.alert("Kiléptél az irodából!")
+        }
+    } catch (error) {
+        if (error instanceof Error) {
+            Alert.alert(error.message)
+        }
+    } finally {
+        setLoading(false)
+    }
+}
+
   return (
     <View style={styles.tabBar}>
       {state.routes.map((route, index) => {
@@ -13,11 +49,19 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
         const isFocused = state.index === index;
 
         const tabBarColor = isFocused ? '#f69133' : '#12b0b0'
+        const ctaColor = online ? '#f69133' : '#12b0b0'
 
-        const ctaButton =
-          <TouchableOpacity style={styles.ctaButton}>
-            <FontAwesomeIcon icon={faDoorOpen} size={35} color='#ffffff' />
-          </TouchableOpacity>
+        const ctaButton = () => {
+          const handlePress = () => {
+            updateOnlineStatus({ online: !online })
+          }
+          return (
+            <TouchableOpacity style={[styles.ctaButton, { backgroundColor: ctaColor}]} onPress={handlePress}>
+              <FontAwesomeIcon icon={online ? faDoorOpen : faDoorClosed} size={35} color='#ffffff' />
+            </TouchableOpacity>
+          )
+
+        }
 
         const onPress = () => {
           const event = navigation.emit({
@@ -31,6 +75,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
           }
         };
 
+
         return (
           <TouchableOpacity
             onPress={onPress}
@@ -38,11 +83,11 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
           >
             {
               index === 0
-                ? <FontAwesomeIcon icon={faHome} size={30} color={tabBarColor}/>
-                : index === 1 ? <FontAwesomeIcon icon={faCalendarDay} size={30} color={tabBarColor}/>
-                  : index === 2 ? ctaButton
-                    : index === 3 ? <FontAwesomeIcon icon={faNewspaper} size={30} color={tabBarColor}/>
-                      : <FontAwesomeIcon icon={faList} size={30} color={tabBarColor}/>
+                ? <FontAwesomeIcon icon={faHome} size={30} color={tabBarColor} />
+                : index === 1 ? <FontAwesomeIcon icon={faCalendarDay} size={30} color={tabBarColor} />
+                  : index === 2 ? ctaButton()
+                    : index === 3 ? <FontAwesomeIcon icon={faNewspaper} size={30} color={tabBarColor} />
+                      : <FontAwesomeIcon icon={faList} size={30} color={tabBarColor} />
             }
           </TouchableOpacity>
         );
@@ -79,7 +124,6 @@ const styles = StyleSheet.create({
   },
   ctaButton: {
     // Style for your elevated CTA button
-    backgroundColor: '#12b0b0',
     borderRadius: 35,
     elevation: 4,
     width: 70,

@@ -96,12 +96,11 @@ export default function Home() {
                 },
             }}>
                 <Tab.Screen name="Iroda" component={Office}/>
-                <Tab.Screen name="BIT News" component={BitNews}/>
-                <Tab.Screen name="CTA" component={Main}/>
                 <Tab.Screen name="Események" component={Agenda}/>
+                <Tab.Screen name="CTA" component={Main}/>
+                <Tab.Screen name="BIT News" component={BitNews}/>
                 <Tab.Screen name="Egyebek" component={More}/>
             </Tab.Navigator>
-
         </SafeAreaView>
     )
 }
