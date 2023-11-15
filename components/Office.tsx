@@ -16,10 +16,10 @@ import { Alert, View, Text, Pressable, ActivityIndicator } from "react-native";
 import { globalStyles } from "../lib/styles";
 import { supabase } from "../lib/supabase";
 import { LinearGradient } from "expo-linear-gradient";
-import AuthContext from "../lib/AuthContext";
+import ProfileContext from "../lib/ProfileContext";
 
 export default function Office() {
-    const { session, online, setOnline, loading, setLoading } = useContext(AuthContext)
+    const { session, online, setOnline, loading, setLoading, setProfile } = useContext(ProfileContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
     const [loaded] = useFonts({
         EncodeSans_100Thin,
@@ -37,7 +37,6 @@ export default function Office() {
         if (session) {
             //supabase.auth.refreshSession();
             getOnlineUsers();
-            getProfile();
         }
         const channel = supabase.channel('public:profiles')
         const profiles = channel
@@ -51,32 +50,7 @@ export default function Office() {
             .subscribe()
     }, [session])
 
-    async function getProfile() {
-        try {
-            setLoading(true)
-            if (!session?.user) throw new Error('No user on the session!')
-
-            let { data, error, status } = await supabase
-                .from('profiles')
-                .select(`online`)
-                .eq('id', session?.user.id)
-                .single()
-            if (error && status !== 406) {
-                throw error
-            }
-
-            if (data) {
-                setOnline(data.online)
-            }
-            console.log(data?.online)
-        } catch (error) {
-            if (error instanceof Error) {
-                Alert.alert(error.message)
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
+    
 
 
     async function getOnlineUsers() {

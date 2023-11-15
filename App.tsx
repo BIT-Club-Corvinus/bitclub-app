@@ -20,12 +20,13 @@ import {
   EncodeSans_800ExtraBold,
   EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
-import AuthContext from './lib/AuthContext'
+import ProfileContext from './lib/ProfileContext'
 import Home from './components/navigation/HomeNavigator'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Welcome from './components/onboarding/Welcome'
 import ForFreshman from './components/onboarding/ForFreshman'
 import FreshmanHome from './components/onboarding/FreshmanHome'
+import { Alert } from 'react-native'
 
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
   const [session, setSession] = useState<Session | null>(null)
   const [online, setOnline] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [profile, setProfile] = useState({})
 
   const [loaded] = useFonts({
     EncodeSans_100Thin,
@@ -56,13 +58,45 @@ export default function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
     })
+
+    if (session) {
+      getProfile();
+    }
   }, [])
+
+  async function getProfile() {
+    try {
+      setLoading(true)
+      if (!session?.user) throw new Error('No user on the session!')
+
+      let { data, error, status } = await supabase
+        .from('profiles')
+        .select()
+        .eq('id', session?.user.id)
+        .single()
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        setProfile(data)
+        setOnline(data.online)
+      }
+      console.log(data?.online)
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   if (!loaded) {
     return null
   }
   return (
-    <AuthContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading }}>
+    <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading, profile, setProfile}}>
       <NavigationContainer>
         {session && session?.user ?
           <Home /> :
@@ -123,7 +157,7 @@ export default function App() {
         }
       </NavigationContainer>
 
-    </AuthContext.Provider>
+    </ProfileContext.Provider>
     /* <View>
       {session && session.user ? <Home key={session.user.id} session={session} /> : <Main />}
     </View> */

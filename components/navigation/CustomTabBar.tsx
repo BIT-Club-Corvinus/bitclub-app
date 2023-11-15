@@ -4,12 +4,12 @@ import { View, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCalendar, faCalendarDay, faDoorClosed, faDoorOpen, faHome, faList, faNewspaper } from '@fortawesome/free-solid-svg-icons'
-import AuthContext from '../../lib/AuthContext';
+import ProfileContext from '../../lib/ProfileContext';
 import Office from '../Office';
 import { supabase } from '../../lib/supabase';
 
 const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
-  const { online, setOnline, setLoading, session} = useContext(AuthContext)
+  const { online, setOnline, setLoading, session} = useContext(ProfileContext)
   
   
   async function updateOnlineStatus({ online }: { online: boolean }) {

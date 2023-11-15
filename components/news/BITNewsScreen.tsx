@@ -16,7 +16,7 @@ import { Alert, View, Text, Pressable, ActivityIndicator, Image, ImageBackground
 import { globalStyles } from "../../lib/styles";
 import { supabase } from "../../lib/supabase";
 import { LinearGradient } from "expo-linear-gradient";
-import AuthContext from "../../lib/AuthContext";
+import ProfileContext from "../../lib/ProfileContext";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BITNewsDetails from "./BITNewsDetailsScreen";
@@ -37,7 +37,7 @@ type News = {
 }
 
 export default function BitNews({navigation}: {navigation: any}) {
-    const { session } = useContext(AuthContext);
+    const { session } = useContext(ProfileContext);
     const [loading, setLoading] = useState(true);
     const [news, setNews] = useState<any>([]);
     const [loaded] = useFonts({
