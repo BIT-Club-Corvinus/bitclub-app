@@ -19,7 +19,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import ProfileContext from "../lib/ProfileContext";
 
 export default function Office() {
-    const { session, online, setOnline, loading, setLoading, setProfile } = useContext(ProfileContext)
+    const { session, online, setOnline, loading, setLoading } = useContext(ProfileContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
     const [loaded] = useFonts({
         EncodeSans_100Thin,
@@ -50,7 +50,7 @@ export default function Office() {
             .subscribe()
     }, [session])
 
-    
+
 
 
     async function getOnlineUsers() {
@@ -77,7 +77,7 @@ export default function Office() {
         }
     }
 
-    
+
 
     if (!loaded) return null;
 
@@ -97,7 +97,7 @@ export default function Office() {
                 </View>
                 : <Text style={[globalStyles.mt20percent, { fontFamily: 'EncodeSans_700Bold', fontSize: 40, textAlign: "center" }]}>Most nincs senki az irodában</Text>
             }
-            <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={() => {  }}>
+            <Pressable style={[globalStyles.mt20percent, globalStyles.button]} onPress={() => { }}>
                 {!online ? <Text style={globalStyles.buttonText}>Bemegyek az irodába!</Text> : <Text style={globalStyles.buttonText}>Kilépek az irodából!</Text>}
             </Pressable>
             <Pressable style={[globalStyles.mt20, globalStyles.logoutButton]} onPress={async () => await supabase.auth.signOut()}>

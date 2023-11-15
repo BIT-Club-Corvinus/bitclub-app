@@ -1,21 +1,66 @@
-import { View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native'
-import React, { useContext } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ProfileContext from '../lib/ProfileContext';
+import { supabase } from '../lib/supabase';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faUser, faGear, faBomb, faDice } from '@fortawesome/free-solid-svg-icons'
+
+
+type UserProfile = {
+  id: string,
+  username: string | null,
+  online: boolean,
+  nameVisibility: boolean | null,
+  minutesInOffice: number | null
+}
 
 const More = () => {
-const { profile } = useContext(ProfileContext)
+  const { session, setLoading, } = useContext(ProfileContext)
+  const [profile, setProfile] = useState<UserProfile>()
+
+  useEffect(() => {
+    getProfile()
+  }, [session])
+  
+
+  async function getProfile() {
+    try {
+      setLoading(true)
+      if (!session?.user) throw new Error('No user on the session!')
+
+      let { data, error, status } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session?.user.id)
+        .single()
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        setProfile(data)
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const moreOptions = [
-    { key: 'profile', label: 'Profile', highlighted: true },
-    { key: 'settings', label: 'Settings', highlighted: false },
-    { key: 'boardGames', label: 'Board Games', highlighted: false },
-    { key: 'anotherOption', label: 'Another Option', highlighted: false },
+    { key: 'profile', label: profile?.username, highlighted: true, iconName: <FontAwesomeIcon icon={faUser} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
+    { key: 'settings', label: 'Beállítások', highlighted: false, iconName:<FontAwesomeIcon icon={faGear} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
+    { key: 'piggie', label: 'Robbanó Röfik', highlighted: false, iconName: <FontAwesomeIcon icon={faBomb} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
+    { key: 'cluedo', label: 'Cluedo', highlighted: false, iconName: <FontAwesomeIcon icon={faDice} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
   ];
 
-  const renderItem = ({ item }: {item: any}) => {
+  const renderItem = ({ item }: { item: any }) => {
     return (
-      <TouchableOpacity style={item.highlighted ? styles.highlightedItem : styles.item}>
+      <TouchableOpacity style={item.highlighted ? [styles.item, {marginBottom: 20}] : styles.item}>
+        {item.iconName}
         <Text style={styles.itemText}>{item.label}</Text>
       </TouchableOpacity>
     );
@@ -23,6 +68,9 @@ const { profile } = useContext(ProfileContext)
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.header}>
+        Menü
+      </Text>
       <FlatList
         data={moreOptions}
         renderItem={renderItem}
@@ -41,16 +89,28 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
-  },
-  highlightedItem: {
-    backgroundColor: '#fff', // Same color as other items
-    padding: 20,
-    marginBottom: 30, // Extra padding at the bottom
-    marginVertical: 8,
-    marginHorizontal: 16,
+    borderRadius: 25,
+    shadowOffset: {
+      width: 0,
+      height: 20
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   itemText: {
     fontSize: 18,
   },
+  icon: {
+    marginRight: 20
+  },
+  header:{
+    fontFamily: 'EncodeSans_700Bold',
+    fontSize: 40,
+    textAlign: 'center',
+    marginBottom: 20,
+    borderRadius: 25
+  }
 })
 export default More

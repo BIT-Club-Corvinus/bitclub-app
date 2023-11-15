@@ -58,45 +58,15 @@ export default function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
     })
-
-    if (session) {
-      getProfile();
-    }
   }, [])
 
-  async function getProfile() {
-    try {
-      setLoading(true)
-      if (!session?.user) throw new Error('No user on the session!')
 
-      let { data, error, status } = await supabase
-        .from('profiles')
-        .select()
-        .eq('id', session?.user.id)
-        .single()
-      if (error && status !== 406) {
-        throw error
-      }
-
-      if (data) {
-        setProfile(data)
-        setOnline(data.online)
-      }
-      console.log(data?.online)
-    } catch (error) {
-      if (error instanceof Error) {
-        Alert.alert(error.message)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
 
   if (!loaded) {
     return null
   }
   return (
-    <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading, profile, setProfile}}>
+    <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading }}>
       <NavigationContainer>
         {session && session?.user ?
           <Home /> :
