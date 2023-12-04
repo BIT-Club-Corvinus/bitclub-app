@@ -26,7 +26,7 @@ import NewsContext from "../../lib/contexts/NewsContext";
 export default function BitNews({navigation}: {navigation: any}) {
     const { session } = useContext(ProfileContext);
     const { news } = useContext(NewsContext);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [loaded] = useFonts({
         EncodeSans_100Thin,
         EncodeSans_200ExtraLight,
