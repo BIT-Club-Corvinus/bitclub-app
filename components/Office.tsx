@@ -60,7 +60,7 @@ export default function Office() {
 
             let { data, error, status } = await supabase
                 .from('profiles')
-                .select(`username, namevisibility, minutesinoffice, online`)
+                .select(`*`)
                 .eq('online', true)
             if (error && status !== 406) {
                 throw error

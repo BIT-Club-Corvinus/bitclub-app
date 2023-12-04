@@ -4,16 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ProfileContext from '../lib/ProfileContext';
 import { supabase } from '../lib/supabase';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser, faGear, faBomb, faDice } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faGear, faBomb, faDice } from '@fortawesome/free-solid-svg-icons';
+import { UserProfile } from '../lib/types/UserProfile';
 
 
-type UserProfile = {
-  id: string,
-  username: string | null,
-  online: boolean,
-  nameVisibility: boolean | null,
-  minutesInOffice: number | null
-}
 
 const More = () => {
   const { session, setLoading, } = useContext(ProfileContext)
@@ -32,7 +26,7 @@ const More = () => {
       let { data, error, status } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', session?.user.id)
+        .eq('userPK', session?.user.id)
         .single()
       if (error && status !== 406) {
         throw error

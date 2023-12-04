@@ -9,38 +9,38 @@ import Office from '../Office';
 import { supabase } from '../../lib/supabase';
 
 const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
-  const { online, setOnline, setLoading, session} = useContext(ProfileContext)
-  
-  
+  const { online, setOnline, setLoading, session } = useContext(ProfileContext)
+
+
   async function updateOnlineStatus({ online }: { online: boolean }) {
     try {
-        setLoading(true)
-        if (!session?.user) throw new Error('No user on the session!')
+      setLoading(true)
+      if (!session?.user) throw new Error('No user on the session!')
 
-        setOnline(online)
+      setOnline(online)
 
-        const updates = {
-            id: session?.user.id,
-            online
-        }
+      const { data, error } = await supabase
+        .from('profiles')
+        .update({ online: online })
+        .eq('userPK', session?.user.id)
+        .select()
 
-        let { error } = await supabase.from('profiles').upsert(updates)
 
-        if (error) {
-            throw error
-        }
-        else {
-            if (online) Alert.alert("Beléptél az irodába!")
-            else Alert.alert("Kiléptél az irodából!")
-        }
+      if (error) {
+        throw error
+      }
+      else {
+        if (online) Alert.alert("Beléptél az irodába!")
+        else Alert.alert("Kiléptél az irodából!")
+      }
     } catch (error) {
-        if (error instanceof Error) {
-            Alert.alert(error.message)
-        }
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
     } finally {
-        setLoading(false)
+      setLoading(false)
     }
-}
+  }
 
   return (
     <View style={styles.tabBar}>
@@ -56,7 +56,7 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
             updateOnlineStatus({ online: !online })
           }
           return (
-            <TouchableOpacity style={[styles.ctaButton, { backgroundColor: ctaColor}]} onPress={handlePress}>
+            <TouchableOpacity style={[styles.ctaButton, { backgroundColor: ctaColor }]} onPress={handlePress}>
               <FontAwesomeIcon icon={online ? faDoorOpen : faDoorClosed} size={35} color='#ffffff' />
             </TouchableOpacity>
           )

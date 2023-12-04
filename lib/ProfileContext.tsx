@@ -2,7 +2,6 @@ import React from 'react';
 import { Session } from '@supabase/supabase-js';
 
 
-
 interface ProfileContextType {
   session: Session | null;
   setSession: (session: Session | null) => void;
