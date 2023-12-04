@@ -27,6 +27,7 @@ import Welcome from './components/onboarding/Welcome'
 import ForFreshman from './components/onboarding/ForFreshman'
 import FreshmanHome from './components/onboarding/FreshmanHome'
 import { Alert } from 'react-native'
+import { UserProfile } from './lib/types/UserProfile'
 
 
 export default function App() {
@@ -34,7 +35,7 @@ export default function App() {
   const [session, setSession] = useState<Session | null>(null)
   const [online, setOnline] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [profile, setProfile] = useState({})
+  const [profile, setProfile] = useState<UserProfile | null>(null)
 
   const [loaded] = useFonts({
     EncodeSans_100Thin,
@@ -61,12 +62,11 @@ export default function App() {
   }, [])
 
 
-
   if (!loaded) {
     return null
   }
   return (
-    <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading }}>
+    <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading, profile, setProfile }}>
       <NavigationContainer>
         {session && session?.user ?
           <Home /> :

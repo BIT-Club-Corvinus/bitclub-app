@@ -10,39 +10,7 @@ import { UserProfile } from '../lib/types/UserProfile';
 
 
 const More = () => {
-  const { session, setLoading, } = useContext(ProfileContext)
-  const [profile, setProfile] = useState<UserProfile>()
-
-  useEffect(() => {
-    getProfile()
-  }, [session])
-  
-
-  async function getProfile() {
-    try {
-      setLoading(true)
-      if (!session?.user) throw new Error('No user on the session!')
-
-      let { data, error, status } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('userPK', session?.user.id)
-        .single()
-      if (error && status !== 406) {
-        throw error
-      }
-
-      if (data) {
-        setProfile(data)
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        Alert.alert(error.message)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
+  const { session, setLoading, profile, setProfile } = useContext(ProfileContext)  
 
   const moreOptions = [
     { key: 'profile', label: profile?.username, highlighted: true, iconName: <FontAwesomeIcon icon={faUser} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
