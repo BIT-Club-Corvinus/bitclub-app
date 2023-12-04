@@ -20,26 +20,13 @@ import ProfileContext from "../../lib/contexts/ProfileContext";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BITNewsDetails from "./BITNewsDetailsScreen";
+import NewsContext from "../../lib/contexts/NewsContext";
 
-type News = {
-    id: number
-    title: string
-    sect_president: string
-    sect_HR: string
-    sect_BD: string
-    sect_TD: string
-    sect_Marketing: string
-    weekly_BITizen1: string
-    weekly_BITizen2: string
-    BITizen1_img: string
-    BITizen2_img: string
-    BITizen_desc: string
-}
 
 export default function BitNews({navigation}: {navigation: any}) {
     const { session } = useContext(ProfileContext);
+    const { news } = useContext(NewsContext);
     const [loading, setLoading] = useState(true);
-    const [news, setNews] = useState<any>([]);
     const [loaded] = useFonts({
         EncodeSans_100Thin,
         EncodeSans_200ExtraLight,
@@ -52,48 +39,10 @@ export default function BitNews({navigation}: {navigation: any}) {
         EncodeSans_900Black,
     });
 
-    useEffect(() => {
-        if (session) {
-            getNews();
-        }
-        const channel = supabase.channel('public:news')
-        const profiles = channel
-            .on(
-                'postgres_changes',
-                { event: '*', schema: 'public', table: 'news' },
-                (payload) => {
-                    getNews()
-                }
-            )
-            .subscribe()
-    }, [session])
-
     const Stack = createNativeStackNavigator();
 
 
-    async function getNews() {
-        try {
-            setLoading(true)
-            if (!session?.user) throw new Error('No user on the session!')
-
-            const { data, error, status } = await supabase
-                .from('news')
-                .select('*')
-
-            if (error && status !== 406) {
-                throw error
-            }
-            if (data) {
-                setNews(data)
-            }
-        } catch (error) {
-            if (error instanceof Error) {
-                Alert.alert(error.message)
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
+    
 
     if (loading) return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -106,7 +55,7 @@ export default function BitNews({navigation}: {navigation: any}) {
                 {/*Ide készítsétek el a BIT news oldal UI-ját (milyen elemek fognak megjelenni, hogyan kerülsz át arra az oldalra ahol részletesen el tudod olvasni az adott BIT news-t., stb.), az oldal alaphátterét megadtam már :) A függvényeket segítségül megírom helyettetek, hogy először tudjatok a UI-ra koncentrálni */}
                 <ScrollView style={globalStyles.bitNewsList}
                 contentContainerStyle={{height: '100%'}}>
-                    {news.map((item: any) => (
+                    {news?.map((item: any) => (
                         <ImageBackground key={item.id} style={globalStyles.bitNewsContainer} source={{uri: item.thumbnail_img}} borderRadius={20} imageStyle={{opacity: 0.5}}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'column', flex: 1, paddingHorizontal: '5%'}}>
                                 <Text style={globalStyles.bitNewsTitle}>{item.title}</Text>
