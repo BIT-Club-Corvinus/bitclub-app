@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ProfileContext from '../lib/ProfileContext';
+import ProfileContext from '../lib/contexts/ProfileContext';
 import { supabase } from '../lib/supabase';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser, faGear, faBomb, faDice } from '@fortawesome/free-solid-svg-icons';

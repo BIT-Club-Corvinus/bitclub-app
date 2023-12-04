@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCalendar, faCalendarDay, faDoorClosed, faDoorOpen, faHome, faList, faNewspaper } from '@fortawesome/free-solid-svg-icons'
-import ProfileContext from '../../lib/ProfileContext';
+import ProfileContext from '../../lib/contexts/ProfileContext';
 import Office from '../Office';
 import { supabase } from '../../lib/supabase';
 
@@ -108,13 +108,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 30,
     paddingBottom: 40,
-    paddingHorizontal: 30,
+    paddingHorizontal: 24,
     backgroundColor: '#fff',
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    borderRadius: 20,
+    borderRadius: 33,
   },
   tabButton: {
     // Normal tab button style

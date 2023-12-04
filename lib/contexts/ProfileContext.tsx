@@ -1,6 +1,6 @@
 import React from 'react';
 import { Session } from '@supabase/supabase-js';
-import { UserProfile } from './types/UserProfile';
+import { UserProfile } from '../types/UserProfile';
 
 
 interface ProfileContextType {

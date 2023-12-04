@@ -20,7 +20,7 @@ import {
   EncodeSans_800ExtraBold,
   EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
-import ProfileContext from './lib/ProfileContext'
+import ProfileContext from './lib/contexts/ProfileContext'
 import Home from './components/navigation/HomeNavigator'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Welcome from './components/onboarding/Welcome'

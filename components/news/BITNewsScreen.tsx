@@ -16,7 +16,7 @@ import { Alert, View, Text, Pressable, ActivityIndicator, Image, ImageBackground
 import { globalStyles } from "../../lib/styles";
 import { supabase } from "../../lib/supabase";
 import { LinearGradient } from "expo-linear-gradient";
-import ProfileContext from "../../lib/ProfileContext";
+import ProfileContext from "../../lib/contexts/ProfileContext";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BITNewsDetails from "./BITNewsDetailsScreen";

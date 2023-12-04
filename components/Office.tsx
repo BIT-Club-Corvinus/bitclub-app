@@ -12,15 +12,20 @@ import {
     EncodeSans_800ExtraBold,
     EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
-import { Alert, View, Text, Pressable, ActivityIndicator, StyleSheet} from "react-native";
+import { Alert, View, Text, Pressable, ActivityIndicator, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { globalStyles } from "../lib/styles";
 import { supabase } from "../lib/supabase";
 import { LinearGradient } from "expo-linear-gradient";
-import ProfileContext from "../lib/ProfileContext";
+import ProfileContext from "../lib/contexts/ProfileContext";
 import { SafeAreaView } from "react-native-safe-area-context";
+import EventsContext from "../lib/contexts/EventContext";
+import { EventType } from "../lib/types/Event";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function Office() {
     const { session, online, setOnline, loading, setLoading, profile, setProfile } = useContext(ProfileContext)
+    const { events } = useContext(EventsContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
     const [loaded] = useFonts({
         EncodeSans_100Thin,
@@ -106,6 +111,7 @@ export default function Office() {
 
 
 
+
     if (!loaded) return null;
 
     if (loading) return (
@@ -114,13 +120,50 @@ export default function Office() {
         </View>
     )
 
+    const renderEvent = ({ item }: { item: EventType }) => {
+        const flagColor = item.type === 'Közösségi' ? '#f69133' : '#12b0b0'
+        return (
+            <TouchableOpacity style={styles.eventCard}>
+                <View style={{ width: 5, height: '100%', backgroundColor: flagColor, marginRight: 16 }}></View>
+                <View style={{ flexDirection: 'column', flex: 3 / 5 }}>
+                    <Text style={styles.eventTitle}>{item.title}</Text>
+                    <Text>{item.place}</Text>
+                </View>
+                <Text style={{ flex: 1 / 3, fontFamily: 'EncodeSans_600SemiBold' }}>{item.date}</Text>
+                <FontAwesomeIcon icon={faAngleRight} />
+            </TouchableOpacity>
+        )
+    }
+
     return (
         <SafeAreaView style={styles.backgroundView}>
             <View style={styles.titleView}>
-                <Text style={{fontFamily: 'EncodeSans_700Bold', color: 'white', fontSize: 30}}>Helló {profile?.username}!</Text>
+                <Text style={{ fontFamily: 'EncodeSans_700Bold', color: 'white', fontSize: 30, paddingHorizontal: 24, paddingTop: 24 }}>Helló {profile?.username}!</Text>
+                <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: 'white', fontSize: 20, paddingHorizontal: 24, paddingTop: 8 }}>Most {peopleInOffice} tag van az irodában</Text>
             </View>
             <View style={styles.modalView}>
-
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8}}>
+                    <Text style={styles.modalTitle}>Közelgő események</Text>
+                    <TouchableOpacity>
+                        <Text style={{fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5}}>Összes</Text>
+                    </TouchableOpacity>
+                </View>
+                <FlatList
+                    data={events}
+                    renderItem={renderEvent}
+                    style={{flex: 1/4}}
+                />
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8}}>
+                    <Text style={styles.modalTitle}>Legfrissebb hírek</Text>
+                    <TouchableOpacity>
+                        <Text style={{fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5}}>Összes</Text>
+                    </TouchableOpacity>
+                </View>
+                <FlatList
+                    data={events}
+                    renderItem={renderEvent}
+                    style={{flex: 1/3}}
+                />
             </View>
         </SafeAreaView>
     )
@@ -134,12 +177,36 @@ const styles = StyleSheet.create({
     },
     titleView: {
         backgroundColor: 'transparent',
-        flex: 1/6
+        flex: 1 / 6
     },
     modalView: {
         backgroundColor: '#efefef',
-        flex: 5/6,
-        zIndex: 2
+        flex: 5 / 6,
+        zIndex: 2,
+        borderRadius: 33,
+        padding: 24
+    },
+    modalTitle: {
+        fontFamily: 'EncodeSans_700Bold',
+        color: 'black',
+        fontSize: 18
+    },
+    eventCard: {
+        borderRadius: 9,
+        flexDirection: 'row',
+        marginVertical: 8,
+        paddingVertical: 16,
+        borderWidth: 2,
+        borderColor: '#12b0b0',
+        paddingHorizontal: 16,
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        backgroundColor: 'white'
+    },
+    eventTitle: {
+        fontFamily: 'EncodeSans_700Bold',
+        fontSize: 18,
+        marginBottom: 4
     }
 })
 
