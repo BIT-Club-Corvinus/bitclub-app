@@ -26,7 +26,6 @@ import NewsContext from "../../lib/contexts/NewsContext";
 export default function BitNews({navigation}: {navigation: any}) {
     const { session } = useContext(ProfileContext);
     const { news } = useContext(NewsContext);
-    const [loading, setLoading] = useState(false);
     const [loaded] = useFonts({
         EncodeSans_100Thin,
         EncodeSans_200ExtraLight,
@@ -41,14 +40,6 @@ export default function BitNews({navigation}: {navigation: any}) {
 
     const Stack = createNativeStackNavigator();
 
-
-    
-
-    if (loading) return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <ActivityIndicator size="large" color="#12b0b0" />
-        </View>
-    )
     function BitNewsList(){
         return (
             <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={[globalStyles.gradient2, { alignItems: 'center' }]} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
@@ -56,7 +47,7 @@ export default function BitNews({navigation}: {navigation: any}) {
                 <ScrollView style={globalStyles.bitNewsList}
                 contentContainerStyle={{height: '100%'}}>
                     {news?.map((item: any) => (
-                        <ImageBackground key={item.id} style={globalStyles.bitNewsContainer} source={{uri: item.thumbnail_img}} borderRadius={20} imageStyle={{opacity: 0.5}}>
+                        <ImageBackground key={item.id} style={globalStyles.bitNewsContainer} source={{uri: item.thumbnail_img}} borderRadius={9} imageStyle={{opacity: 0.5}}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'column', flex: 1, paddingHorizontal: '5%'}}>
                                 <Text style={globalStyles.bitNewsTitle}>{item.title}</Text>
                                 <Text style={{ fontFamily: 'EncodeSans_500Medium', fontSize: 16, color: 'white'}}>{item.date}</Text>

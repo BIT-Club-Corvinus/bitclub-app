@@ -27,10 +27,12 @@ import { EventType } from "../../lib/types/Event";
 import { supabase } from "../../lib/supabase";
 import NewsContext from "../../lib/contexts/NewsContext";
 import { News } from "../../lib/types/News";
+import AgendaScreen from "../calendar_events/AgendaScreen";
+import { AgendaSchedule } from "react-native-calendars";
 
 export default function Home() {
     const { session, loading, setLoading } = useContext(ProfileContext)
-    const [events, setEvents] = useState<EventType[] | null>(null)
+    const [events, setEvents] = useState<AgendaSchedule | any>(undefined)
     const [news, setNews] = useState<News[] | null>(null)
 
     const [loaded] = useFonts({
@@ -171,7 +173,7 @@ export default function Home() {
                             },
                         }}>
                         <Tab.Screen name="Iroda" component={Office} />
-                        <Tab.Screen name="Események" component={Agenda} />
+                        <Tab.Screen name="Események" component={AgendaScreen} />
                         <Tab.Screen name="CTA" component={Main} />
                         <Tab.Screen name="BIT News" component={BitNews} />
                         <Tab.Screen name="Egyebek" component={More} />

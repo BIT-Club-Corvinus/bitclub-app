@@ -12,7 +12,7 @@ import {
     EncodeSans_800ExtraBold,
     EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
-import { Alert, View, Text, Pressable, ActivityIndicator, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { Alert, View, Text, Pressable, ActivityIndicator, StyleSheet, FlatList, TouchableOpacity, ImageBackground } from "react-native";
 import { globalStyles } from "../lib/styles";
 import { supabase } from "../lib/supabase";
 import { LinearGradient } from "expo-linear-gradient";
@@ -22,10 +22,13 @@ import EventsContext from "../lib/contexts/EventContext";
 import { EventType } from "../lib/types/Event";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import NewsContext from "../lib/contexts/NewsContext";
+import { News } from "../lib/types/News";
 
-export default function Office() {
+export default function Office({ navigation }: { navigation: any }) {
     const { session, online, setOnline, loading, setLoading, profile, setProfile } = useContext(ProfileContext)
     const { events } = useContext(EventsContext)
+    const { news } = useContext(NewsContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
     const [loaded] = useFonts({
         EncodeSans_100Thin,
@@ -135,6 +138,23 @@ export default function Office() {
         )
     }
 
+    const renderNews = ({ item }: { item: News }) => {
+        return (
+            <TouchableOpacity>
+                <ImageBackground key={item.id} style={styles.newsCard} source={{ uri: item.thumbnail_img }} borderRadius={9} imageStyle={{ opacity: 0.5 }}>
+                    <View style={{ justifyContent: 'space-between', flexDirection: 'column', flex: 1, paddingHorizontal: '5%' }}>
+                        <Text style={globalStyles.bitNewsTitle}>{item.title}</Text>
+                        <Text style={{ fontFamily: 'EncodeSans_500Medium', fontSize: 16, color: 'white' }}>{item.date}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'column', justifyContent: 'center', marginRight: '5%' }}>
+                        <FontAwesomeIcon icon={faAngleRight} size={18} color="white" />
+                    </View>
+                </ImageBackground>
+            </TouchableOpacity>
+
+        )
+    }
+
     return (
         <SafeAreaView style={styles.backgroundView}>
             <View style={styles.titleView}>
@@ -142,27 +162,29 @@ export default function Office() {
                 <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: 'white', fontSize: 20, paddingHorizontal: 24, paddingTop: 8 }}>Most {peopleInOffice} tag van az irodában</Text>
             </View>
             <View style={styles.modalView}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <Text style={styles.modalTitle}>Közelgő események</Text>
                     <TouchableOpacity>
-                        <Text style={{fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5}}>Összes</Text>
+                        <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5 }}>Összes</Text>
                     </TouchableOpacity>
                 </View>
                 <FlatList
                     data={events}
                     renderItem={renderEvent}
-                    style={{flex: 1/4}}
+                    style={{ flex: 1 / 4, elevation: 10}}
+                    initialNumToRender={2}
                 />
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <Text style={styles.modalTitle}>Legfrissebb hírek</Text>
                     <TouchableOpacity>
-                        <Text style={{fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5}}>Összes</Text>
+                        <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5 }}>Összes</Text>
                     </TouchableOpacity>
                 </View>
                 <FlatList
-                    data={events}
-                    renderItem={renderEvent}
-                    style={{flex: 1/3}}
+                    data={news}
+                    renderItem={renderNews}
+                    style={{ flex: 1 / 3 }}
+                    initialNumToRender={2}
                 />
             </View>
         </SafeAreaView>
@@ -184,17 +206,21 @@ const styles = StyleSheet.create({
         flex: 5 / 6,
         zIndex: 2,
         borderRadius: 33,
-        padding: 24
+        padding: 24,
+        flexDirection: 'column',
+        justifyContent: 'flex-start'
     },
     modalTitle: {
         fontFamily: 'EncodeSans_700Bold',
         color: 'black',
-        fontSize: 18
+        fontSize: 18,
+        marginTop: 12,
+        marginBottom: 4
     },
     eventCard: {
         borderRadius: 9,
         flexDirection: 'row',
-        marginVertical: 8,
+        marginTop: 8,
         paddingVertical: 16,
         borderWidth: 2,
         borderColor: '#12b0b0',
@@ -207,6 +233,16 @@ const styles = StyleSheet.create({
         fontFamily: 'EncodeSans_700Bold',
         fontSize: 18,
         marginBottom: 4
+    },
+    newsCard: {
+        marginTop: 8,
+        backgroundColor: 'black',
+        borderRadius: 9,
+        flex: 1 / 7,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingVertical: '5%',
     }
 })
 
