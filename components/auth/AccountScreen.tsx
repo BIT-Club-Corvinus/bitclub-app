@@ -11,8 +11,10 @@ export default function Account() {
 
   return (
     <SafeAreaView>
-      
+      <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Felhasználónév</Text>
       <TextView item={profile} attributeName='username' />
+      <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Team</Text>
+      <TextView item={profile} attributeName='teamFK'/>
     </SafeAreaView>
   )
 }
@@ -25,10 +27,6 @@ const TextView = ({ item, attributeName }: { item: any, attributeName: string })
 
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    backgroundColor: '#fff',
-  },
   input: {
     height: 50,
     margin: 12,
