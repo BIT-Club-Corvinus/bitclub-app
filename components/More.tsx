@@ -9,22 +9,22 @@ import { UserProfile } from '../lib/types/UserProfile';
 
 
 
-const More = (navigation: any) => {
+const More = ({navigation}: {navigation: any}) => {
 
   const moreOptions = [
-    { key: 'profile', label: 'Profilom', highlighted: true, iconName: <FontAwesomeIcon icon={faUser} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>, navigateTo: 'AccountScreen'},
-    { key: 'settings', label: 'Beállítások', highlighted: false, iconName:<FontAwesomeIcon icon={faGear} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>, navigateTo: ''},
-    { key: 'piggie', label: 'Robbanó Röfik', highlighted: false, iconName: <FontAwesomeIcon icon={faBomb} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>, navigateTo: ''},
-    { key: 'cluedo', label: 'Cluedo', highlighted: false, iconName: <FontAwesomeIcon icon={faDice} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>, navigateTo: ''},
+    { key: 'profile', label: 'Profilom', highlighted: true, iconName: <FontAwesomeIcon icon={faUser} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
+    { key: 'settings', label: 'Beállítások', highlighted: false, iconName:<FontAwesomeIcon icon={faGear} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
+    { key: 'piggie', label: 'Robbanó Röfik', highlighted: false, iconName: <FontAwesomeIcon icon={faBomb} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
+    { key: 'cluedo', label: 'Cluedo', highlighted: false, iconName: <FontAwesomeIcon icon={faDice} size={30} color='#12b0b0' style={styles.icon}></FontAwesomeIcon>},
   ];
 
-  const handlePress = ({item}: {item: any}) => {
-    navigation.navigate(item.navigateTo)
+  const handlePress = (item: any) => {
+    navigation.navigate(item.label)
   }
 
   const renderItem = ({ item }: { item: any }) => {
     return (
-      <TouchableOpacity style={item.highlighted ? [styles.item, {marginBottom: 20}] : styles.item} onPress={()=> {handlePress(item)}}>
+      <TouchableOpacity style={item.highlighted ? [styles.item, {marginBottom: 20}] : styles.item} onPress={()=>handlePress(item)}>
         {item.iconName}
         <Text style={styles.itemText}>{item.label}</Text>
       </TouchableOpacity>

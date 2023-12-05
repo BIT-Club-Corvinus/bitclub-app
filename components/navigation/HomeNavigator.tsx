@@ -29,6 +29,7 @@ import NewsContext from "../../lib/contexts/NewsContext";
 import { News } from "../../lib/types/News";
 import AgendaScreen from "../calendar_events/AgendaScreen";
 import { AgendaSchedule } from "react-native-calendars";
+import MoreNavigator from "./MoreNavigator";
 
 export default function Home() {
     const { session, loading, setLoading } = useContext(ProfileContext)
@@ -176,7 +177,7 @@ export default function Home() {
                         <Tab.Screen name="Események" component={AgendaScreen} />
                         <Tab.Screen name="CTA" component={Main} />
                         <Tab.Screen name="BIT News" component={BitNews} />
-                        <Tab.Screen name="Egyebek" component={More} />
+                        <Tab.Screen name="Egyebek" component={MoreNavigator} />
                     </Tab.Navigator>
                 </SafeAreaView>
             </NewsContext.Provider>
