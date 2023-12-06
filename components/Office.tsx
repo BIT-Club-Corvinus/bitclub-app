@@ -26,21 +26,10 @@ import NewsContext from "../lib/contexts/NewsContext";
 import { News } from "../lib/types/News";
 
 export default function Office({ navigation }: { navigation: any }) {
-    const { session, online, setOnline, loading, setLoading, profile, setProfile } = useContext(ProfileContext)
+    const { session, online, setOnline, loading, setLoading, profile, setProfile, setTeam } = useContext(ProfileContext)
     const { events } = useContext(EventsContext)
     const { news } = useContext(NewsContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
-    const [loaded] = useFonts({
-        EncodeSans_100Thin,
-        EncodeSans_200ExtraLight,
-        EncodeSans_300Light,
-        EncodeSans_400Regular,
-        EncodeSans_500Medium,
-        EncodeSans_600SemiBold,
-        EncodeSans_700Bold,
-        EncodeSans_800ExtraBold,
-        EncodeSans_900Black,
-    });
 
     useEffect(() => {
         if (session) {
@@ -68,7 +57,7 @@ export default function Office({ navigation }: { navigation: any }) {
 
             let { data, error, status } = await supabase
                 .from('profiles')
-                .select('*')
+                .select('*, teams(name)')
                 .eq('userPK', session?.user.id)
                 .single()
             if (error && status !== 406) {
@@ -78,6 +67,7 @@ export default function Office({ navigation }: { navigation: any }) {
             if (data) {
                 setProfile(data)
                 setOnline(data?.online)
+                setTeam(data.teams.name)
             }
         } catch (error) {
             if (error instanceof Error) {
@@ -111,11 +101,6 @@ export default function Office({ navigation }: { navigation: any }) {
             setLoading(false)
         }
     }
-
-
-
-
-    if (!loaded) return null;
 
     if (loading) return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -171,7 +156,7 @@ export default function Office({ navigation }: { navigation: any }) {
                 <FlatList
                     data={events}
                     renderItem={renderEvent}
-                    style={{ flex: 1 / 4, elevation: 10}}
+                    style={{ flex: 1 / 4, elevation: 10 }}
                     initialNumToRender={2}
                 />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>

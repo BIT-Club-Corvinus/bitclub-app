@@ -7,21 +7,21 @@ import ProfileContext from '../../lib/contexts/ProfileContext'
 
 
 export default function Account() {
-  const { session, profile } = useContext(ProfileContext)
+  const { session, profile, team } = useContext(ProfileContext)
 
   return (
     <SafeAreaView>
       <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Felhasználónév</Text>
-      <TextView item={profile} attributeName='username' />
+      <TextView item={profile} attributeName='username' placeHolderText={team!} />
       <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Team</Text>
-      <TextView item={profile} attributeName='teamFK'/>
+      <TextView item={profile} attributeName='team' placeHolderText={team!}/>
     </SafeAreaView>
   )
 }
 
-const TextView = ({ item, attributeName }: { item: any, attributeName: string }) => {
+const TextView = ({ item, attributeName, placeHolderText }: { item: any, attributeName: string, placeHolderText: string }) => {
   return (
-    <TextInput style={styles.input} placeholder={item[attributeName] ? item[attributeName].toString() : ''} />
+    <TextInput style={styles.input} placeholder={item[attributeName] ? item[attributeName].toString() : placeHolderText} />
   );
 }
 

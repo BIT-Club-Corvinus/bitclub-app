@@ -6,12 +6,14 @@ import { UserProfile } from '../types/UserProfile';
 interface ProfileContextType {
   session: Session | null;
   setSession: (session: Session | null) => void;
-  online: boolean ;
+  online: boolean;
   setOnline: (online: boolean) => void;
   loading: boolean,
   setLoading: (loading: boolean) => void;
   profile: UserProfile | null;
   setProfile: (profile: UserProfile | null) => void;
+  team: string | null;
+  setTeam: (team: string | null) => void;
 }
 
 const ProfileContext = React.createContext<ProfileContextType>({
@@ -22,7 +24,9 @@ const ProfileContext = React.createContext<ProfileContextType>({
   loading: false,
   setLoading: () => { },
   profile: null,
-  setProfile: () => { }
+  setProfile: () => { },
+  team: null,
+  setTeam: () => { }
 });
 
 export default ProfileContext;
