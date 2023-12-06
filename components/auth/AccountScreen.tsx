@@ -10,11 +10,16 @@ export default function Account() {
   const { session, profile, team } = useContext(ProfileContext)
 
   return (
-    <SafeAreaView>
-      <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Felhasználónév</Text>
-      <TextView item={profile} attributeName='username' placeHolderText={team!} />
-      <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Team</Text>
-      <TextView item={profile} attributeName='team' placeHolderText={team!}/>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#12b0b0' }}>
+      <View style={{ flex: 1 / 6, alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}>
+        <Text style={styles.header}>Profilom</Text>
+      </View>
+      <View style={styles.modalView}>
+        <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Felhasználónév</Text>
+        <TextView item={profile} attributeName='username' placeHolderText={team!} />
+        <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Team</Text>
+        <TextView item={profile} attributeName='team' placeHolderText={team!} />
+      </View>
     </SafeAreaView>
   )
 }
@@ -44,4 +49,21 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  header: {
+    fontFamily: 'EncodeSans_700Bold',
+    fontSize: 40,
+    textAlign: 'center',
+    marginBottom: 20,
+    borderRadius: 25,
+    color: 'white'
+  },
+  modalView: {
+    backgroundColor: '#efefef',
+    flex: 5 / 6,
+    zIndex: 2,
+    borderRadius: 33,
+    padding: 16,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  }
 })

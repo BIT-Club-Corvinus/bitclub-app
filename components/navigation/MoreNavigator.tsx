@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import More from '../More';
 import Account from '../auth/AccountScreen';
@@ -15,16 +14,16 @@ function MoreNavigator() {
             <Stack.Screen name="Profilom" component={Account} options={{
                 headerBackTitle: 'Vissza',
                 headerBackTitleStyle: {
-                    fontFamily: 'EncodeSans_400Regular'
+                    fontFamily: 'EncodeSans_400Regular',
                 },
                 headerTintColor: 'white',
                 headerStyle: {
-                    backgroundColor: '#12b0b0'
+                    backgroundColor: '#12b0b0',
+                    borderBottomWidth: 0,
+                    elevation: 0,
+                    shadowOpacity: 0
                 },
-                headerTitleStyle: {
-                    fontFamily: 'EncodeSans_600SemiBold',
-                    fontSize: 20
-                }
+                headerTitle: '',
             }}/>
         </Stack.Navigator>
     );

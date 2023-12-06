@@ -39,10 +39,10 @@ const AgendaScreen = () => {
     const endOfMonth = new Date(startOfMonth.getFullYear(), startOfMonth.getMonth() + 1, 0);
 
     for (let date = startOfMonth; date <= endOfMonth; date.setDate(date.getDate() + 1)) {
-        const dateStr = date.toISOString().split('T')[0];
-        if (!newItems[dateStr]) {
-            newItems[dateStr] = []; // Ensure each day has an entry, even if it's empty
-        }
+      const dateStr = date.toISOString().split('T')[0];
+      if (!newItems[dateStr]) {
+        newItems[dateStr] = []; // Ensure each day has an entry, even if it's empty
+      }
     }
 
     setItems(newItems);
@@ -66,15 +66,17 @@ const AgendaScreen = () => {
   const renderEmptyDate = () => {
     return (
       <View style={styles.emptyEventCard}>
-        <Text style={{fontFamily: 'EncodeSans_700Bold', color: '#505050', fontSize: 26}}>Nincs esemény!</Text>
-        <Image source={require('../../assets/rofii1.gif')} style={{height: 200, width: 200}}/>
+        <Text style={{ fontFamily: 'EncodeSans_700Bold', color: '#505050', fontSize: 26 }}>Nincs esemény!</Text>
+        <Image source={require('../../assets/rofii1.gif')} style={{ height: 200, width: 200 }} />
       </View>
     )
   }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#12b0b0'}}>
-      <Text style={styles.header}>Timeline</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#12b0b0' }}>
+      <View style={{flex: 1/6, alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
+        <Text style={styles.header}>Timeline</Text>
+      </View>
       <Agenda
         items={items}
         loadItemsForMonth={loadItemsForMonth}
@@ -94,6 +96,7 @@ const AgendaScreen = () => {
           agendaDayTextColor: 'black',
           agendaDayNumColor: '#505050'
         }}
+        style={{ borderRadius: 33, zIndex: 2 }}
       />
     </SafeAreaView>
 
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 4
   },
-  header:{
+  header: {
     fontFamily: 'EncodeSans_700Bold',
     fontSize: 40,
     textAlign: 'center',
