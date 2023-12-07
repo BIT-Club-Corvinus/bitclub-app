@@ -3,7 +3,7 @@
     "jsEngine": "jsc",
     "name": "Business IT Club - Corvinus",
     "slug": "BIT-Club-Corvinus",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/bitlogo_square.png",
     "userInterfaceStyle": "light",
@@ -21,7 +21,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "hu.businessitclub.app",
-      "buildNumber": "1.0.7"
+      "buildNumber": "1.1.0"
     },
     "android": {
       "adaptiveIcon": {

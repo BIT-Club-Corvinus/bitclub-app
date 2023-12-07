@@ -7,9 +7,18 @@ import ProfileContext from '../../lib/contexts/ProfileContext'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPersonCircleMinus, faRightFromBracket, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-const { session, profile, team, role } = useContext(ProfileContext)
+
 
 export default function Account() {
+  const { session, profile, team, role } = useContext(ProfileContext)
+
+  async function deleteAccount() {
+    try {
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#12b0b0' }}>
@@ -28,7 +37,7 @@ export default function Account() {
             <FontAwesomeIcon icon={faRightFromBracket} size={20} style={{ marginHorizontal: 8 }} />
             <Text style={{ color: '#000', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Kijelentkezés</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]} onPress={deleteAccount}>
+          <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]}>
             <FontAwesomeIcon icon={faTrash} size={20} style={{ marginHorizontal: 8 }} color='#ff0800' />
             <Text style={{ color: '#ff0800', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Fiók törlése</Text>
           </TouchableOpacity>
@@ -58,21 +67,7 @@ async function logOut() {
 
 }
 
-async function deleteAccount() {
-  try {
 
-    const { error } = await supabase
-      .from('profiles')
-      .delete()
-      .eq('userPK', session?.user.id)
-
-    if (error) {
-      throw error;
-    }
-  } catch (error) {
-    Alert.alert('Fiók törlése sikertelen')
-  }
-}
 
 
 const styles = StyleSheet.create({
