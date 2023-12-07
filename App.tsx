@@ -37,6 +37,7 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [team, setTeam] = useState<string | null>(null)
+  const [role, setRole] = useState<string | null>(null)
 
   const [loaded] = useFonts({
     EncodeSans_100Thin,
@@ -67,7 +68,7 @@ export default function App() {
     return null
   }
   return (
-    <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading, profile, setProfile, team, setTeam }}>
+    <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading, profile, setProfile, team, setTeam, role, setRole }}>
       <NavigationContainer>
         {session && session?.user ?
           <Home /> :

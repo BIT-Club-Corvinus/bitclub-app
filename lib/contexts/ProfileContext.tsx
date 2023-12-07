@@ -14,6 +14,8 @@ interface ProfileContextType {
   setProfile: (profile: UserProfile | null) => void;
   team: string | null;
   setTeam: (team: string | null) => void;
+  role: string | null;
+  setRole: (role: string | null) => void;
 }
 
 const ProfileContext = React.createContext<ProfileContextType>({
@@ -26,7 +28,9 @@ const ProfileContext = React.createContext<ProfileContextType>({
   profile: null,
   setProfile: () => { },
   team: null,
-  setTeam: () => { }
+  setTeam: () => { },
+  role: null,
+  setRole: () => { }
 });
 
 export default ProfileContext;

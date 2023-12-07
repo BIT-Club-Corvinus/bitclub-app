@@ -1,13 +1,15 @@
 import { useState, useEffect, useContext } from 'react'
 import { supabase } from '../../lib/supabase'
-import { StyleSheet, View, Alert, Text, TextInput, Pressable, SafeAreaView } from 'react-native'
+import { StyleSheet, View, Alert, Text, TextInput, Pressable, SafeAreaView, TouchableOpacity } from 'react-native'
 import { Session } from '@supabase/supabase-js'
 import React from 'react'
 import ProfileContext from '../../lib/contexts/ProfileContext'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faPersonCircleMinus, faRightFromBracket, faTrash } from '@fortawesome/free-solid-svg-icons'
 
+const { session, profile, team, role } = useContext(ProfileContext)
 
 export default function Account() {
-  const { session, profile, team } = useContext(ProfileContext)
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#12b0b0' }}>
@@ -16,18 +18,60 @@ export default function Account() {
       </View>
       <View style={styles.modalView}>
         <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Felhasználónév</Text>
-        <TextView item={profile} attributeName='username' placeHolderText={team!} />
+        <TextView item={profile} attributeName='username' placeHolderText={team!} disabled={false} />
         <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Team</Text>
-        <TextView item={profile} attributeName='team' placeHolderText={team!} />
+        <TextView item={profile} attributeName='team' placeHolderText={team!} disabled={true} />
+        <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Szerepkör</Text>
+        <TextView item={profile} attributeName='role' placeHolderText={role!} disabled={true} />
+        <View style={{ flexDirection: 'column', marginTop: 32 }}>
+          <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', marginBottom: 0, flexDirection: 'row' }]} onPress={logOut}>
+            <FontAwesomeIcon icon={faRightFromBracket} size={20} style={{ marginHorizontal: 8 }} />
+            <Text style={{ color: '#000', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Kijelentkezés</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]} onPress={deleteAccount}>
+            <FontAwesomeIcon icon={faTrash} size={20} style={{ marginHorizontal: 8 }} color='#ff0800' />
+            <Text style={{ color: '#ff0800', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Fiók törlése</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   )
 }
 
-const TextView = ({ item, attributeName, placeHolderText }: { item: any, attributeName: string, placeHolderText: string }) => {
+const TextView = ({ item, attributeName, placeHolderText, disabled }: { item: any, attributeName: string, placeHolderText: string, disabled: boolean }) => {
   return (
-    <TextInput style={styles.input} placeholder={item[attributeName] ? item[attributeName].toString() : placeHolderText} />
+    <TextInput style={styles.input} placeholder={item[attributeName] ? item[attributeName].toString() : placeHolderText} editable={!disabled} />
   );
+}
+
+async function logOut() {
+
+  try {
+    let { error } = await supabase.auth.signOut()
+
+    if (error) {
+      throw error;
+    }
+  } catch (error) {
+    Alert.alert('Nem sikerült kijelentkezni')
+  }
+
+}
+
+async function deleteAccount() {
+  try {
+
+    const { error } = await supabase
+      .from('profiles')
+      .delete()
+      .eq('userPK', session?.user.id)
+
+    if (error) {
+      throw error;
+    }
+  } catch (error) {
+    Alert.alert('Fiók törlése sikertelen')
+  }
 }
 
 
@@ -38,7 +82,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ddd',
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 17,
     backgroundColor: '#f7f7f7',
     shadowColor: '#000',
     shadowOffset: {
@@ -65,5 +109,5 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: 'column',
     justifyContent: 'flex-start'
-  }
+  },
 })

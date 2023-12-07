@@ -26,7 +26,7 @@ import NewsContext from "../lib/contexts/NewsContext";
 import { News } from "../lib/types/News";
 
 export default function Office({ navigation }: { navigation: any }) {
-    const { session, online, setOnline, loading, setLoading, profile, setProfile, setTeam } = useContext(ProfileContext)
+    const { session, online, setOnline, loading, setLoading, profile, setProfile, setTeam, setRole } = useContext(ProfileContext)
     const { events } = useContext(EventsContext)
     const { news } = useContext(NewsContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
@@ -57,7 +57,7 @@ export default function Office({ navigation }: { navigation: any }) {
 
             let { data, error, status } = await supabase
                 .from('profiles')
-                .select('*, teams(name)')
+                .select('*, teams(name), roles(name)')
                 .eq('userPK', session?.user.id)
                 .single()
             if (error && status !== 406) {
@@ -68,6 +68,7 @@ export default function Office({ navigation }: { navigation: any }) {
                 setProfile(data)
                 setOnline(data?.online)
                 setTeam(data.teams.name)
+                setRole(data.roles.name)
             }
         } catch (error) {
             if (error instanceof Error) {
