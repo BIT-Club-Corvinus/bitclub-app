@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { useEffect, useState } from "react";
 import {
     useFonts,
@@ -24,12 +24,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import NewsContext from "../lib/contexts/NewsContext";
 import { News } from "../lib/types/News";
+import BottomModal from "./modal/BottomModal";
+import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet";
 
 export default function Office({ navigation }: { navigation: any }) {
     const { session, online, setOnline, loading, setLoading, profile, setProfile, setTeam, setRole } = useContext(ProfileContext)
     const { events } = useContext(EventsContext)
     const { news } = useContext(NewsContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
+    const bottomSheetRef = useRef<BottomSheet>(null)
 
     useEffect(() => {
         if (session) {
@@ -112,7 +115,7 @@ export default function Office({ navigation }: { navigation: any }) {
     const renderEvent = ({ item }: { item: EventType }) => {
         const flagColor = item.type === 'Közösségi' ? '#f69133' : '#12b0b0'
         return (
-            <TouchableOpacity style={styles.eventCard}>
+            <TouchableOpacity style={styles.eventCard} onPress={handlePress}>
                 <View style={{ width: 5, height: '100%', backgroundColor: flagColor, marginRight: 16 }}></View>
                 <View style={{ flexDirection: 'column', flex: 3 / 5 }}>
                     <Text style={styles.eventTitle}>{item.title}</Text>
@@ -126,7 +129,7 @@ export default function Office({ navigation }: { navigation: any }) {
 
     const renderNews = ({ item }: { item: News }) => {
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handlePress}>
                 <ImageBackground key={item.id} style={styles.newsCard} source={{ uri: item.thumbnail_img }} borderRadius={9} imageStyle={{ opacity: 0.5 }}>
                     <View style={{ justifyContent: 'space-between', flexDirection: 'column', flex: 1, paddingHorizontal: '5%' }}>
                         <Text style={globalStyles.bitNewsTitle}>{item.title}</Text>
@@ -139,6 +142,10 @@ export default function Office({ navigation }: { navigation: any }) {
             </TouchableOpacity>
 
         )
+    }
+
+    const handlePress = () => {
+        bottomSheetRef.current?.expand();
     }
 
     return (
@@ -158,7 +165,8 @@ export default function Office({ navigation }: { navigation: any }) {
                     data={events}
                     renderItem={renderEvent}
                     style={{ flex: 1 / 4, elevation: 10 }}
-                    initialNumToRender={2}
+                    showsVerticalScrollIndicator={false}
+                    bounces={true}
                 />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <Text style={styles.modalTitle}>Legfrissebb hírek</Text>
@@ -170,8 +178,10 @@ export default function Office({ navigation }: { navigation: any }) {
                     data={news}
                     renderItem={renderNews}
                     style={{ flex: 1 / 3 }}
-                    initialNumToRender={2}
+                    showsVerticalScrollIndicator={false}
+                    bounces={true}
                 />
+                <BottomModal reference={bottomSheetRef} />
             </View>
         </SafeAreaView>
     )

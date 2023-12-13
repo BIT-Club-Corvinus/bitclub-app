@@ -28,6 +28,7 @@ import ForFreshman from './components/onboarding/ForFreshman'
 import FreshmanHome from './components/onboarding/FreshmanHome'
 import { Alert } from 'react-native'
 import { UserProfile } from './lib/types/UserProfile'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 
 export default function App() {
@@ -68,68 +69,71 @@ export default function App() {
     return null
   }
   return (
-    <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading, profile, setProfile, team, setTeam, role, setRole }}>
-      <NavigationContainer>
-        {session && session?.user ?
-          <Home /> :
-          <Stack.Navigator >
-            <Stack.Screen
-              name='Kezdőlap'
-              component={Welcome}
-              options={{ headerShown: false }} />
-            <Stack.Screen
-              name='Leendő Bitizeneknek'
-              component={ForFreshman}
-              options={{
-                headerShown: true,
-                headerShadowVisible: false,
-                headerTitle: '',
-                headerTintColor: 'white',
-                headerTransparent: true,
-                headerBackTitle: 'Vissza',
-                headerBackTitleStyle: {
-                  fontFamily: 'EncodeSans_300Light'
-                }
-              }} />
-            <Stack.Screen
-              name='Toborzás'
-              component={FreshmanHome}
-              options={{
-                headerTransparent: true,
-                headerTintColor: 'white',
-                headerTitle: '',
-                headerBackTitle: 'Vissza',
-                headerBackTitleStyle: {
-                  fontFamily: 'EncodeSans_300Light'
-                }
-              }}
-            />
-            <Stack.Screen name="Bejelentkezés" component={Login}
-              options={{
-                headerShown: true,
-                headerTintColor: 'white',
-                headerTransparent: true,
-                headerTitle: ''
-              }}
-            />
-            <Stack.Screen name='Regisztráció' component={Register}
-              options={{
-                headerStyle: {
-                  backgroundColor: '#12b0b0'
-                },
-                headerTitle: '',
-                headerBackTitleStyle: {
-                  fontFamily: 'EncodeSans_500Medium'
-                },
-                headerTintColor: 'white',
-                headerBackTitleVisible: false,
-                headerShadowVisible: false
-              }} />
-          </Stack.Navigator>
-        }
-      </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading, profile, setProfile, team, setTeam, role, setRole }}>
+        <NavigationContainer>
+          {session && session?.user ?
+            <Home /> :
+            <Stack.Navigator >
+              <Stack.Screen
+                name='Kezdőlap'
+                component={Welcome}
+                options={{ headerShown: false }} />
+              <Stack.Screen
+                name='Leendő Bitizeneknek'
+                component={ForFreshman}
+                options={{
+                  headerShown: true,
+                  headerShadowVisible: false,
+                  headerTitle: '',
+                  headerTintColor: 'white',
+                  headerTransparent: true,
+                  headerBackTitle: 'Vissza',
+                  headerBackTitleStyle: {
+                    fontFamily: 'EncodeSans_300Light'
+                  }
+                }} />
+              <Stack.Screen
+                name='Toborzás'
+                component={FreshmanHome}
+                options={{
+                  headerTransparent: true,
+                  headerTintColor: 'white',
+                  headerTitle: '',
+                  headerBackTitle: 'Vissza',
+                  headerBackTitleStyle: {
+                    fontFamily: 'EncodeSans_300Light'
+                  }
+                }}
+              />
+              <Stack.Screen name="Bejelentkezés" component={Login}
+                options={{
+                  headerShown: true,
+                  headerTintColor: 'white',
+                  headerTransparent: true,
+                  headerTitle: ''
+                }}
+              />
+              <Stack.Screen name='Regisztráció' component={Register}
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#12b0b0'
+                  },
+                  headerTitle: '',
+                  headerBackTitleStyle: {
+                    fontFamily: 'EncodeSans_500Medium'
+                  },
+                  headerTintColor: 'white',
+                  headerBackTitleVisible: false,
+                  headerShadowVisible: false
+                }} />
+            </Stack.Navigator>
+          }
+        </NavigationContainer>
 
-    </ProfileContext.Provider>
+      </ProfileContext.Provider>
+    </GestureHandlerRootView>
+
     /* <View>
       {session && session.user ? <Home key={session.user.id} session={session} /> : <Main />}
     </View> */
