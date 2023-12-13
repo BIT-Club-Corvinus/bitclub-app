@@ -1,44 +1,52 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useCallback } from 'react'
-import BottomSheet from '@gorhom/bottom-sheet';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import BottomSheet, { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import CustomBackdrop from './Backdrop';
+import { EventType } from '../../lib/types/Event';
+import { News } from '../../lib/types/News';
 
-const BottomModal = ({reference}: {reference: any}) => {
+const BottomModal = ({ reference, item }: { reference: any, item: any}) => {
+
+    useEffect(() => {
+    }, [])
+
 
     // ref
-    const bottomSheetRef = reference;
+    const bottomSheetModalRef = reference;
 
-    // callbacks
+    // variables
+    const snapPoints = useMemo(() => ['25%', '75%'], []);
+
     const handleSheetChanges = useCallback((index: number) => {
         console.log('handleSheetChanges', index);
     }, []);
 
+    // renders
     return (
-        <BottomSheet
-            ref={bottomSheetRef}
-            index={1}
-            snapPoints={['1%', '75%']}
-            onChange={handleSheetChanges}
-            enablePanDownToClose={true}
-            //backdropComponent={CustomBackdrop}
-        >
-            <View style={styles.contentContainer}>
-                <Text>Awesome 🎉</Text>
-            </View>
-        </BottomSheet>
-    )
+        <BottomSheetModalProvider>
+            <BottomSheetModal
+                ref={bottomSheetModalRef}
+                index={1}
+                snapPoints={snapPoints}
+                onChange={handleSheetChanges}
+                backdropComponent={CustomBackdrop}
+                enablePanDownToClose={true}
+            >
+                <View style={styles.contentContainer}>
+                    <Text style={{fontFamily: 'EncodeSans_700Bold', fontSize: 26}}>{item?.title!}</Text>
+                </View>
+            </BottomSheetModal>
+        </BottomSheetModalProvider>
+    );
 }
 
 export default BottomModal
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-        backgroundColor: 'grey',
-    },
     contentContainer: {
         flex: 1,
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        padding: 24
     },
 })

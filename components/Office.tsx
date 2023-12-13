@@ -26,13 +26,15 @@ import NewsContext from "../lib/contexts/NewsContext";
 import { News } from "../lib/types/News";
 import BottomModal from "./modal/BottomModal";
 import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 export default function Office({ navigation }: { navigation: any }) {
     const { session, online, setOnline, loading, setLoading, profile, setProfile, setTeam, setRole } = useContext(ProfileContext)
     const { events } = useContext(EventsContext)
     const { news } = useContext(NewsContext)
     const [peopleInOffice, setPeopleCount] = useState(0)
-    const bottomSheetRef = useRef<BottomSheet>(null)
+    const bottomSheetRef = useRef<BottomSheetModal>(null)
+    const [selectedItem, setSelectedItem] = useState<EventType | News | null>(null)
 
     useEffect(() => {
         if (session) {
@@ -115,7 +117,7 @@ export default function Office({ navigation }: { navigation: any }) {
     const renderEvent = ({ item }: { item: EventType }) => {
         const flagColor = item.type === 'Közösségi' ? '#f69133' : '#12b0b0'
         return (
-            <TouchableOpacity style={styles.eventCard} onPress={handlePress}>
+            <TouchableOpacity style={styles.eventCard} onPress={() => handlePress(item)}>
                 <View style={{ width: 5, height: '100%', backgroundColor: flagColor, marginRight: 16 }}></View>
                 <View style={{ flexDirection: 'column', flex: 3 / 5 }}>
                     <Text style={styles.eventTitle}>{item.title}</Text>
@@ -129,7 +131,7 @@ export default function Office({ navigation }: { navigation: any }) {
 
     const renderNews = ({ item }: { item: News }) => {
         return (
-            <TouchableOpacity onPress={handlePress}>
+            <TouchableOpacity onPress={() => handlePress(item)}>
                 <ImageBackground key={item.id} style={styles.newsCard} source={{ uri: item.thumbnail_img }} borderRadius={9} imageStyle={{ opacity: 0.5 }}>
                     <View style={{ justifyContent: 'space-between', flexDirection: 'column', flex: 1, paddingHorizontal: '5%' }}>
                         <Text style={globalStyles.bitNewsTitle}>{item.title}</Text>
@@ -144,8 +146,9 @@ export default function Office({ navigation }: { navigation: any }) {
         )
     }
 
-    const handlePress = () => {
-        bottomSheetRef.current?.expand();
+    const handlePress = (item: EventType | News ) => {
+        setSelectedItem(item)
+        bottomSheetRef.current?.present();
     }
 
     return (
@@ -181,8 +184,8 @@ export default function Office({ navigation }: { navigation: any }) {
                     showsVerticalScrollIndicator={false}
                     bounces={true}
                 />
-                <BottomModal reference={bottomSheetRef} />
             </View>
+            <BottomModal reference={bottomSheetRef} item={selectedItem}/>
         </SafeAreaView>
     )
 }
@@ -191,7 +194,6 @@ const styles = StyleSheet.create({
     backgroundView: {
         backgroundColor: '#12b0b0',
         flex: 1,
-        zIndex: 1
     },
     titleView: {
         backgroundColor: 'transparent',
@@ -200,7 +202,6 @@ const styles = StyleSheet.create({
     modalView: {
         backgroundColor: '#efefef',
         flex: 5 / 6,
-        zIndex: 2,
         borderRadius: 33,
         padding: 24,
         flexDirection: 'column',
