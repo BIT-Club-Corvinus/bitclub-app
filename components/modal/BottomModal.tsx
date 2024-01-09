@@ -9,8 +9,6 @@ const BottomModal = ({ reference, item }: { reference: any, item: any}) => {
 
     useEffect(() => {
     }, [])
-
-
     // ref
     const bottomSheetModalRef = reference;
 
