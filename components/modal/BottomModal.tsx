@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import BottomSheet, { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import CustomBackdrop from './Backdrop';
@@ -15,7 +15,7 @@ const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
     const bottomSheetModalRef = reference;
 
     // variables
-    const snapPoints = useMemo(() => ['25%', '75%'], []);
+    const snapPoints = useMemo(() => ['25%', '80%'], []);
 
     const handleSheetChanges = useCallback((index: number) => {
         //console.log('handleSheetChanges', index);
@@ -38,21 +38,30 @@ const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
             >
                 <View style={styles.contentContainer}>
                     <TouchableOpacity onPress={handleClose} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <FontAwesomeIcon icon={faXmark} size={26} style={{ marginBottom: 24}} />
+                        <FontAwesomeIcon icon={faXmark} size={26} style={{ marginBottom: 24 }} />
                     </TouchableOpacity>
-                    <Text style={{ fontFamily: 'EncodeSans_800ExtraBold', fontSize: 26, marginBottom: 16 }}>{item?.title!}</Text>
-                    {
-                        item?.place != null ?
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
-                                <Text style={styles.contentText}>{item?.place!}</Text>
-                                <Text style={styles.contentText}>{item?.date!}</Text>
-                            </View>
-                            :
-                            <View>
-                                <Text style={styles.contentText}>{item?.date!}</Text>
-                            </View>
-
-                    }
+                    <ScrollView style={{ width: '100%' }}>
+                        <Text style={{ fontFamily: 'EncodeSans_800ExtraBold', fontSize: 26, marginBottom: 16 }}>{item?.title!}</Text>
+                        {
+                            item?.place != null ?
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                                        <Text style={styles.contentSubtitle}>{item?.place!}</Text>
+                                        <Text style={styles.contentSubtitle}>{item?.date!}</Text>
+                                    </View>
+                                    <View style={{ marginTop: 32 }}>
+                                        <Text style={styles.contentTitle}>Az eseményről röviden</Text>
+                                        <Text style={styles.contentText}>{item?.description!}</Text>
+                                    </View>
+                                </View>
+                                :
+                                <View>
+                                    <View>
+                                        <Text style={styles.contentSubtitle}>{item?.date!}</Text>
+                                    </View>
+                                </View>
+                        }
+                    </ScrollView>
                 </View>
             </BottomSheetModal>
         </BottomSheetModalProvider>
@@ -69,8 +78,18 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         paddingVertical: 0
     },
-    contentText: {
+    contentSubtitle: {
         fontFamily: 'EncodeSans_500Medium',
-        fontSize: 16
+        fontSize: 18
+    },
+    contentTitle: {
+        fontFamily: 'EncodeSans_700Bold',
+        fontSize: 18,
+        marginBottom: 16
+    },
+    contentText: {
+        fontFamily: 'EncodeSans_400Regular',
+        fontSize: 16,
+        textAlign: 'justify'
     }
 })
