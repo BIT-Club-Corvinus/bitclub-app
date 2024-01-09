@@ -1,17 +1,5 @@
 import React, { useContext, useRef } from "react";
 import { useEffect, useState } from "react";
-import {
-    useFonts,
-    EncodeSans_100Thin,
-    EncodeSans_200ExtraLight,
-    EncodeSans_300Light,
-    EncodeSans_400Regular,
-    EncodeSans_500Medium,
-    EncodeSans_600SemiBold,
-    EncodeSans_700Bold,
-    EncodeSans_800ExtraBold,
-    EncodeSans_900Black,
-} from '@expo-google-fonts/encode-sans';
 import { Alert, View, Text, Pressable, ActivityIndicator, StyleSheet, FlatList, TouchableOpacity, ImageBackground } from "react-native";
 import { globalStyles } from "../lib/styles";
 import { supabase } from "../lib/supabase";
@@ -151,8 +139,8 @@ export default function Office({ navigation }: { navigation: any }) {
         bottomSheetRef.current?.present();
     }
     
-    const handleNavigation = () => {
-        navigation.navigate()
+    const handleNavigation = (routename: string) => {
+        navigation.navigate(routename)
     }
 
     return (
@@ -164,7 +152,7 @@ export default function Office({ navigation }: { navigation: any }) {
             <View style={styles.modalView}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <Text style={styles.modalTitle}>Közelgő események</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=> handleNavigation('Események')}>
                         <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5 }}>Összes</Text>
                     </TouchableOpacity>
                 </View>
@@ -177,7 +165,7 @@ export default function Office({ navigation }: { navigation: any }) {
                 />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <Text style={styles.modalTitle}>Legfrissebb hírek</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=> handleNavigation('BIT News')}>
                         <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5 }}>Összes</Text>
                     </TouchableOpacity>
                 </View>

@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import BottomSheet, { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import CustomBackdrop from './Backdrop';
 import { EventType } from '../../lib/types/Event';
 import { News } from '../../lib/types/News';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const BottomModal = ({ reference, item }: { reference: any, item: any}) => {
+const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
 
     useEffect(() => {
     }, [])
@@ -19,6 +21,10 @@ const BottomModal = ({ reference, item }: { reference: any, item: any}) => {
         //console.log('handleSheetChanges', index);
     }, []);
 
+    const handleClose = () => {
+        reference.current?.close();
+    }
+
     // renders
     return (
         <BottomSheetModalProvider>
@@ -31,7 +37,22 @@ const BottomModal = ({ reference, item }: { reference: any, item: any}) => {
                 enablePanDownToClose={true}
             >
                 <View style={styles.contentContainer}>
-                    <Text style={{fontFamily: 'EncodeSans_700Bold', fontSize: 26}}>{item?.title!}</Text>
+                    <TouchableOpacity onPress={handleClose} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <FontAwesomeIcon icon={faXmark} size={26} style={{ marginBottom: 24}} />
+                    </TouchableOpacity>
+                    <Text style={{ fontFamily: 'EncodeSans_800ExtraBold', fontSize: 26, marginBottom: 16 }}>{item?.title!}</Text>
+                    {
+                        item?.place != null ?
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
+                                <Text style={styles.contentText}>{item?.place!}</Text>
+                                <Text style={styles.contentText}>{item?.date!}</Text>
+                            </View>
+                            :
+                            <View>
+                                <Text style={styles.contentText}>{item?.date!}</Text>
+                            </View>
+
+                    }
                 </View>
             </BottomSheetModal>
         </BottomSheetModalProvider>
@@ -45,6 +66,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-start',
         flexDirection: 'column',
-        padding: 24
+        paddingHorizontal: 24,
+        paddingVertical: 0
     },
+    contentText: {
+        fontFamily: 'EncodeSans_500Medium',
+        fontSize: 16
+    }
 })
