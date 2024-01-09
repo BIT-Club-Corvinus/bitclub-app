@@ -6,10 +6,15 @@ import { EventType } from '../../lib/types/Event';
 import { News } from '../../lib/types/News';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+
 
 const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
+    const [initialRegion, setInitialRegion] = useState<any>({})
 
     useEffect(() => {
+        setInitialRegion({ latitude: 47.48490, longitude: 19.06053, latitudeDelta: 0.001, longitudeDelta: 0.01})
     }, [])
     // ref
     const bottomSheetModalRef = reference;
@@ -24,6 +29,7 @@ const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
     const handleClose = () => {
         reference.current?.close();
     }
+
 
     // renders
     return (
@@ -53,6 +59,12 @@ const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
                                         <Text style={styles.contentTitle}>Az eseményről röviden</Text>
                                         <Text style={styles.contentText}>{item?.description!}</Text>
                                     </View>
+                                    <View style={{ marginTop: 24 }}>
+                                        <Text style={styles.contentTitle}>Térkép, ha esetleg eltévednétek</Text>
+                                    </View>
+                                    <MapView region={initialRegion} style={{ height: 200, marginTop: 4 }}>
+                                        <Marker coordinate={{ latitude: 47.48490607581476, longitude: 19.06053477238782 }}/>
+                                    </MapView>
                                 </View>
                                 :
                                 <View>
