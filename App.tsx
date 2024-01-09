@@ -29,9 +29,13 @@ import FreshmanHome from './components/onboarding/FreshmanHome'
 import { Alert } from 'react-native'
 import { UserProfile } from './lib/types/UserProfile'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import * as SplashScreen from 'expo-splash-screen'
 
+SplashScreen.preventAutoHideAsync();
+setTimeout(SplashScreen.hideAsync, 3000)
 
 export default function App() {
+  
 
   const [session, setSession] = useState<Session | null>(null)
   const [online, setOnline] = useState(false)

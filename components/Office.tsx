@@ -150,6 +150,10 @@ export default function Office({ navigation }: { navigation: any }) {
         setSelectedItem(item)
         bottomSheetRef.current?.present();
     }
+    
+    const handleNavigation = () => {
+        navigation.navigate()
+    }
 
     return (
         <SafeAreaView style={styles.backgroundView}>
