@@ -6,6 +6,7 @@ import React from 'react'
 import ProfileContext from '../../lib/contexts/ProfileContext'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPersonCircleMinus, faRightFromBracket, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { ScrollView } from 'react-native-gesture-handler'
 
 
 
@@ -26,22 +27,24 @@ export default function Account() {
         <Text style={styles.header}>Profilom</Text>
       </View>
       <View style={styles.modalView}>
-        <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Felhasználónév</Text>
-        <TextView item={profile} attributeName='username' placeHolderText={team!} disabled={false} />
-        <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Team</Text>
-        <TextView item={profile} attributeName='team' placeHolderText={team!} disabled={true} />
-        <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Szerepkör</Text>
-        <TextView item={profile} attributeName='role' placeHolderText={role!} disabled={true} />
-        <View style={{ flexDirection: 'column', marginTop: 32 }}>
-          <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', marginBottom: 0, flexDirection: 'row' }]} onPress={logOut}>
-            <FontAwesomeIcon icon={faRightFromBracket} size={20} style={{ marginHorizontal: 8 }} />
-            <Text style={{ color: '#000', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Kijelentkezés</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]}>
-            <FontAwesomeIcon icon={faTrash} size={20} style={{ marginHorizontal: 8 }} color='#ff0800' />
-            <Text style={{ color: '#ff0800', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Fiók törlése</Text>
-          </TouchableOpacity>
-        </View>
+        <ScrollView style={{marginBottom: 100, flex: 1}} bounces={false}>
+          <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Felhasználónév</Text>
+          <TextView item={profile} attributeName='username' placeHolderText={team!} disabled={false} />
+          <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Team</Text>
+          <TextView item={profile} attributeName='team' placeHolderText={team!} disabled={true} />
+          <Text style={{ marginHorizontal: 16, marginTop: 16, fontFamily: 'EncodeSans_700Bold' }}>Szerepkör</Text>
+          <TextView item={profile} attributeName='role' placeHolderText={role!} disabled={true} />
+          <View style={{ flexDirection: 'column', marginTop: 32 }}>
+            <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', marginBottom: 0, flexDirection: 'row' }]} onPress={logOut}>
+              <FontAwesomeIcon icon={faRightFromBracket} size={20} style={{ marginHorizontal: 8 }} />
+              <Text style={{ color: '#000', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Kijelentkezés</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]}>
+              <FontAwesomeIcon icon={faTrash} size={20} style={{ marginHorizontal: 8 }} color='#ff0800' />
+              <Text style={{ color: '#ff0800', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Fiók törlése</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   )

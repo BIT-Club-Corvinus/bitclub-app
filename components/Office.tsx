@@ -142,7 +142,7 @@ export default function Office({ navigation }: { navigation: any }) {
         <SafeAreaView style={styles.backgroundView}>
             <View style={styles.titleView}>
                 <Text style={{ fontFamily: 'EncodeSans_700Bold', color: 'white', fontSize: 30, paddingHorizontal: 24, paddingTop: 24 }}>Helló {profile?.username}!</Text>
-                <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: 'white', fontSize: 20, paddingHorizontal: 24, paddingTop: 8 }}>Most {peopleInOffice} tag van az irodában</Text>
+                <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: 'white', fontSize: 20, paddingHorizontal: 24, paddingTop: 8,}}>Most {peopleInOffice} tag van az irodában</Text>
             </View>
             <View style={styles.modalView}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
         borderRadius: 33,
         padding: 24,
         flexDirection: 'column',
+        marginTop: 16
     },
     modalTitle: {
         fontFamily: 'EncodeSans_700Bold',

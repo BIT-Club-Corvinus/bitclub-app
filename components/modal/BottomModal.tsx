@@ -62,7 +62,7 @@ const BottomModal = ({ reference, item, navigation}: { reference: any, item: any
                                 </ScrollView>
                                 :
                                 <View>
-                                    <BottomSheetScrollView alwaysBounceVertical={true}>
+                                    <ScrollView >
                                         <View>
                                             <Text style={styles.contentSubtitle}>{item?.date!}</Text>
                                         </View>
@@ -72,7 +72,7 @@ const BottomModal = ({ reference, item, navigation}: { reference: any, item: any
                                                 {item?.sect_president!}
                                             </ReadMore>
                                         </View>
-                                    </BottomSheetScrollView>
+                                    </ScrollView>
                                 </View>
                         }
                     </View>
