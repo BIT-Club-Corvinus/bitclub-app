@@ -15,6 +15,7 @@ import { News } from "../lib/types/News";
 import BottomModal from "./modal/BottomModal";
 import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import LoadingModal from "./modal/LoadingModal";
 
 export default function Office({ navigation }: { navigation: any }) {
     const { session, online, setOnline, loading, setLoading, profile, setProfile, setTeam, setRole } = useContext(ProfileContext)
@@ -96,12 +97,6 @@ export default function Office({ navigation }: { navigation: any }) {
         }
     }
 
-    if (loading) return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <ActivityIndicator size="large" color="#12b0b0" />
-        </View>
-    )
-
     const renderEvent = ({ item }: { item: EventType }) => {
         const flagColor = item.type === 'Közösségi' ? '#f69133' : '#12b0b0'
         return (
@@ -134,7 +129,7 @@ export default function Office({ navigation }: { navigation: any }) {
         )
     }
 
-    const handlePress = (item: EventType | News ) => {
+    const handlePress = (item: EventType | News) => {
         setSelectedItem(item)
         bottomSheetRef.current?.present();
     }
@@ -159,11 +154,11 @@ export default function Office({ navigation }: { navigation: any }) {
                 <FlatList
                     data={events}
                     renderItem={renderEvent}
-                    style={{ flex: 1 / 4, elevation: 10 }}
+                    style={{ flex: 1 / 4, elevation: 0,}}
                     showsVerticalScrollIndicator={false}
-                    bounces={true}
+                    bounces={false}
                 />
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, marginTop: 0}}>
                     <Text style={styles.modalTitle}>Legfrissebb hírek</Text>
                     <TouchableOpacity onPress={()=> handleNavigation('BIT News')}>
                         <Text style={{ fontFamily: 'EncodeSans_600SemiBold', color: '#12b0b0', fontSize: 12, marginRight: 5 }}>Összes</Text>
@@ -172,12 +167,13 @@ export default function Office({ navigation }: { navigation: any }) {
                 <FlatList
                     data={news}
                     renderItem={renderNews}
-                    style={{ flex: 1 / 3 }}
+                    style={{ flex: 1 / 4, marginBottom: 100 }}
                     showsVerticalScrollIndicator={false}
-                    bounces={true}
+                    bounces={false}
                 />
             </View>
-            <BottomModal reference={bottomSheetRef} item={selectedItem}/>
+            <BottomModal reference={bottomSheetRef} item={selectedItem} navigation={navigation}/>
+            <LoadingModal modalVisible={loading} taskOngoing={!online ? 'Kilépés az irodából...' : 'Belépés az irodába...'}/>
         </SafeAreaView>
     )
 }
@@ -197,7 +193,6 @@ const styles = StyleSheet.create({
         borderRadius: 33,
         padding: 24,
         flexDirection: 'column',
-        justifyContent: 'flex-start'
     },
     modalTitle: {
         fontFamily: 'EncodeSans_700Bold',

@@ -1,26 +1,23 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import BottomSheet, { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import CustomBackdrop from './Backdrop';
 import { EventType } from '../../lib/types/Event';
 import { News } from '../../lib/types/News';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import MapView from 'react-native-maps';
-import { Marker } from 'react-native-maps';
+import ReadMore from '@fawazahmed/react-native-read-more';
 
 
-const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
-    const [initialRegion, setInitialRegion] = useState<any>({})
+const BottomModal = ({ reference, item, navigation}: { reference: any, item: any, navigation: any}) => {
 
     useEffect(() => {
-        setInitialRegion({ latitude: 47.48490, longitude: 19.06053, latitudeDelta: 0.001, longitudeDelta: 0.01})
     }, [])
     // ref
     const bottomSheetModalRef = reference;
 
     // variables
-    const snapPoints = useMemo(() => ['25%', '80%'], []);
+    const snapPoints = useMemo(() => ['25%', '85%'], []);
 
     const handleSheetChanges = useCallback((index: number) => {
         //console.log('handleSheetChanges', index);
@@ -28,6 +25,9 @@ const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
 
     const handleClose = () => {
         reference.current?.close();
+    }
+    const navigateToNews = (routeName: string, item: any) => {
+        navigation.navigate(routeName, {screen: 'BitNewsElem', params: {paramKey: item}, initial: false})
     }
 
 
@@ -46,11 +46,11 @@ const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
                     <TouchableOpacity onPress={handleClose} style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <FontAwesomeIcon icon={faXmark} size={26} style={{ marginBottom: 24 }} />
                     </TouchableOpacity>
-                    <ScrollView style={{ width: '100%' }}>
+                    <View>
                         <Text style={{ fontFamily: 'EncodeSans_800ExtraBold', fontSize: 26, marginBottom: 16 }}>{item?.title!}</Text>
                         {
                             item?.place != null ?
-                                <View>
+                                <ScrollView>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                                         <Text style={styles.contentSubtitle}>{item?.place!}</Text>
                                         <Text style={styles.contentSubtitle}>{item?.date!}</Text>
@@ -59,21 +59,23 @@ const BottomModal = ({ reference, item }: { reference: any, item: any }) => {
                                         <Text style={styles.contentTitle}>Az eseményről röviden</Text>
                                         <Text style={styles.contentText}>{item?.description!}</Text>
                                     </View>
-                                    <View style={{ marginTop: 24 }}>
-                                        <Text style={styles.contentTitle}>Térkép, ha esetleg eltévednétek</Text>
-                                    </View>
-                                    <MapView region={initialRegion} style={{ height: 200, marginTop: 4 }}>
-                                        <Marker coordinate={{ latitude: 47.48490607581476, longitude: 19.06053477238782 }}/>
-                                    </MapView>
-                                </View>
+                                </ScrollView>
                                 :
                                 <View>
-                                    <View>
-                                        <Text style={styles.contentSubtitle}>{item?.date!}</Text>
-                                    </View>
+                                    <BottomSheetScrollView alwaysBounceVertical={true}>
+                                        <View>
+                                            <Text style={styles.contentSubtitle}>{item?.date!}</Text>
+                                        </View>
+                                        <View style={{ marginTop: 24, }}>
+                                            <Text style={styles.contentTitle}>Elnöki ügy</Text>
+                                            <ReadMore numberOfLines={12} style={styles.contentText} seeMoreStyle={styles.seeMoreText} seeMoreText='Tovább' onSeeMore={()=>navigateToNews('BIT News', item)}>
+                                                {item?.sect_president!}
+                                            </ReadMore>
+                                        </View>
+                                    </BottomSheetScrollView>
                                 </View>
                         }
-                    </ScrollView>
+                    </View>
                 </View>
             </BottomSheetModal>
         </BottomSheetModalProvider>
@@ -97,11 +99,16 @@ const styles = StyleSheet.create({
     contentTitle: {
         fontFamily: 'EncodeSans_700Bold',
         fontSize: 18,
-        marginBottom: 16
+        marginBottom: 12
     },
     contentText: {
         fontFamily: 'EncodeSans_400Regular',
         fontSize: 16,
         textAlign: 'justify'
+    },
+    seeMoreText: {
+        fontFamily: 'EncodeSans_900Black',
+        color: '#12b0b0',
+        fontSize: 16
     }
 })

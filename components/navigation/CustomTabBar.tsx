@@ -29,10 +29,10 @@ const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
       if (error) {
         throw error
       }
-      else {
+      /* else {
         if (online) Alert.alert("Beléptél az irodába!")
         else Alert.alert("Kiléptél az irodából!")
-      }
+      } */
     } catch (error) {
       if (error instanceof Error) {
         Alert.alert(error.message)
@@ -114,7 +114,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    borderRadius: 33,
+    borderTopLeftRadius: 33,
+    borderTopRightRadius: 33,
+    
   },
   tabButton: {
     // Normal tab button style

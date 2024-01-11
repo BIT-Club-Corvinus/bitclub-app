@@ -4,7 +4,7 @@ import { globalStyles } from '../../lib/styles'
 
 export default function BITNewsDetails({ route }: { route: any }) {
     return (
-        <ScrollView contentContainerStyle={{ backgroundColor: '#12b0b0' }} style={{ backgroundColor: '#12b0b0' }}>
+        <ScrollView contentContainerStyle={{ backgroundColor: '#12b0b0', paddingBottom: 100 }} style={{ backgroundColor: '#12b0b0' }} bounces={false}>
             <View style={{paddingHorizontal: '7.5%', justifyContent: 'space-between', height: '4%', paddingTop: '5%', marginBottom: '5%'}}>
                 <Text style={globalStyles.bitNewsTitle}>{route.params.paramKey.title}</Text>
                 <Text style={{ fontFamily: 'EncodeSans_500Medium', fontSize: 16, color: 'white' }}>{route.params.paramKey.date}</Text>
