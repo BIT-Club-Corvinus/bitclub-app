@@ -133,7 +133,7 @@ export default function Auth({ navigation }: { navigation: any }) {
             </View>
             <View style={globalStyles.container}>
               <View style={[globalStyles.mt20, globalStyles.button]}>
-                <Pressable disabled={loading} onPress={() => signUpWithEmail()}>
+                <Pressable disabled={loading} onPress={() => {signUpWithEmail()}}>
                   <Text style={[globalStyles.buttonText]}>Regisztráció</Text>
                 </Pressable>
               </View>

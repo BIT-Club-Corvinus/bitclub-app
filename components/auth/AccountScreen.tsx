@@ -15,7 +15,8 @@ export default function Account() {
 
   async function deleteAccount() {
     try {
-
+      logOut()
+      const { data, error } = await supabase.functions.invoke('delete_user_account');
     } catch (error) {
       console.log(error)
     }
@@ -39,7 +40,7 @@ export default function Account() {
               <FontAwesomeIcon icon={faRightFromBracket} size={20} style={{ marginHorizontal: 8 }} />
               <Text style={{ color: '#000', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Kijelentkezés</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]}>
+            <TouchableOpacity style={[styles.input, { justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }]} onPress={deleteAccount}>
               <FontAwesomeIcon icon={faTrash} size={20} style={{ marginHorizontal: 8 }} color='#ff0800' />
               <Text style={{ color: '#ff0800', fontFamily: 'EncodeSans_700Bold', fontSize: 20, textAlign: 'center', }}>Fiók törlése</Text>
             </TouchableOpacity>
@@ -52,7 +53,7 @@ export default function Account() {
 
 const TextView = ({ item, attributeName, placeHolderText, disabled }: { item: any, attributeName: string, placeHolderText: string, disabled: boolean }) => {
   return (
-    <TextInput style={styles.input} placeholder={item[attributeName] ? item[attributeName].toString() : placeHolderText} editable={!disabled} />
+    <TextInput style={styles.input} placeholder={item[attributeName] ? item[attributeName]!.toString() : placeHolderText} editable={!disabled} />
   );
 }
 
