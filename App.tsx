@@ -30,12 +30,13 @@ import { Alert } from 'react-native'
 import { UserProfile } from './lib/types/UserProfile'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import * as SplashScreen from 'expo-splash-screen'
+import OTPVerification from './components/auth/OTPVerification'
 
 SplashScreen.preventAutoHideAsync();
 setTimeout(SplashScreen.hideAsync, 3000)
 
 export default function App() {
-  
+
 
   const [session, setSession] = useState<Session | null>(null)
   const [online, setOnline] = useState(false)
@@ -73,7 +74,7 @@ export default function App() {
     return null
   }
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <ProfileContext.Provider value={{ session, setSession, online, setOnline, loading, setLoading, profile, setProfile, team, setTeam, role, setRole }}>
         <NavigationContainer>
           {session && session?.user ?
@@ -128,6 +129,19 @@ export default function App() {
                     fontFamily: 'EncodeSans_500Medium'
                   },
                   headerTintColor: 'white',
+                  headerBackTitleVisible: false,
+                  headerShadowVisible: false
+                }} />
+              <Stack.Screen name='Megerősítés' component={OTPVerification}
+                options={{
+                  headerStyle: {
+                    backgroundColor: '#f2f2f2'
+                  },
+                  headerTitle: '',
+                  headerBackTitleStyle: {
+                    fontFamily: 'EncodeSans_500Medium'
+                  },
+                  headerTintColor: 'black',
                   headerBackTitleVisible: false,
                   headerShadowVisible: false
                 }} />
