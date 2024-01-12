@@ -114,7 +114,7 @@ export default function App() {
               <Stack.Screen name="Bejelentkezés" component={Login}
                 options={{
                   headerShown: true,
-                  headerTintColor: 'white',
+                  headerTintColor: 'black',
                   headerTransparent: true,
                   headerTitle: ''
                 }}

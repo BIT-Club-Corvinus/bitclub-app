@@ -17,12 +17,18 @@ import {
   EncodeSans_800ExtraBold,
   EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faEye, faEyeSlash, faKey, faUser } from '@fortawesome/free-solid-svg-icons'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 export default function Login({ navigation }: { navigation: any }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false)
+
   const [loaded] = useFonts({
     EncodeSans_100Thin,
     EncodeSans_200ExtraLight,
@@ -34,7 +40,6 @@ export default function Login({ navigation }: { navigation: any }) {
     EncodeSans_800ExtraBold,
     EncodeSans_900Black,
   });
-  const [screenState, setScreenState] = useState('login');
 
   if (!loaded) {
     return null;
@@ -76,67 +81,82 @@ export default function Login({ navigation }: { navigation: any }) {
   const user_icon = require("../../assets/user_icon.png")
 
   return (
-    <LinearGradient colors={['rgba(18, 176, 176, 1)', 'rgba(191, 240, 207, 1)']} style={globalStyles.linearGradient} start={{ x: 0.4, y: 0 }} locations={[0.6, 0.95]}>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <View style={{ height: '100%', justifyContent: 'center' }}>
-          <View style={{alignItems: 'center'}}>
-            <Image source={bit_logo} style={globalStyles.logo2}></Image>
-          </View>
-          <Text style={globalStyles.title}>
-            Bejelentkezés
-          </Text>
-          <Text style={globalStyles.labelText}>
-            E-mail cím
-          </Text>
-          <View style={[globalStyles.inputContainer]}>
-            <Icon type='font-awesome' name='user' style={globalStyles.inputIcon} color={'#12b0b0'}></Icon>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <SafeAreaView style={{ paddingHorizontal: 24 }}>
+        <View style={styles.imageAndTitleContainer}>
+          <Image source={require('../../assets/bit_logo.png')} style={{ height: 200, width: 250 }} />
+          <Text style={styles.title}>Bejelentkezés</Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.subTitle}>E-mail</Text>
+          <View style={styles.textInput}>
+            <FontAwesomeIcon icon={faUser} color='#12b0b0' size={20}/>
             <TextInput
-              onChangeText={(text: React.SetStateAction<string>) => setEmail(text)}
               value={email}
-              placeholder="keresztnev.vezeteknev@bce.bitclub.com"
-              autoCapitalize={'none'} autoComplete={undefined}
-              autoCorrect={false}
-              style={{ width: '100%' }} />
+              onChangeText={setEmail}
+              placeholder='keresztnev.vezeteknev@bce.bitclub.hu'
+              autoCapitalize={'none'}
+              autoComplete={undefined}
+              style={{ width: '100%', padding: 20, fontFamily: 'EncodeSans_500Medium' }}
+            />
           </View>
-          <Text style={globalStyles.labelText}>
-            Jelszó
-          </Text>
-          <View style={[globalStyles.inputContainer]}>
-            <Icon name={'lock'} type={'font-awesome'} style={globalStyles.inputIcon} color={'#12b0b0'}></Icon>
+          <Text style={styles.subTitle}>Jelszó</Text>
+          <View style={styles.textInput}>
+            <FontAwesomeIcon icon={faKey} color='#12b0b0' size={20}/>
             <TextInput
-              onChangeText={(text) => setPassword(text)}
               value={password}
-              secureTextEntry={true}
-              placeholder="#Bitizenvagyok420"
-              autoCapitalize={'none'} autoComplete={undefined}
-              autoCorrect={false}
-              style={{ width: '100%' }} />
-          </View>
-          <View>
-            <Text style={globalStyles.forgottenPassword}>
-              Elfelejtett jelszó
-            </Text>
-          </View>
-          <View style={globalStyles.container}>
-            <View style={[globalStyles.mt20, globalStyles.button]}>
-              <Pressable disabled={loading} onPress={() => signInWithEmail()}>
-                <Text style={[globalStyles.buttonText]}>Bejelentkezés</Text>
-              </Pressable>
-            </View>
-          </View>
-          <View style={globalStyles.mt20}>
-            <Pressable disabled={loading} onPress={() => navigation.navigate('Regisztráció')} style={{ flexDirection: 'row', justifyContent: 'center' }}>
-              <Text style={globalStyles.registrationText}>
-                Még nincs fiókod?
-              </Text>
-              <Text style={{ color: '#12b0b0', fontFamily: 'EncodeSans_700Bold', marginLeft: '1.9%' }}>
-                Regisztráció
-              </Text>
-            </Pressable>
+              onChangeText={setPassword}
+              secureTextEntry={isPasswordVisible}
+              placeholder='goofyJelszó2024'
+              autoCapitalize='none'
+              autoComplete={undefined}
+              style={{ flex: 1, padding: 20, fontFamily: 'EncodeSans_500Medium' }}
+            />
+            <TouchableOpacity onPress={() => {setPasswordVisible(!isPasswordVisible)}}>
+              <FontAwesomeIcon icon={isPasswordVisible ? faEye : faEyeSlash} color='#12b0b0' size={20}/>
+            </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAvoidingView>
-    </LinearGradient>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 
+const styles = StyleSheet.create({
+  imageAndTitleContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 32
+  },
+  title: {
+    fontFamily: 'EncodeSans_700Bold',
+    fontSize: 26,
+  },
+  inputContainer: {
+    marginTop: 32,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  subTitle: {
+    fontFamily: 'EncodeSans_600SemiBold',
+    fontSize: 16
+  },
+  textInput: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 9,
+    backgroundColor: 'white',
+    height: 'auto',
+    marginBottom: 16,
+    marginTop: 16,
+    width: '100%',
+    paddingHorizontal: 16,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      width: 2,
+      height: 2
+    }
+  }
+})

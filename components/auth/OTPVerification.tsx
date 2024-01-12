@@ -1,7 +1,7 @@
-import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native'
+import { Alert, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useRef, useState } from 'react'
 import OTPTextView from 'react-native-otp-textinput';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { supabase } from '../../lib/supabase';
 import ProfileContext from '../../lib/contexts/ProfileContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -24,23 +24,24 @@ const OTPVerification = ({ route }: { route: any }) => {
     }
 
     return (
-        <SafeAreaView style={{flex: 1, justifyContent: 'center', }}>
-            <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-                <Text style={styles.header}>Írd be a megerősítő email-ben található 6 jegyű kódot!</Text>
-                <OTPTextView
-                    ref={input}
-                    keyboardType='numeric'
-                    handleTextChange={setOtpInput}
-                    containerStyle={styles.textInputContainer}
-                    textInputStyle={styles.roundedTextInput}
-                    inputCount={6}
-                    tintColor={'#12b0b0'}
-                />
-                <TouchableOpacity style={styles.verifyButton} onPress={verifyOTP}>
-                    <Text style={styles.buttonText}>Megerősítés</Text>
-                </TouchableOpacity>
+        <SafeAreaView style={{ flex: 1, justifyContent: 'center', }}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} >
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.container}>
+                    <Text style={styles.header}>Írd be a megerősítő email-ben található 6 jegyű kódot!</Text>
+                    <OTPTextView
+                        ref={input}
+                        keyboardType='numeric'
+                        handleTextChange={setOtpInput}
+                        containerStyle={styles.textInputContainer}
+                        textInputStyle={styles.roundedTextInput}
+                        inputCount={6}
+                        tintColor={'#12b0b0'}
+                    />
+                    <TouchableOpacity style={styles.verifyButton} onPress={verifyOTP}>
+                        <Text style={styles.buttonText}>Megerősítés</Text>
+                    </TouchableOpacity>
+                </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
-
         </SafeAreaView>
     )
 }
@@ -52,19 +53,16 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         paddingHorizontal: 32,
+        paddingBottom: 32
     },
     textInputContainer: {
         marginBottom: 32,
-        marginHorizontal: 32 
+        marginHorizontal: 32
     },
     roundedTextInput: {
         borderRadius: 9,
         borderWidth: 4,
-        height: 'auto',
-        width: 'auto',
         fontSize: 18,
-        paddingVertical: 16,
-        paddingHorizontal: 20,
         fontFamily: 'EncodeSans_900Black'
     },
     verifyButton: {
