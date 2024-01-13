@@ -114,23 +114,21 @@ export default function App() {
               <Stack.Screen name="Bejelentkezés" component={Login}
                 options={{
                   headerShown: true,
-                  headerTintColor: 'black',
+                  headerTintColor: 'white',
                   headerTransparent: true,
                   headerTitle: ''
                 }}
               />
               <Stack.Screen name='Regisztráció' component={Register}
                 options={{
-                  headerStyle: {
-                    backgroundColor: '#12b0b0'
-                  },
                   headerTitle: '',
                   headerBackTitleStyle: {
                     fontFamily: 'EncodeSans_500Medium'
                   },
                   headerTintColor: 'white',
                   headerBackTitleVisible: false,
-                  headerShadowVisible: false
+                  headerShadowVisible: false,
+                  headerTransparent: true
                 }} />
               <Stack.Screen name='Megerősítés' component={OTPVerification}
                 options={{

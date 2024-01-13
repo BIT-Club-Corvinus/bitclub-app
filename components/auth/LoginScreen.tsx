@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, Pressable, StyleSheet, View, Text, Image, TextInput, KeyboardAvoidingView, ScrollView, Platform } from 'react-native'
+import { Alert, Pressable, StyleSheet, View, Text, Image, TextInput, KeyboardAvoidingView, ScrollView, Platform, Keyboard, ImageBackground, StatusBar } from 'react-native'
 import { supabase } from '../../lib/supabase'
 import { Button, Icon, Input } from 'react-native-elements'
 import { globalStyles } from '../../lib/styles'
@@ -17,10 +17,9 @@ import {
   EncodeSans_800ExtraBold,
   EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEye, faEyeSlash, faKey, faUser } from '@fortawesome/free-solid-svg-icons'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 
 export default function Login({ navigation }: { navigation: any }) {
@@ -81,58 +80,63 @@ export default function Login({ navigation }: { navigation: any }) {
   const user_icon = require("../../assets/user_icon.png")
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <SafeAreaView style={{ paddingHorizontal: 24 }}>
-        <View style={styles.imageAndTitleContainer}>
-          <Image source={require('../../assets/bit_logo.png')} style={{ height: 200, width: 250 }} />
-          <Text style={styles.title}>Bejelentkezés</Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.subTitle}>E-mail</Text>
-          <View style={styles.textInput}>
-            <FontAwesomeIcon icon={faUser} color='#12b0b0' size={20} />
-            <TextInput
-              value={email}
-              onChangeText={setEmail}
-              placeholder='keresztnev.vezeteknev@bce.bitclub.hu'
-              autoCapitalize={'none'}
-              autoComplete={undefined}
-              style={{ width: '100%', padding: 20, fontFamily: 'EncodeSans_500Medium' }}
-            />
-          </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8, alignItems: 'center'}}>
-            <Text style={styles.subTitle}>Jelszó</Text>
-            <TouchableOpacity>
-              <Text style={styles.forgotPassword}>Elfelejtettem a jelszavam</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.textInput}>
-            <FontAwesomeIcon icon={faKey} color='#12b0b0' size={20} />
-            <TextInput
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={isPasswordVisible}
-              placeholder='goofyJelszó2024'
-              autoCapitalize={'none'}
-              autoComplete={undefined}
-              style={{ flex: 1, padding: 20, fontFamily: 'EncodeSans_500Medium' }}
-            />
-            <TouchableOpacity onPress={() => { setPasswordVisible(!isPasswordVisible) }}>
-              <FontAwesomeIcon icon={isPasswordVisible ? faEye : faEyeSlash} color='#12b0b0' size={20} />
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={signInWithEmail} style={styles.loginButton}>
-            <Text style={styles.buttonText}>Bejelentkezés</Text>
-          </TouchableOpacity>
-          <View style={{flexDirection: 'row',}}>
-            <Text style={styles.subTitle}>Még nincs fiókod?</Text>
-            <TouchableOpacity>
-              <Text style={{}}>Regisztráció</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+      <ImageBackground source={require('../../assets/background_pattern.png')} style={{ height: '100%' }}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : undefined} style={{ backgroundColor: 'rgba(0,0,0,0.75)', height: '100%' }}>
+          <TouchableWithoutFeedback style={{ paddingHorizontal: 24, }} onPress={Keyboard.dismiss}>
+            <View style={styles.imageAndTitleContainer}>
+              <Image source={require('../../assets/BIT-new-logo-FULL-white.png')} style={{ height: 200, width: 250 }} />
+              <Text style={styles.title}>Bejelentkezés</Text>
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.subTitle}>E-mail</Text>
+              <View style={styles.textInput}>
+                <FontAwesomeIcon icon={faUser} color='#12b0b0' size={20} />
+                <TextInput
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder='keresztnev.vezeteknev@bce.bitclub.hu'
+                  autoCapitalize={'none'}
+                  autoCorrect={false}
+                  autoComplete={undefined}
+                  style={{ width: '100%', padding: 20, fontFamily: 'EncodeSans_500Medium' }}
+                />
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8, alignItems: 'center' }}>
+                <Text style={styles.subTitle}>Jelszó</Text>
+                <TouchableOpacity>
+                  <Text style={styles.forgotPassword}>Elfelejtettem a jelszavam</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.textInput}>
+                <FontAwesomeIcon icon={faKey} color='#12b0b0' size={20} />
+                <TextInput
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry={!isPasswordVisible}
+                  placeholder='goofyJelszó2024'
+                  autoCapitalize={'none'}
+                  autoCorrect={false}
+                  autoComplete={undefined}
+                  style={{ flex: 1, padding: 20, fontFamily: 'EncodeSans_500Medium' }}
+                />
+                <TouchableOpacity onPress={() => { setPasswordVisible(!isPasswordVisible) }}>
+                  <FontAwesomeIcon icon={!isPasswordVisible ? faEye : faEyeSlash} color='#12b0b0' size={20} />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity onPress={signInWithEmail} style={styles.loginButton}>
+                <Text style={styles.buttonText}>Bejelentkezés</Text>
+              </TouchableOpacity>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 16 }}>
+                <Text style={styles.subTitle}>Még nincs fiókod?</Text>
+                <TouchableOpacity onPress={() => { navigation.navigate('Regisztráció') }}>
+                  <Text style={{ color: '#12b0b0', fontFamily: 'EncodeSans_700Bold', fontSize: 16, marginLeft: 2 }}>Regisztráció</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+
   )
 }
 
@@ -141,20 +145,24 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 32
+    paddingTop: 32,
   },
   title: {
     fontFamily: 'EncodeSans_700Bold',
     fontSize: 26,
+    color: 'white',
+    textAlign: 'center'
   },
   inputContainer: {
-    marginTop: 24,
+    marginTop: 20,
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 24
   },
   subTitle: {
     fontFamily: 'EncodeSans_600SemiBold',
-    fontSize: 16
+    fontSize: 16,
+    color: 'white'
   },
   textInput: {
     alignItems: 'center',
@@ -162,12 +170,12 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     backgroundColor: 'white',
     height: 'auto',
-    marginBottom: 16,
+    marginBottom: 8,
     marginTop: 16,
     width: '100%',
     paddingHorizontal: 16,
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
+    shadowColor: 'white',
+    shadowOpacity: 0.75,
     shadowOffset: {
       width: 2,
       height: 2
