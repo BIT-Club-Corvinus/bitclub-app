@@ -90,7 +90,7 @@ export default function Login({ navigation }: { navigation: any }) {
         <View style={styles.inputContainer}>
           <Text style={styles.subTitle}>E-mail</Text>
           <View style={styles.textInput}>
-            <FontAwesomeIcon icon={faUser} color='#12b0b0' size={20}/>
+            <FontAwesomeIcon icon={faUser} color='#12b0b0' size={20} />
             <TextInput
               value={email}
               onChangeText={setEmail}
@@ -100,20 +100,34 @@ export default function Login({ navigation }: { navigation: any }) {
               style={{ width: '100%', padding: 20, fontFamily: 'EncodeSans_500Medium' }}
             />
           </View>
-          <Text style={styles.subTitle}>Jelszó</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8, alignItems: 'center'}}>
+            <Text style={styles.subTitle}>Jelszó</Text>
+            <TouchableOpacity>
+              <Text style={styles.forgotPassword}>Elfelejtettem a jelszavam</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.textInput}>
-            <FontAwesomeIcon icon={faKey} color='#12b0b0' size={20}/>
+            <FontAwesomeIcon icon={faKey} color='#12b0b0' size={20} />
             <TextInput
               value={password}
               onChangeText={setPassword}
               secureTextEntry={isPasswordVisible}
               placeholder='goofyJelszó2024'
-              autoCapitalize='none'
+              autoCapitalize={'none'}
               autoComplete={undefined}
               style={{ flex: 1, padding: 20, fontFamily: 'EncodeSans_500Medium' }}
             />
-            <TouchableOpacity onPress={() => {setPasswordVisible(!isPasswordVisible)}}>
-              <FontAwesomeIcon icon={isPasswordVisible ? faEye : faEyeSlash} color='#12b0b0' size={20}/>
+            <TouchableOpacity onPress={() => { setPasswordVisible(!isPasswordVisible) }}>
+              <FontAwesomeIcon icon={isPasswordVisible ? faEye : faEyeSlash} color='#12b0b0' size={20} />
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity onPress={signInWithEmail} style={styles.loginButton}>
+            <Text style={styles.buttonText}>Bejelentkezés</Text>
+          </TouchableOpacity>
+          <View style={{flexDirection: 'row',}}>
+            <Text style={styles.subTitle}>Még nincs fiókod?</Text>
+            <TouchableOpacity>
+              <Text style={{}}>Regisztráció</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -134,7 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   inputContainer: {
-    marginTop: 32,
+    marginTop: 24,
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
@@ -158,5 +172,23 @@ const styles = StyleSheet.create({
       width: 2,
       height: 2
     }
+  },
+  loginButton: {
+    backgroundColor: '#12b0b0',
+    borderRadius: 9,
+    paddingVertical: 16,
+    height: 'auto',
+    marginTop: 28,
+    alignItems: 'center'
+  },
+  buttonText: {
+    color: 'white',
+    fontFamily: 'EncodeSans_600SemiBold',
+    fontSize: 18
+  },
+  forgotPassword: {
+    fontFamily: 'EncodeSans_400Regular',
+    fontSize: 12,
+    textDecorationLine: 'underline'
   }
 })
