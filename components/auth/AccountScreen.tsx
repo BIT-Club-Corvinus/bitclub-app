@@ -15,11 +15,24 @@ export default function Account() {
 
   async function deleteAccount() {
     try {
-      logOut()
       const { data, error } = await supabase.functions.invoke('delete_user_account');
+      logOut()
     } catch (error) {
       console.log(error)
     }
+  }
+  async function logOut() {
+
+    try {
+      let { error } = await supabase.auth.signOut()
+  
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      Alert.alert('Nem sikerült kijelentkezni')
+    }
+  
   }
 
   return (
@@ -57,19 +70,7 @@ const TextView = ({ item, attributeName, placeHolderText, disabled }: { item: an
   );
 }
 
-async function logOut() {
 
-  try {
-    let { error } = await supabase.auth.signOut()
-
-    if (error) {
-      throw error;
-    }
-  } catch (error) {
-    Alert.alert('Nem sikerült kijelentkezni')
-  }
-
-}
 
 
 
