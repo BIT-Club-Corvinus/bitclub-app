@@ -16,13 +16,16 @@ import {
   EncodeSans_800ExtraBold,
   EncodeSans_900Black,
 } from '@expo-google-fonts/encode-sans';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faEnvelope, faEye, faEyeSlash, faKey } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Auth({ navigation }: { navigation: any }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false)
   const [loading, setLoading] = useState(false)
   const [loaded] = useFonts({
     EncodeSans_100Thin,
@@ -57,7 +60,7 @@ export default function Auth({ navigation }: { navigation: any }) {
         Alert.alert(error.message)
       }
       else {
-        navigation.navigate('Megerősítés', {email: email})
+        navigation.navigate('Megerősítés', { email: email })
         Alert.alert("Sikeres regisztráció")
       }
       setLoading(false)
@@ -69,13 +72,73 @@ export default function Auth({ navigation }: { navigation: any }) {
   const user_icon = require("../../assets/user_icon.png")
 
   return (
-    <ImageBackground source={require('../../assets/background_pattern.png')} style={{height: '100%'}}>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : undefined} style={{backgroundColor: 'rgba(0,0,0,0.75)', height: '100%'}}>
-        <TouchableWithoutFeedback style={{paddingHorizontal: 24}} onPress={Keyboard.dismiss}>
-          <View style={styles.imageAndTitleContainer}>
-            <Text style={styles.title}>Regisztráció</Text>
+    <ImageBackground source={require('../../assets/background_pattern.png')}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ backgroundColor: 'rgba(0,0,0,0.75)', paddingHorizontal: 24 }}>
+        <TouchableWithoutFeedback style={{ height: '100%', justifyContent: 'center' }} onPress={Keyboard.dismiss}>
+          <Text style={globalStyles.title}>
+            Regisztráció
+          </Text>
+          <Text style={globalStyles.labelText}>
+            E-mail cím
+          </Text>
+          <View style={[globalStyles.inputContainer]}>
+            <FontAwesomeIcon icon={faEnvelope} size={20} color='#12b0b0' />
+            <TextInput
+              onChangeText={(text: React.SetStateAction<string>) => setEmail(text)}
+              value={email}
+              placeholder="keresztnev.vezeteknev@bce.bitclub.com"
+              autoCapitalize={'none'} autoComplete={undefined}
+              autoCorrect={false}
+              style={{ flex: 1, fontFamily: 'EncodeSans_500Medium', padding: 20 }}
+            />
           </View>
-
+          <Text style={globalStyles.labelText}>
+            Jelszó
+          </Text>
+          <View style={[globalStyles.inputContainer]}>
+            <FontAwesomeIcon icon={faKey} size={20} color='#12b0b0' />
+            <TextInput
+              onChangeText={(text) => setPassword(text)}
+              value={password}
+              secureTextEntry={!isPasswordVisible}
+              placeholder="#Bitizenvagyok420"
+              autoCapitalize={'none'} autoComplete={undefined}
+              autoCorrect={false}
+              style={{ flex: 1, fontFamily: 'EncodeSans_500Medium', padding: 20 }}
+            />
+            <TouchableOpacity onPress={()=>setPasswordVisible(!isPasswordVisible)}>
+              <FontAwesomeIcon icon={!isPasswordVisible ? faEye : faEyeSlash} size={20} color='#12b0b0' />
+            </TouchableOpacity>
+          </View>
+          <Text style={globalStyles.labelText}>
+            Jelszó megerősítése
+          </Text>
+          <View style={[globalStyles.inputContainer]}>
+            <FontAwesomeIcon icon={faKey} size={20} color='#12b0b0' />
+            <TextInput
+              onChangeText={(text) => setConfirmPassword(text)}
+              value={confirmPassword}
+              secureTextEntry={true}
+              placeholder="#Bitizenvagyok420"
+              autoCapitalize={'none'} autoComplete={undefined}
+              autoCorrect={false}
+              style={{ flex: 1, fontFamily: 'EncodeSans_500Medium', padding: 20 }} />
+          </View>
+          <View style={globalStyles.container}>
+            <TouchableOpacity onPress={() => { signUpWithEmail() }} style={globalStyles.button}>
+              <Text style={[globalStyles.buttonText]}>Regisztráció</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'center' }}>
+            <Text style={globalStyles.registrationText}>
+              Már van fiókod?
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Bejelentkezés')} style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <Text style={{ color: '#12b0b0', fontFamily: 'EncodeSans_700Bold', marginLeft: '1.9%' }}>
+                Belépés
+              </Text>
+            </TouchableOpacity>
+          </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </ImageBackground>

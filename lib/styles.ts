@@ -18,9 +18,9 @@ export const globalStyles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#12b0b0",
-    width: '85%',
-    padding: '3%',
-    borderRadius: 100,
+    width: '100%',
+    padding: 12,
+    borderRadius: 9,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: 'black',
@@ -29,7 +29,8 @@ export const globalStyles = StyleSheet.create({
       width: 4,
       height: 5,
     },
-    elevation: 20
+    elevation: 20,
+    marginTop: 16
   },
   logoutButton: {
     backgroundColor: "#f69133",
@@ -70,9 +71,11 @@ export const globalStyles = StyleSheet.create({
     marginTop: '0%'
   },
   labelText: {
-    fontFamily: 'EncodeSans_500Medium',
-    color: 'white', fontSize: 20,
-    marginBottom: '2.5%'
+    fontFamily: 'EncodeSans_600SemiBold',
+    color: 'white',
+    fontSize: 18,
+    marginBottom: 8,
+    marginTop: 0
   },
   inputText: {
     fontFamily: 'EncodeSans_700Bold',
@@ -107,17 +110,18 @@ export const globalStyles = StyleSheet.create({
   inputContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    borderRadius: 100,
+    borderRadius: 9,
     backgroundColor: 'white',
-    height: 60,
-    marginBottom: '5%',
+    height: 'auto',
+    marginBottom: 16,
+    marginTop: 16,
     width: '100%',
-    padding: '2%',
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
+    paddingHorizontal: 16,
+    shadowColor: 'white',
+    shadowOpacity: 0.75,
     shadowOffset: {
-      width: 4,
-      height: 5
+      width: 2,
+      height: 2.5
     }
   },
   inputIcon: {
@@ -129,7 +133,9 @@ export const globalStyles = StyleSheet.create({
     color: 'white',
     fontFamily: 'EncodeSans_700Bold',
     textAlign: 'right',
-    fontSize: 12
+    fontSize: 14,
+    marginRight: 2,
+    textDecorationLine: 'underline'
   },
   whiteButton: {
     backgroundColor: "white",
