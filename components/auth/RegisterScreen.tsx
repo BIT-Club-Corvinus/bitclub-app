@@ -19,6 +19,7 @@ import {
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEnvelope, faEye, faEyeSlash, faKey } from '@fortawesome/free-solid-svg-icons'
+import LoadingModal from '../modal/LoadingModal'
 
 
 export default function Auth({ navigation }: { navigation: any }) {
@@ -139,6 +140,7 @@ export default function Auth({ navigation }: { navigation: any }) {
               </Text>
             </TouchableOpacity>
           </View>
+          <LoadingModal modalVisible={loading} taskOngoing='Megerősítő email küldése...'/>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </ImageBackground>

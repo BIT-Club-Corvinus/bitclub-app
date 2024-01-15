@@ -22,13 +22,15 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#0008'
+        backgroundColor: '#0008',
+        paddingHorizontal: 24
     },
     modalView: {
         margin: 20,
         width: 'auto',
         height: 'auto',
         padding: 16,
+        paddingHorizontal: 24,
         backgroundColor: 'white',
         borderRadius: 5,
         flexDirection: 'row',

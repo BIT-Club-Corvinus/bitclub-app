@@ -1,7 +1,7 @@
 import { Alert, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useRef, useState } from 'react'
 import OTPTextView from 'react-native-otp-textinput';
-import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { supabase } from '../../lib/supabase';
 import ProfileContext from '../../lib/contexts/ProfileContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
