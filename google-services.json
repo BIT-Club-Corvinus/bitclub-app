@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "434134125555",
+    "project_id": "bitclub-app",
+    "storage_bucket": "bitclub-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434134125555:android:88284dd1766c2b2ed72086",
+        "android_client_info": {
+          "package_name": "hu.businessitclub.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBse0p30OaIaz5ev9XlxuuN0w8c7qKei4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
